@@ -5,7 +5,7 @@ create table users(
 	email varchar2(100),
 	phone varchar2(20),
 	addr varchar2(100),
-	level number(10),
+	lev number(10),
 	coin number(38)
 )tablespace semi;
 
