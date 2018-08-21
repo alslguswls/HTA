@@ -85,7 +85,7 @@ create table chat(
 )tablespace semi;
 create sequence chat_seq;
 
-
+sssssss
 ######입찰진행 호가    #######
 create table mprice(
 	mp_no number(38) primary key,
