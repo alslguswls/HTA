@@ -6,14 +6,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>insert.jsp</title>
 </head>
-<body>
+<body align="center">
 <h1> 회원 가입</h1>
-<table border="1" width="300">
+<table border="1" width="350" align="center">
 <form method="post" action="insert.do">  <!-- 가입버튼을 누르면 insert.do 서블릿으로 이동 -->
-	<!--  미사용
-	<input type="hidden" name="lev" value="1">  
+	
+	<!--  가입시 lev 0, coin 0을 입력 -->
+	<input type="hidden" name="lev" value="0">  
 	<input type="hidden" name="coin" value="0">  
-	-->
 	
 	<tr>
 		<td>아이디</td>
