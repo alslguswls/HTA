@@ -4,29 +4,29 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 import board.vo.boardVo;
 import db.DBConnection;
 
 
-public class boadDao {
+public class boardDao {
 	Connection con=null;
 	PreparedStatement pstmt=null;
 	ResultSet rs=null;
 	String sql="";
 	int n;
 	//싱글패턴 생성자생성
-	private static boadDao instance=new boadDao();
+	private static boardDao instance=new boardDao();
 	//디펄트생성자
-	private boadDao() {}
+	private boardDao() {}
 	
 	//생성자 호출 
-	public static boadDao getInstance() {
+	public static boardDao getInstance() {
 		return instance;
 	}
 	//게시글 인서트
 	public int insert(boardVo vo) {
-		int bnum = vo.getBnum();
 		String id=vo.getId();
 		int cate=vo.getCate();
 		String title=vo.getTitle();
@@ -35,9 +35,6 @@ public class boadDao {
 		String savefilename=vo.getSavefilename();
 		Date starttime=vo.getStarttime();
 		int startprice=vo.getStartprice();
-		//int hit=0;
-		//int regv=0;
-		//int status
 		sql="insert into board values(board_seq.nextval,?,?,?,?,?,?,?,?,0,0,0)";
 		try {
 			con=DBConnection.getConn();
@@ -57,6 +54,27 @@ public class boadDao {
 			return -1;
 		}finally {
 			DBConnection.closeConn(null, pstmt, con);
+		}
+	}
+	
+	public ArrayList<boardVo> list(String cate){
+		int cate_no=Integer.parseInt(cate);
+		ArrayList<boardVo> list=new ArrayList<boardVo>();
+		sql="";
+		try {
+			con=DBConnection.getConn();
+			pstmt=con.prepareStatement(sql);
+			pstmt.setInt(1, cate_no);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				
+			}
+			return list;
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			return null;
+		}finally {
+			DBConnection.closeConn(rs, pstmt, con);
 		}
 	}
 
