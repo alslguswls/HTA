@@ -60,4 +60,8 @@
 	<%
 		}
 	%>
+	<br>
+	댓글 : <input type="text" id="comm" size="20">
+	<input type="button" value="입력" onclick="comm()">
+	<div id="list"></div>
 </div>

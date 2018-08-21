@@ -28,6 +28,26 @@
 				}
 			}
 		}
+		
+		var commXhr = null;
+		function comm() {
+			commXhr = new XMLHttpRequest();
+			commXhr.onreadystatechange = commCallback;
+			commXhr.open('post','comm.do',true);
+			commXhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+			var bnum = ${vo.bnum };
+			var id = "<%=session.getAttribute("id") %>";
+			var comm = document.getElementById("comm").value;
+			var param = "bnum=" + bnum + "&id=" + id + "&comm=" + comm;
+			xhr.send(param);
+		}
+		function commCallback() {
+			if(resvXhr.readyState==4 && resvXhr.status==200){
+				var list = document.getElementById("list");
+				var txt = resvXhr.responseText;
+				var json = JSON.parse(txt);
+			}
+		}
 	</script>
 	<%
 		String context = application.getContextPath();
