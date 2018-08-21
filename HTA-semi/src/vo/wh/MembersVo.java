@@ -80,10 +80,4 @@ public class MembersVo {
 		this.coin = coin;
 	}
 	
-	// getter ¸Þ¼Òµå
-		@Override
-		public String toString() {
-			return "MembersVo [id=" + id + ", pwd=" + pwd + ", email=" + email + ",phone=" + phone + ", addr=" + addr + ", lev="
-					+ lev + ",coin=" + coin + "]";
-		}
 }	

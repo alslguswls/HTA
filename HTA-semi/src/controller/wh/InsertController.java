@@ -23,11 +23,11 @@ public class InsertController extends HttpServlet {
 		String email=request.getParameter("email");
 		String phone=request.getParameter("phone");
 		String addr=request.getParameter("addr");
-		int lev=Integer.parseInt(request.getParameter("lev"));
-		Double coin=Double.parseDouble(request.getParameter("coin"));
+		//int lev=Integer.parseInt(request.getParameter("lev"));
+		//Double coin=Double.parseDouble(request.getParameter("coin"));
 		
 		MembersDao dao=new MembersDao();
-		MembersVo vo=new MembersVo(id, pwd, email, phone, addr, lev, coin);
+		MembersVo vo=new MembersVo(id, pwd, email, phone, addr, 0, 0.0);
 		dao.insert(vo);
 		
 		response.sendRedirect("main.jsp");

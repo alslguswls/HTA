@@ -33,29 +33,64 @@
 		}
 	}
 	
+	var xhr2=null;
+	function pwdcheck(){
+		var pwd=document.f.pwd.value;
+		var pwd2=document.f.pwd2.value;
+		if(pwd=="" || pwd2==""){
+			document.getElementById("pwdcheck").innerHTML="";
+			return; // 메소드 끝내기
+		}
+		xhr2=new XMLHttpRequest();
+		xhr2.onreadystatechange=pwd_callback;
+		xhr2.open('get','pwdcheck.jsp?pwd='+pwd + '&pwd2='+ pwd2,true);
+		xhr2.send();
+	}
+	
+	function pwd_callback(){ // 패스워드 체크 콜백 메소드
+		if(xhr2.readyState==4 && xhr2.status==200){
+			var xml=xhr2.responseXML;
+			var same=xml.getElementsByTagName("same")[0];
+			var s=same.firstChild.nodeValue;
+			var span=document.getElementById("pwdcheck");
+			if(eval(s)==true){ // 패스워드 일치
+				span.innerHTML="패스워드가 일치 합니다.";
+			}else{
+				span.innerHTML="패스워드가 일치하지 않습니다";
+			}
+		}
+	}
+	
 	// 입력칸 입력여부 체크
 	function check(){
-		var id=document.getElementById("id");
-		var pwd=document.getElementById("pwd");
-		var email=document.getElementById("email");
-		var phone=document.getElementById("phone");
-		var addr=document.getElementById("addr");
-		if(id.value==""){
+		var id=document.f.id.value;
+		var pwd=document.f.pwd.value;
+		var pwd2=document.f.pwd2.value;
+		var email=document.f.email.value;
+		var phone=document.f.phone.value;
+		var addr=document.f.addr.value;
+		if(id==""){
 			alert("아이디를 입력하세요");
 			return false;
-		}else if(pwd.value==""){
+		}else if(pwd==""){
 			alert("패스워드를 입력하세요");
 			return false;
-		}else if(email.value==""){
+		}else if(pwd != pwd2){
+			alert("패스워드를 확인하세요");
+			return false;
+			pwd.focus();
+		}else if(email==""){
 			alert("이메일을 입력하세요");
 			return false;
-		}else if(phone.value==""){
+		}else if(phone==""){
 			alert("전화번호를 입력하세요");
 			return false;
-		}else if(addr.value==""){
+		}else if(addr==""){
 			alert("주소를 입력하세요");
 			return false;
 		}
+		alert("가입을 축하합니다")
+		
 	}
 	
 
@@ -64,19 +99,19 @@
 <body align="center">
 <h1> 회원 가입</h1>
 
+<form name="f" method="post" action="insert.do" onsubmit="return check()">  <!-- 가입버튼을 누르면 insert.do 서블릿으로 이동 -->
 <table border="1" width="300" align="center">
-<form method="post" action="insert.do" onsubmit="return check()">  <!-- 가입버튼을 누르면 insert.do 서블릿으로 이동 -->
-	<!--  가입시 lev 0, coin 0을 입력 -->
+	<!--  가입시 lev 0, coin 0을 입력 
 	<input type="hidden" name="lev" value="0">  
 	<input type="hidden" name="coin" value="0">  
+	-->
 	
 	<tr>
 		<td>아이디</td>
 		<td>
 			<input type="text" name="id" id="id" onkeyup="idcheck()">
 			<!-- 아이디 중복검사 기능 -->
-			<br>
-			<span id="idcheck" style="color:red;font-size:12px"></span>
+			<div id="idcheck" style="color:red;font-size:12px"></div>
 		</td>
 	</tr>
 	<tr>
@@ -86,9 +121,8 @@
 	<tr>
 		<td>패스워드 확인</td>
 		<td>
-			<input type="password" name="pwd2">
-			<br>
-			<span id="pwdcheck" style="color:red;font-size:12px"></span>
+			<input type="password" name="pwd2" onkeyup="pwdcheck()">
+			<div id="pwdcheck" style="color:red;font-size:12px"></div>
 		</td>
 	</tr>
 	<tr>
@@ -107,8 +141,8 @@
 			<input type="submit" value="가입">
 			<input type="reset" value="취소">
 	</td>
-</form>
 </table>
+</form>
 메인으로 이동...<a href="main.jsp">메인</a>
 
 </body>
