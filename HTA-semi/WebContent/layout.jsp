@@ -51,11 +51,7 @@
 			<jsp:include page="header.jsp"></jsp:include>
 		</div>
 		<div id="category">
-<<<<<<< HEAD
-			<jsp:include page="error.jsp"></jsp:include>
-=======
 			<jsp:include page="/board/category.jsp"></jsp:include>
->>>>>>> refs/remotes/origin/master
 		</div>
 		<div id="content">
 			<jsp:include page="<%=page1 %>"></jsp:include>
