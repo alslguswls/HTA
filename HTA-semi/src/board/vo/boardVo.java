@@ -18,6 +18,7 @@ public class boardVo {
 	
 	public boardVo() {}
 	
+	//전체 데이터 변수 사용
 	public boardVo(int bnum,String id,int cate, String title, String content, String orgfilename,String savefilename,Date starttime,int startprice,int hit,int regv,int status) {
 		this.bnum=bnum;
 		this.id=id;
