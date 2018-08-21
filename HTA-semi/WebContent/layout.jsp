@@ -36,7 +36,7 @@
 </head>
 <body>
 	<%
-		session.setAttribute("id", "테스터3");
+		session.setAttribute("id", "테스터1");
 		String page1 = request.getParameter("page");
 		if(page1 == null) page1 = "main.jsp";
 	%>

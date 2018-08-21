@@ -21,6 +21,7 @@ public class DetailController extends HttpServlet{
 		BoardDao dao = new BoardDao();
 		BoardVo vo = dao.detail(bnum);
 		if(vo != null) {
+			dao.hitup(bnum);
 			String id = (String)request.getSession().getAttribute("id");
 			ReservationDao rdao = new ReservationDao();
 			if(rdao.select(new ReservationVo(0, bnum, id))) {
