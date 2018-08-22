@@ -101,7 +101,7 @@
 
 <form name="f" method="post" action="insert.do" onsubmit="return check()">  <!-- 가입버튼을 누르면 insert.do 서블릿으로 이동 -->
 <table border="1" width="300" align="center">
-	<!--  가입시 lev 0, coin 0을 입력 
+	<!--  가입시 lev 0, coin 0을 입력하는 기능. 미사용
 	<input type="hidden" name="lev" value="0">  
 	<input type="hidden" name="coin" value="0">  
 	-->

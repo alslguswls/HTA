@@ -16,7 +16,7 @@ import vo.wh.MembersVo;
 
 public class MembersDao {
 	
-	// È¸¿ø Á¶È¸ÇÏ´Â ºÎºĞ
+	// ì‚¬ìš©ì ë¦¬ìŠ¤íŠ¸ 
 	public ArrayList<MembersVo> list(){
 		Connection con=null;
 		PreparedStatement pstmt=null;
@@ -49,7 +49,7 @@ public class MembersDao {
 		}	
 	}
 	
-	// È¸¿ø °¡ÀÔ ÇÏ´Â ºÎºĞ
+	// ì‚¬ìš©ì ë“±ë¡
 	public int insert(MembersVo vo) {
 		Connection con=null;
 		PreparedStatement pstmt=null;
@@ -74,7 +74,7 @@ public class MembersDao {
 		}
 	}
 	
-	// È¸¿ø »èÁ¦ ÇÏ´Â ºÎºĞ
+	// ì‚¬ìš©ì ì‚­ì œ
 	public int delete(String id) {
 		Connection con=null;
 		PreparedStatement pstmt=null;
@@ -92,8 +92,8 @@ public class MembersDao {
 		}
 	}
 	
-	// È¸¿ø »ó¼¼Á¤º¸ Á¶È¸ÇÏ´Â ºÎºĞ
-	public MembersVo getinfo(String id) {
+		// ì‚¬ìš©ì ìƒì„¸ì •ë³´ 
+		public MembersVo getinfo(String id) {
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -126,8 +126,8 @@ public class MembersDao {
 		}
 	}
 	
-	// È¸¿ø Á¤º¸ ¾÷µ¥ÀÌÆ® ÇÏ´Â ºÎºĞ
-	public int update(MembersVo vo) {
+		// ì‚¬ìš©ì ìˆ˜ì •
+		public int update(MembersVo vo) {
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		try {
