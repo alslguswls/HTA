@@ -47,6 +47,10 @@
 			<th>경매품상태</th>
 			<td>${vo.status }</td>
 		</tr>
+		<tr>
+			<th>등록일</th>
+			<td>${vo.regdate }</td>
+		</tr>
 	</table>
 	<%
 		boolean resv = (boolean)request.getAttribute("resv");
@@ -63,5 +67,5 @@
 	<br>
 	댓글 : <input type="text" id="comm" size="20">
 	<input type="button" value="입력" onclick="comm()">
-	<div id="list" onload="commList()"></div>
+	<div id="list"></div>
 </div>

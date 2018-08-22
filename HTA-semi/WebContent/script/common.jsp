@@ -33,32 +33,126 @@
 		var id = "<%=session.getAttribute("id") %>";
 		var comm = document.getElementById("comm").value;
 		var param = "bnum=" + bnum + "&id=" + id + "&comm=" + comm;
-		xhr.send(param);
+		commXhr.send(param);
 	}
 	function commCallback() {
-		if(resvXhr.readyState==4 && resvXhr.status==200){
-			var list = document.getElementById("list");
-			var txt = resvXhr.responseText;
+		if(commXhr.readyState==4 && commXhr.status==200){
+			var txt = commXhr.responseText;
 			var json = JSON.parse(txt);
+			if(json.result){
+				commList();
+			}else{
+				alert("오류로 인해 댓글등록에 실패하였습니다.");
+			}
+		}
+	}
+	
+	var ccommXhr = null;
+	function ccomm(i) {
+		ccommXhr = new XMLHttpRequest();
+		ccommXhr.onreadystatechange = ccommCallback;
+		ccommXhr.open('post','comm.do?cmd=insert',true);
+		ccommXhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+		var cnum = document.getElementsByName("form"+i)[0].cnum.value;
+		var bnum = document.getElementsByName("form"+i)[0].bnum.value;
+		var id = document.getElementsByName("form"+i)[0].id.value;
+		var comm = document.getElementsByName("form"+i)[0].comm.value;
+		var ref = document.getElementsByName("form"+i)[0].ref.value;
+		var lev = document.getElementsByName("form"+i)[0].lev.value;
+		var step = document.getElementsByName("form"+i)[0].step.value;
+		var param = "cnum=" + cnum + "&bnum=" + bnum + "&id=" + id + 
+			"&comm=" + comm + "&ref=" + ref + "&lev=" + lev + "&step=" + step;
+		ccommXhr.send(param);
+	}
+	function ccommCallback() {
+		if(ccommXhr.readyState==4 && ccommXhr.status==200){
+			var txt = ccommXhr.responseText;
+			var json = JSON.parse(txt);
+			if(json.result){
+				commList();
+			}else{
+				alert("오류로 인해 답글등록에 실패하였습니다.");
+			}
 		}
 	}
 	
 	var listXhr = null;
-	function commList() {
+	function commList(pageNum) {
 		listXhr = new XMLHttpRequest();
 		listXhr.onreadystatechange = listCallback;
-		listXhr.open('get','comm.do?cmd=list',true);
+		if(pageNum == undefined){
+			listXhr.open('get','comm.do?cmd=list&bnum=${vo.bnum}',true);
+		}else{
+			listXhr.open('get','comm.do?cmd=list&bnum=${vo.bnum}&pageNum='+pageNum,true);
+		}
 		listXhr.send();
 	}
 	function listCallback() {
-		if(resvXhr.readyState==4 && resvXhr.status==200){
+		if(listXhr.readyState==4 && listXhr.status==200){
 			var list = document.getElementById("list");
-			var txt = resvXhr.responseText;
+			var txt = listXhr.responseText;
 			var json = JSON.parse(txt);
+			list.innerHTML = "";
 			for(var i = 0;i < json.list.length;i++){
-				list.innerHTML += "<label>" + json.list[i].id +
-							json.list[i].comments + "</label>";
+				for(var j = 0;j < json.list[i].lev;j++){
+					list.innerHTML += "&nbsp;&nbsp;&nbsp;&nbsp;";
+				}
+				list.innerHTML += "<label>"+json.list[i].id+" : "+json.list[i].comments+"</label>&nbsp;"+
+					"<input type=\"button\" value=\"답글\" onclick=\"addInput(" + i + ")\" id=\"btn" + i + "\"><br>"+
+					"<form action=\"\" method=\"post\" style=\"display: none;\" name=\"form"+i+"\">"+
+						"<input type=\"hidden\" name=\"cnum\" value=\""+json.list[i].cnum+"\">"+
+						"<input type=\"hidden\" name=\"bnum\" value=\""+json.list[i].bnum+"\">"+
+						"<input type=\"hidden\" name=\"id\" value=\"<%=session.getAttribute("id") %>\">"+
+						"<input type=\"hidden\" name=\"ref\" value=\""+json.list[i].ref+"\">"+
+						"<input type=\"hidden\" name=\"lev\" value=\""+json.list[i].lev+"\">"+
+						"<input type=\"hidden\" name=\"step\" value=\""+json.list[i].step+"\">"+
+						"<input type=\"text\" name=\"comm\" size=\"20\">"+
+						"<input type=\"button\" value=\"입력\" onclick=\"ccomm("+i+")\">";
+					"</form>";
+			}
+			
+			if(json.startPage>10){
+				list.innerHTML += "<a href=\"javascript:commList("+(json.startPage-1)+");\">[이전]</a>";
+			}else{
+				list.innerHTML += "[이전]";
+			}
+			for(var i = json.startPage;i <= json.endPage;i++){
+				if(json.pageNum == i){
+					list.innerHTML += "<a href=\"javascript:commList("+i+");\" style=\"color: red\">["+i+"]</a>";
+				}else{
+					list.innerHTML += "<a href=\"javascript:commList("+i+");\" style=\"color: gray\">["+i+"]</a>";
+				}
+			}
+			if(json.endPage<json.pageCount){
+				list.innerHTML += "<a href=\"javascript:commList("+(json.endPage+1)+");\">[다음]</a>";
+			}else{
+				list.innerHTML += "[다음]";
 			}
 		}
 	}
+	
+	function addInput(i) {
+		var form = document.getElementsByName("form"+i)[0];
+		var btn = document.getElementById("btn"+i);
+		btn.style.display = "none";
+		form.style.display = "block";
+	}
 </script>
+
+<a ></a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

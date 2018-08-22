@@ -32,7 +32,8 @@ public class BoardDao {
 				int hit = rs.getInt("hit");
 				int regv = rs.getInt("regv");
 				int status = rs.getInt("status");
-				return new BoardVo(bnum, id, cate, title, content, orgfilename, savefilename, starttime, startprice, hit, regv, status);
+				Date regdate = rs.getDate("regdate");
+				return new BoardVo(bnum, id, cate, title, content, orgfilename, savefilename, starttime, startprice, hit, regv, status, regdate);
 			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());

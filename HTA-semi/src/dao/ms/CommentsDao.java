@@ -85,17 +85,27 @@ public class CommentsDao {
 			System.out.println(e.getMessage());
 			return -1;
 		}finally {
+			DBConnection.closeConn(pstmt1);
 			DBConnection.closeConn(null, pstmt, con);
 		}
 	}
-	public ArrayList<CommentsVo> list() {
+	public ArrayList<CommentsVo> list(int num, int startRow,int endRow) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
 			con = DBConnection.getConn();
-			String sql = "select * from comments";
+			String sql = "select *" + 
+					"from (select AA.*, rownum rnum" + 
+					"    from (select *" + 
+					"        from comments" + 
+					"        where bnum=?" + 
+					"        order by ref desc,step) AA)" + 
+					"where rnum>=? and rnum<=?";
 			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
 			rs = pstmt.executeQuery();
 			ArrayList<CommentsVo> list = new ArrayList<>();
 			while(rs.next()) {
