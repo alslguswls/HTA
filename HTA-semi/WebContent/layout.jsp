@@ -13,7 +13,6 @@
 	<link rel="stylesheet" type="text/css" href="<%=context %>/css/common.css">
 </head>
 	<%
-		session.setAttribute("id", "테스터1");
 		String page1 = request.getParameter("page");
 		if(page1 == null) page1 = "main.jsp";
 		if(page1.equals("detail.jsp")){
