@@ -9,7 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.ms.BoardDao;
+import dao.ms.ReservationDao;
 import vo.ms.BoardVo;
+import vo.ms.ReservationVo;
 
 @WebServlet("/detail.do")
 public class DetailController extends HttpServlet{
@@ -19,10 +21,18 @@ public class DetailController extends HttpServlet{
 		BoardDao dao = new BoardDao();
 		BoardVo vo = dao.detail(bnum);
 		if(vo != null) {
+			dao.hitup(bnum);
+			String id = (String)request.getSession().getAttribute("id");
+			ReservationDao rdao = new ReservationDao();
+			if(rdao.select(new ReservationVo(0, bnum, id))) {
+				request.setAttribute("resv", true);
+			}else {
+				request.setAttribute("resv", false);
+			}
 			request.setAttribute("vo", vo);
 			request.getRequestDispatcher("/layout.jsp?page=detail.jsp").forward(request, response);
 		}else {
-			request.setAttribute("errMsg", "¿À·ù·Î ÀÎÇØ Á¶È¸¿¡ ½ÇÆĞÇÏ¿´½À´Ï´Ù.");
+			request.setAttribute("errMsg", "ì˜¤ë¥˜ë¡œ ì¸í•´ ì¡°íšŒì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤.");
 			request.getRequestDispatcher("/layout.jsp?page=error.jsp").forward(request, response);
 		}
 	}

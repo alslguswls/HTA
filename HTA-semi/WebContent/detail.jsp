@@ -49,10 +49,19 @@
 		</tr>
 	</table>
 	<%
-		String id = (String)session.getAttribute("id");
-		
+		boolean resv = (boolean)request.getAttribute("resv");
+		if(resv){
 	%>
-	<input type="button" value="예약" id="resvBtn" onclick="resv()" >
-	<input type="button" value="예약완료" id="resvBtn" disabled="disabled">
-	
+			<input type="button" value="예약완료" id="resvBtn" disabled="disabled">
+	<%
+		}else{
+	%>
+			<input type="button" value="예약" id="resvBtn" onclick="resv()" >
+	<%
+		}
+	%>
+	<br>
+	댓글 : <input type="text" id="comm" size="20">
+	<input type="button" value="입력" onclick="comm()">
+	<div id="list"></div>
 </div>

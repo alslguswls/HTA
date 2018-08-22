@@ -1,4 +1,5 @@
-/test/
-/dao/
-/vo/
+/board/
 /controller/
+/dao/
+/lib/
+/vo/

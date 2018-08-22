@@ -55,7 +55,7 @@ public class MembersDao {
 		PreparedStatement pstmt=null;
 		try {
 			con=db.DBConnection.getConn();
-			String sql="insert into users values(?,?,?,?,?,0,0)";
+			String sql="insert into users (id,pwd,email,phone,addr) values(?,?,?,?,?)";
 			pstmt=con.prepareStatement(sql);
 			
 			pstmt.setString(1,vo.getId());

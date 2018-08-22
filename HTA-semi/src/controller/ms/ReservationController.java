@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.simple.JSONObject;
 
+import dao.ms.BoardDao;
 import dao.ms.ReservationDao;
 import vo.ms.ReservationVo;
 
@@ -27,6 +28,7 @@ public class ReservationController extends HttpServlet{
 		JSONObject json = new JSONObject();
 		response.setContentType("text/plain;charset=utf-8");
 		if(n > 0) {
+			new BoardDao().resvup(bnum);
 			json.put("result", true);
 		}else{
 			json.put("result", false);

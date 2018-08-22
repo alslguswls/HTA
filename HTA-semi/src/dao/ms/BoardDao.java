@@ -41,4 +41,36 @@ public class BoardDao {
 		}
 		return null;
 	}
+	public int hitup(int bnum) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+			con = DBConnection.getConn();
+			String sql = "update board set hit=hit+1 where bnum=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, bnum);
+			return pstmt.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			return -1;
+		}finally {
+			DBConnection.closeConn(null, pstmt, con);
+		}
+	}
+	public int resvup(int bnum) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+			con = DBConnection.getConn();
+			String sql = "update board set regv=regv+1 where bnum=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, bnum);
+			return pstmt.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			return -1;
+		}finally {
+			DBConnection.closeConn(null, pstmt, con);
+		}
+	}
 }

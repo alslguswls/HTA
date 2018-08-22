@@ -41,6 +41,6 @@ public class boardController extends HttpServlet {
 		request.setAttribute("startPage",startPage);
 		request.setAttribute("endPage",endPage);
 		request.setAttribute("pageNum",pageNum);
-		request.getRequestDispatcher("/layout.jsp?page=board/list.jsp").forward(request, response);
+		request.getRequestDispatcher("/layout.jsp?page=/board/list.jsp").forward(request, response);
 	}
 }

@@ -9,8 +9,7 @@
 	<script type="text/javascript">
 		var resvXhr = null;
 		function resv() {
-			//var id = session.getAttribute("id");
-			var id = "테스터2";
+			var id = "<%=session.getAttribute("id") %>";
 			resvXhr = new XMLHttpRequest();
 			resvXhr.onreadystatechange = resvCallback;
 			resvXhr.open('get','resv.do?bnum=${vo.bnum }&id='+id,true);
@@ -29,6 +28,26 @@
 				}
 			}
 		}
+		
+		var commXhr = null;
+		function comm() {
+			commXhr = new XMLHttpRequest();
+			commXhr.onreadystatechange = commCallback;
+			commXhr.open('post','comm.do',true);
+			commXhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+			var bnum = ${vo.bnum };
+			var id = "<%=session.getAttribute("id") %>";
+			var comm = document.getElementById("comm").value;
+			var param = "bnum=" + bnum + "&id=" + id + "&comm=" + comm;
+			xhr.send(param);
+		}
+		function commCallback() {
+			if(resvXhr.readyState==4 && resvXhr.status==200){
+				var list = document.getElementById("list");
+				var txt = resvXhr.responseText;
+				var json = JSON.parse(txt);
+			}
+		}
 	</script>
 	<%
 		String context = application.getContextPath();
@@ -37,15 +56,10 @@
 </head>
 <body>
 	<%
-		session.setAttribute("id", "테스터");
+		session.setAttribute("id", "테스터1");
 		String page1 = request.getParameter("page");
 		if(page1 == null) page1 = "main.jsp";
 	%>
-	<!--
-	 	로그인 기능을 메뉴로 추가하고 로그인/로그아웃 기능을 추가해보세요 
-	 	로그인후에 main.jsp페이지가 보이도록 하고
-	 	로그아웃 후에도 main.jsp페이지가 보이도록 합니다.
-	-->
 	<div id="wrap">
 		<div id="header">
 			<jsp:include page="header.jsp"></jsp:include>
