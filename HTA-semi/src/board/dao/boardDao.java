@@ -61,19 +61,11 @@ public class boardDao {
 	}
 	//게시글 리스트 불러오기 카테고리별
 	public ArrayList<boardVo> list(int startRow, int endRow, int cate) {
-		String sql = "select X.bnum, X.id, X.title, X.hit,X.status, X.regdate "
-						+ "from ("
-							+ "select rownum as bnum, A.id, A.title, A.hit,A.status, A.regdate"
-							+ "from ("
-								+ "select bnum, id,cate, title,hit,status, regdate"
-								+ " from board"
-								+ "order by regdate) A "
-							+ "where rownum <= ? and A.cate=?) X"
-						+ "where X.bnum >= ?";
+		String sql = "select X.bnum, X.id, X.title, X.hit,X.status, X.regdate from ( select rownum as bnum, A.id, A.title, A.hit, A.status, A.regdate from ( select bnum, id,cate, title,hit,status, regdate  from board order by regdate) A where rownum <= ? and A.cate=?) X where X.bnum >= ?";
 		try {
 			con = DBConnection.getConn();
 			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, endRow);
+			pstmt.setInt(1,endRow );
 			pstmt.setInt(2, cate);
 			pstmt.setInt(3, startRow);
 			rs = pstmt.executeQuery();

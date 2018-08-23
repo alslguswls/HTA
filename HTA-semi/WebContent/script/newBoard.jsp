@@ -18,13 +18,14 @@
 			alert("제목을 입력해주세요");
 			return false;
 		} else if (!cate) {
-			alert();
 			return false;
 		} else if (!money) {
 			alert("가격을 입력해 주세요");
+			document.getElementById("price").value=money;
 			return false;
-		}else if(!regNumber.test(money)){
+		}else if(!regNumber.test(price)){
 			alert("가격은 숫자만 입력 가능합니다.");
+			document.getElementById("price").value=money;
 			return false;
 		}else if (!sdate) {
 			alert("날짜를 선택해주세요");
@@ -37,6 +38,7 @@
 			return false;
 		}else if (thumbext != "jpg" && thumbext != "png" &&  thumbext != "gif" &&  thumbext != "bmp") {
 			alert("jpg,png,gif,bmp파일만 업로드 가능합니다.");
+			document.getElementById('orgfile').value="";
 			return false;
 		}
 		//fm.submit();

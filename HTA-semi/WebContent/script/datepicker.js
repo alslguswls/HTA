@@ -2,6 +2,8 @@ $(function() {
     $( "#sdate" ).datepicker({
    changeYear: true,
    changeMonth: true, 
+   	minDate : new Date(),
+   	maxDate : 10,
     nextText: '다음 달',
     prevText: '이전 달',
     dayNames: ['월요일', '화요일', '수요일', '목요일', '금요일', '토요일', '일요일'],
@@ -12,3 +14,4 @@ $(function() {
     yearRange: 'c-99:c+99'
     });
 });
+

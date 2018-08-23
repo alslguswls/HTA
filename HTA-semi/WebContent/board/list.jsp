@@ -12,11 +12,11 @@
 	</tr>
 		<c:forEach var="n" items="${list}">
 			<tr>
-				<td>${list.bnum }<td>
-				<td>${list.title }<td>
-				<td>${list.id }<td>
-				<td>${list.hit }<td>
-				<td>${list.regdate }<td>
+				<td>${n.bnum }<td>
+				<td><a href="<%=context %>/layout.jsp?page=detail.do?bnum=${n.bnum}">${n.title }</a><td>
+				<td>${n.id }<td>
+				<td>${n.hit }<td>
+				<td>${n.regdate }<td>
 			</tr>
 		</c:forEach>
 	<tr>
