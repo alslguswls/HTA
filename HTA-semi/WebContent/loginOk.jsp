@@ -31,7 +31,7 @@
 		request.setAttribute("id", id);
 		request.setAttribute("pwd", pwd);
 		// 로그인 jsp로 이동
-		RequestDispatcher rd=request.getRequestDispatcher("login.jsp");
+		RequestDispatcher rd=request.getRequestDispatcher("layout.jsp?page=login.jsp");
 		rd.forward(request,response);
 	}
 	
