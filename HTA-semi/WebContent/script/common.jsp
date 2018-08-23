@@ -145,7 +145,7 @@
 		var id = "<%=session.getAttribute("id") %>";
 		enterXhr = new XMLHttpRequest();
 		enterXhr.onreadystatechange = enterCallback;
-		enterXhr.open('get','enter.do?bnum='+bnum+'&id='+id,true);
+		enterXhr.open('get','enter.do?cmd=resv&bnum='+bnum+'&id='+id,true);
 		enterXhr.send();
 	}
 	function enterCallback() {
