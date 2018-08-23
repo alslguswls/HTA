@@ -30,6 +30,6 @@ public class InsertController extends HttpServlet {
 		MembersVo vo=new MembersVo(id, pwd, email, phone, addr, 0, 0.0);
 		dao.insert(vo);
 		
-		response.sendRedirect("main.jsp");
+		response.sendRedirect("login.jsp");
 	}
 }

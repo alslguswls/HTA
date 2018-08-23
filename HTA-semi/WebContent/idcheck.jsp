@@ -10,6 +10,7 @@
 
 <%
 //1. 파라미터로 전달된 아이디가 존재하는지 검사
+	request.setCharacterEncoding("utf-8"); // utf-8로 id 받기
 	String id=request.getParameter("id");
 	boolean using=false;
 	Connection con=null;

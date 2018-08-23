@@ -10,6 +10,7 @@
 
 <%
 //1. 파라미터로 전달된 패스워드 두개 값이 서로 일치하는지 검사
+	request.setCharacterEncoding("utf-8"); // utf-8로 pwd받기
 	String pwd=request.getParameter("pwd");
 	String pwd2=request.getParameter("pwd2");
 	boolean same=false;
