@@ -4,7 +4,7 @@
 <div>
 	<ul>
 		<li><a href="layout.jsp?page=main.jsp">홈으로</a></li>
-		<li><a href="layout.jsp?page=reg.jsp">회원가입</a></li>
+		<li><a href="layout.jsp?page=join.jsp">회원가입</a></li>
 		<li><a href="layout.jsp?page=notice.jsp">공지사항</a></li>
 		<li><a href="layout.jsp?page=list.jsp">경매품보기</a></li>
 		<%

@@ -30,14 +30,15 @@ public class CommentsDao {
 		return -1;
 	}
 	
-	public int getCount() {
+	public int getCount(int num) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
 			con = DBConnection.getConn();
-			String sql = "select nvl(count(cnum),0) cnt from comments";
+			String sql = "select nvl(count(cnum),0) cnt from comments where bnum=?";
 			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, num);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				return rs.getInt("cnt");

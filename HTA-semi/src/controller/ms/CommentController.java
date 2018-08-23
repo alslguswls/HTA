@@ -71,7 +71,7 @@ public class CommentController extends HttpServlet{
 		CommentsDao dao = new CommentsDao();
 		ArrayList<CommentsVo> list = dao.list(num, startRow, endRow);
 		
-		int pageCount = (int)Math.ceil(dao.getCount()/10.0);
+		int pageCount = (int)Math.ceil(dao.getCount(num)/10.0);
 		int startPage = (pageNum-1)/10*10+1;
 		int endPage = startPage+9;
 		if(endPage>pageCount) endPage=pageCount;
