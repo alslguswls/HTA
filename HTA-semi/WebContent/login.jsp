@@ -4,7 +4,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>login_form.html</title>
+<title>login.jsp</title>
+<style>table {margin:auto;text-align:center}</style>
 <script type="text/javascript">
 	function check(){
 		//alert("나오냐");
@@ -37,7 +38,7 @@
 
 <h1>로그인</h1>
 
-<form name="f" method="post" action="loginOk.jsp" onsubmit="return check()">
+<form name="f" method="post" action="loginOk.jsp" onsubmit="return check()" align="center">
 	<table align="center" border="1" width="250" height="100"  >
 		<div style="color:red;font-size:12px"><%=errMsg %></div>
 		<tr>
