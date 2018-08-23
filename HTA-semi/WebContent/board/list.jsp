@@ -1,45 +1,64 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+		String context = application.getContextPath();
+%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-<h2>게시글목록</h2>
-
-<!-- 페이징 -->
-<div>
-	<!-- 이전 -->
-	<c:choose>
-		<c:when test="${startPage>10 }">
-			<a href="list.do?pageNum=${startPage-1 }">[이전]</a>
-		</c:when>
-		<c:otherwise>
-			[이전]
-		</c:otherwise>
-	</c:choose>
-	
-	<c:forEach var="i" begin="${startPage }" end="${endPage }">
-	<c:choose>
-		<c:when test="${pageNum==i }"><%-- 현재페이지인경우--%>
-			<a href="list.do?pageNum=${i }"><span style="color:red" >[${i }]</span></a>
-		</c:when>
-		<c:otherwise>
-			<a href="list.do?pageNum=${i }"><span style="color:#555" >[${i }]</span></a>
-		</c:otherwise>
-	</c:choose>	
-	</c:forEach>
-	
-	
-	<!-- 다음 -->
-	<c:choose>
-		<c:when test="${endPage<pageCount }">
-			<a href="list.do?pageNum=${endPage+1 }">[다음]</a>
-		</c:when>
-		<c:otherwise>
-			[다음]
-		</c:otherwise>
-	</c:choose>
-	
-</div>
-
+<h2>게시글목록</h2>     
+<div><a href="<%=context %>/layout.jsp?page=/board/newBoard.jsp">글작성</a></div>
+<table>
+	<tr>
+		<th>글번호</th><th>제목</th><th>작성자</th><th>조회수</th><th>작성일</th>
+	</tr>
+		<c:forEach var="n" items="${list}">
+			<tr>
+				<td>${list.bnum }<td>
+				<td>${list.title }<td>
+				<td>${list.id }<td>
+				<td>${list.hit }<td>
+				<td>${list.regdate }<td>
+			</tr>
+		</c:forEach>
+	<tr>
+		<td colspan="5">
+		<!-- 페이징 -->
+		<div>
+			<!-- 이전 -->
+			<c:choose>
+				<c:when test="${startPage>10 }">
+					<a href="boardList.do?pageNum=${startPage-1 }">[이전]</a>
+				</c:when>
+				<c:otherwise>
+					[이전]
+				</c:otherwise>
+			</c:choose>
+			
+			<c:forEach var="i" begin="${startPage }" end="${endPage }">
+			<c:choose>
+				<c:when test="${pageNum==i }"><%-- 현재페이지인경우--%>
+					<a href="boardList.do?pageNum=${i }"><span style="color:red" >[${i }]</span></a>
+				</c:when>
+				<c:otherwise>
+					<a href="boardList.do?pageNum=${i }"><span style="color:#555" >[${i }]</span></a>
+				</c:otherwise>
+			</c:choose>	
+			</c:forEach>
+			
+			
+			<!-- 다음 -->
+			<c:choose>
+				<c:when test="${endPage<pageCount }">
+					<a href="boardList.do?pageNum=${endPage+1 }">[다음]</a>
+				</c:when>
+				<c:otherwise>
+					[다음]
+				</c:otherwise>
+			</c:choose>
+			
+		</div>
+		</td>
+	</tr>
+</table>
 
 
 

@@ -16,8 +16,11 @@ import board.vo.boardVo;
 public class boardController extends HttpServlet {
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int cate=Integer.parseInt(request.getParameter("cate"));
-		
+		String ck=request.getParameter("cate");
+		int cate=0;
+		if(ck!=null) {
+			cate=Integer.parseInt(ck);
+		}
 		String spageNum=request.getParameter("pageNum");
 		int pageNum=1;
 		if(spageNum!=null) {

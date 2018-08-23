@@ -14,8 +14,17 @@
 </head>
 	<%
 		String page1 = request.getParameter("page");
-		if(page1 == null) page1 = "main.jsp";
-		if(page1.equals("detail.jsp")){
+		if(page1 == null) page1 = "/boardList.do";
+		//달력 스크립트 글게시시 사용
+		if(page1.equals("/board/newBoard.jsp")){
+	%>
+		<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
+		<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script> 
+		<script src="<%=context %>/script/datepicker.js" ></script>
+		<jsp:include page="/script/newBoard.jsp"></jsp:include>
+	<% 
+		}else if(page1.equals("detail.jsp")){
 	%>
 			<body onload="commList()">
 	<%

@@ -61,25 +61,32 @@ public class boardDao {
 	}
 	//게시글 리스트 불러오기 카테고리별
 	public ArrayList<boardVo> list(int startRow, int endRow, int cate) {
-		String sql = "SELECT * FROM " + "(  " + "	   SELECT AA.*,ROWNUM RNUM FROM " + "	   ( "
-				+ "	     SELECT * FROM board " + "	     ORDER BY REF DESC,STEP ASC " + "	   )AA " + ")"
-				+ " WHERE RNUM>=?AND RNUM<=? AND CATE = ?";
+		String sql = "select X.bnum, X.id, X.title, X.hit,X.status, X.regdate "
+						+ "from ("
+							+ "select rownum as bnum, A.id, A.title, A.hit,A.status, A.regdate"
+							+ "from ("
+								+ "select bnum, id,cate, title,hit,status, regdate"
+								+ " from board"
+								+ "order by regdate) A "
+							+ "where rownum <= ? and A.cate=?) X"
+						+ "where X.bnum >= ?";
 		try {
 			con = DBConnection.getConn();
 			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, startRow);
-			pstmt.setInt(2, endRow);
-			pstmt.setInt(3, cate);
+			pstmt.setInt(1, endRow);
+			pstmt.setInt(2, cate);
+			pstmt.setInt(3, startRow);
 			rs = pstmt.executeQuery();
 			ArrayList<boardVo> list = new ArrayList<>();
 			while (rs.next()) {
 				int bnum = rs.getInt("bnum");
+				System.out.println(bnum);
 				String id=rs.getString("id");
 				String title= rs.getString("title");
-				String content = rs.getString("content");
 				int hit = rs.getInt("hit");
 				int status = rs.getInt("status");
-				boardVo vo = new boardVo(bnum,id,cate,title,content,null,null,null,0,hit,0,status);
+				Date regdate = rs.getDate("regdate");
+				boardVo vo = new boardVo(bnum,id,cate,title,null,null,null,null,0,hit,0,status,regdate);
 				list.add(vo);
 			}
 			return list;

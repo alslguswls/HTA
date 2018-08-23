@@ -15,11 +15,12 @@ public class boardVo {
 	private int hit;//조회수
 	private int regv;//경매 예약자 수
 	private int status;//상태값
+	private Date regdate; //등록시간
 	
 	public boardVo() {}
 	
 	//전체 데이터 변수 사용
-	public boardVo(int bnum,String id,int cate, String title, String content, String orgfilename,String savefilename,Date starttime,int startprice,int hit,int regv,int status) {
+	public boardVo(int bnum,String id,int cate, String title, String content, String orgfilename,String savefilename,Date starttime,int startprice,int hit,int regv,int status,Date regdate) {
 		this.bnum=bnum;
 		this.id=id;
 		this.cate=cate;
@@ -32,6 +33,7 @@ public class boardVo {
 		this.hit=hit;
 		this.regv=regv;
 		this.status=status;
+		this.regdate=regdate;
 	}
 
 	public int getBnum() {
@@ -128,6 +130,14 @@ public class boardVo {
 
 	public void setStatus(int status) {
 		this.status = status;
+	}
+
+	public Date getRegdate() {
+		return regdate;
+	}
+
+	public void setRegdate(Date regdate) {
+		this.regdate = regdate;
 	}
 	
 }
