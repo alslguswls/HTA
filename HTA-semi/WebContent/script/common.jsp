@@ -24,18 +24,17 @@
 	}
 	
 	var commXhr = null;
-	function comm() {
-		alert("asd");
+	function comm1() {
 		commXhr = new XMLHttpRequest();
 		commXhr.onreadystatechange = commCallback;
 		commXhr.open('post','comm.do?cmd=insert',true);
 		commXhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
 		var bnum = ${vo.bnum };
 		var id = "<%=session.getAttribute("id") %>";
-		var comm = document.getElementById("comm").value;
-		var param = "bnum=" + bnum + "&id=" + id + "&comm=" + comm;
+		var comm = document.getElementById("comm");
+		var param = "bnum=" + bnum + "&id=" + id + "&comm=" + comm.value;
 		commXhr.send(param);
-		return false;
+		comm.value = "";
 	}
 	function commCallback() {
 		if(commXhr.readyState==4 && commXhr.status==200){
