@@ -64,7 +64,12 @@
 	<%
 		}
 	%>
+	<input type="button" value="경매참여" id="enterBtn" onclick="enter()">
 	<br>
+	<form action="javascript:return false;" onsubmit="return comm();" method="post">
+		댓글 : <input type="text" id="comm" size="20">
+		<input type="submit" value="입력">
+	</form>
 	댓글 : <input type="text" id="comm" size="20">
 	<input type="button" value="입력" onclick="comm()">
 	<div id="list"></div>

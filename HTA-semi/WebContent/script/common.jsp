@@ -25,6 +25,7 @@
 	
 	var commXhr = null;
 	function comm() {
+		alert("asd");
 		commXhr = new XMLHttpRequest();
 		commXhr.onreadystatechange = commCallback;
 		commXhr.open('post','comm.do?cmd=insert',true);
@@ -34,6 +35,7 @@
 		var comm = document.getElementById("comm").value;
 		var param = "bnum=" + bnum + "&id=" + id + "&comm=" + comm;
 		commXhr.send(param);
+		return false;
 	}
 	function commCallback() {
 		if(commXhr.readyState==4 && commXhr.status==200){
@@ -99,7 +101,7 @@
 				}
 				list.innerHTML += "<label>"+json.list[i].id+" : "+json.list[i].comments+"</label>&nbsp;"+
 					"<input type=\"button\" value=\"답글\" onclick=\"addInput(" + i + ")\" id=\"btn" + i + "\"><br>"+
-					"<form action=\"\" method=\"post\" style=\"display: none;\" name=\"form"+i+"\">"+
+					"<form action=\"javascript:return false;\" method=\"post\" style=\"display: none;\" name=\"form"+i+"\" onsubmit=\"ccomm("+i+")\" >"+
 						"<input type=\"hidden\" name=\"cnum\" value=\""+json.list[i].cnum+"\">"+
 						"<input type=\"hidden\" name=\"bnum\" value=\""+json.list[i].bnum+"\">"+
 						"<input type=\"hidden\" name=\"id\" value=\"<%=session.getAttribute("id") %>\">"+
@@ -107,7 +109,7 @@
 						"<input type=\"hidden\" name=\"lev\" value=\""+json.list[i].lev+"\">"+
 						"<input type=\"hidden\" name=\"step\" value=\""+json.list[i].step+"\">"+
 						"<input type=\"text\" name=\"comm\" size=\"20\">"+
-						"<input type=\"button\" value=\"입력\" onclick=\"ccomm("+i+")\">";
+						"<input type=\"submit\" value=\"입력\" >";
 					"</form>";
 			}
 			
@@ -136,6 +138,27 @@
 		var btn = document.getElementById("btn"+i);
 		btn.style.display = "none";
 		form.style.display = "block";
+	}
+	
+	var enterXhr = null;
+	function enter() {
+		var bnum = ${vo.bnum };
+		var id = "<%=session.getAttribute("id") %>";
+		enterXhr = new XMLHttpRequest();
+		enterXhr.onreadystatechange = enterCallback;
+		enterXhr.open('get','enter.do?bnum='+bnum+'&id='+id,true);
+		enterXhr.send();
+	}
+	function enterCallback() {
+		if(enterXhr.readyState==4 && enterXhr.status==200){
+			var txt = enterXhr.responseText;
+			var json = JSON.parse(txt);
+			if(json.resv){
+				location.href = "layout.jsp?page=enter.jsp";
+			}else{
+				alert("경매참여가 불가능합니다.");
+			}
+		}
 	}
 </script>
 
