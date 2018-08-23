@@ -11,6 +11,6 @@
 	session.invalidate(); // 세션 비우기
 %>
 <h1>로그아웃 되었습니다.</h1>	
-<a href="main.jsp">메인으로..</a>
+<a href="layout.jsp">메인으로..</a>
 </body>
 </html>
