@@ -36,9 +36,9 @@ public class boardDao {
 		String content = vo.getContent();
 		String orgfilename = vo.getOrgfilename();
 		String savefilename = vo.getSavefilename();
-		Date starttime = vo.getStarttime();
+		String starttime = vo.getStarttime();
 		int startprice = vo.getStartprice();
-		sql = "insert into board values(board_seq.nextval,?,?,?,?,?,?,?,?,0,0,0)";
+		sql = "insert into board values(board_seq.nextval,?,?,?,?,?,?,to_char(?,'yyyy-MM-dd HH:mm'),?,0,0,0)";
 		try {
 			con = DBConnection.getConn();
 			pstmt = con.prepareStatement(sql);
@@ -48,7 +48,7 @@ public class boardDao {
 			pstmt.setString(4, content);
 			pstmt.setString(5, orgfilename);
 			pstmt.setString(6, savefilename);
-			pstmt.setDate(7, starttime);
+			pstmt.setString(7, starttime);
 			pstmt.setInt(8, startprice);
 			n = pstmt.executeUpdate();
 			return n;

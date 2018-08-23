@@ -8,10 +8,10 @@
 	String[] cate=lb.category();
 %>
 <c:set var="cate" value="<%=cate %>"/>
-<form id="newBoard" method="post" action="insertBoard.do" enctype="multipart/form-data">
+<form id="newBoard"  name="newBoard" method="post" action="insertBoard.do" enctype="multipart/form-data">
 	<table>
 		<tr>
-			<th >작성자</th><td>${session.id }</td>
+			<th >작성자</th><td>${session.id }<input type="hidden" id="id" name="name" value="${session.id }hyunjin"></td> 
 		</tr>
 		<tr>
 			<th >제목</th><td><input type="text" name="title" id="title"></td>
@@ -19,7 +19,7 @@
 		<tr>
 			<th >카테고리</th>
 			<td>
-				<select id="cate">
+				<select id="cate" name="cate">
 					<c:forEach var="n" items="${cate }" varStatus="cate">
 						<option value="${cate.index}">${n }</option>
 					</c:forEach>
@@ -35,19 +35,31 @@
 		<tr>
 			<th>시작시간선택</th>
 			<td>
-				<select id="hh">
+				<select id="hh" name="hh">
 					<option>시</option>
-					<%for(int i=1;i<25;i++){ 
-						String n=""+i;
+					<%for(int i=0;i<24;i++){ 
+						String n;
+						if(i<10){
+						n="0"+i;
+						}else{
+						n=""+i;
+						}
 						if(i==24){n="00";}
 					%>
 						<option value="<%=n%>"><%=n%></option>
 					<%} %>
 				</select>
-				<select id="mm">
+				<select id="mm" name="mm">
 					<option>분</option>
-					<%for(int i=0;i<61;i++){ %>
-						<option value="<%=i%>"><%=i%></option>
+					<%for(int i=0;i<51;i+=10){ 
+						String n;
+						if(i<10){
+						n="0"+i;
+						}else{
+						n=""+i;
+						}
+						%>
+						<option value="<%=n%>"><%=n%></option>
 					<%} %>
 				</select>
 			</td>
