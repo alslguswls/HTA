@@ -16,7 +16,7 @@ import vo.wh.MembersVo;
 
 public class MembersDao {
 	
-	// 사용자 리스트 
+	// 사용자 리스트 조회 
 	public ArrayList<MembersVo> list(){
 		Connection con=null;
 		PreparedStatement pstmt=null;
@@ -34,8 +34,9 @@ public class MembersDao {
 				String email=rs.getString("email");
 				String phone=rs.getString("phone");
 				String addr=rs.getString("addr");
-				int lev=rs.getInt("lev");
-				Double coin=rs.getDouble("coin"); 
+				Integer lev=rs.getInt("lev");
+				Long coin=rs.getLong("coin"); 
+				
 				MembersVo vo=new MembersVo(id, pwd, email, phone, addr, lev, coin);
 				list.add(vo);
 			}
@@ -92,8 +93,8 @@ public class MembersDao {
 		}
 	}
 	
-		// 사용자 상세정보 
-		public MembersVo getinfo(String id) {
+	// 사용자 상세정보 
+	public MembersVo getinfo(String id) {
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -110,7 +111,7 @@ public class MembersDao {
 				String phone=rs.getString("phone");
 				String addr=rs.getString("addr");
 				Integer lev=rs.getInt("lev");
-				Double coin=rs.getDouble("coin");
+				Long coin=rs.getLong("coin");
 				
 				MembersVo vo=new MembersVo(id, pwd, email, phone, addr, lev, coin);
 				return vo;
@@ -126,8 +127,8 @@ public class MembersDao {
 		}
 	}
 	
-		// 사용자 수정
-		public int update(MembersVo vo) {
+	// 사용자 수정
+	public int update(MembersVo vo) {
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		try {
@@ -145,6 +146,70 @@ public class MembersDao {
 			return -1;
 		}finally {
 			DBConnection.closeConn(null,pstmt,con);
+		}
+	}
+		
+	// 페이징 처리를 위한 사용자 수 구하기 
+	public int getCount() {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try {
+			con=DBConnection.getConn();
+			String sql="select count(1) cnt from users";
+			pstmt=con.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				return rs.getInt("cnt");
+			}else {
+				return 0; // 만약 없으면 0을 리턴
+			}
+		}catch(SQLException se) {
+			System.out.println(se.getMessage());
+			return -1;
+		}finally {
+			DBConnection.closeConn(rs, pstmt, con);
+		}
+	}
+	
+	public ArrayList<MembersVo> list(int startRow, int endRow){
+		String sql="select * from " + 
+				"    (" + 
+				"        select AA.*,rownum rnum from " + 
+				"        (" + 
+				"            select * from users order by id asc" + 
+				"        ) " + 
+				"    AA) " + 
+				"where rnum>=? and rnum<=?";
+		
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try {
+			con=DBConnection.getConn();
+			pstmt=con.prepareStatement(sql);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			rs=pstmt.executeQuery();
+			ArrayList<MembersVo> list = new ArrayList<>();
+			while(rs.next()) {
+				String id=rs.getString("id");
+				String pwd=rs.getString("pwd");
+				String email=rs.getString("email");
+				String phone=rs.getString("phone");
+				String addr=rs.getString("addr");
+				Integer lev=rs.getInt("lev");
+				Long coin=rs.getLong("coin");
+				
+				MembersVo vo=new MembersVo(id, pwd, email, phone, addr, lev, coin);
+				list.add(vo);
+			}
+			return list;
+		}catch(SQLException se) {
+			System.out.println(se.getMessage());
+			return null;
+		}finally {
+			DBConnection.closeConn(rs, pstmt, con);
 		}
 	}
 }

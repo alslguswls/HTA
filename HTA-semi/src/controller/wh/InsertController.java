@@ -27,7 +27,7 @@ public class InsertController extends HttpServlet {
 		//Double coin=Double.parseDouble(request.getParameter("coin"));
 		
 		MembersDao dao=new MembersDao();
-		MembersVo vo=new MembersVo(id, pwd, email, phone, addr, 0, 0.0);
+		MembersVo vo=new MembersVo(id, pwd, email, phone, addr, 0, 0L);
 		dao.insert(vo);
 		
 		response.sendRedirect("layout.jsp?page=login.jsp");

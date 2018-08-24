@@ -5,24 +5,27 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>member.jsp</title>
 </head>
 <body align="center">
 <h1>회원관리 페이지</h1>
-<form name="f">
 	<table border="1" align="center" width="800">
-		<tr>
-			<td>id</td>
-			<td>email</td>
-			<td>phone</td>
-			<td>수정</td>
-			<td>삭제</td>
-		</tr>
+			<tr>
+				<td>id</td>
+				<td>email</td>
+				<td>phone</td>
+				<td>수정</td>
+				<td>삭제</td>
+			</tr>
 		<c:forEach var="vo" items="${list }">
-			
+			<tr>
+				<td>${vo.id }</td>
+				<td>${vo.email }</td>
+				<td>${vo.phone }</td>
+				<td><input type="button" value="수정"></td>
+				<td><input type="button" value="삭제"></td>
+			</tr>
 		</c:forEach>
-		
 	</table>
-</form>
 </body>
 </html>

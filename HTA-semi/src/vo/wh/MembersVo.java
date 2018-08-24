@@ -1,18 +1,17 @@
 package vo.wh;
 
 public class MembersVo {
-	private String id;			// »ç¿ëÀÚ ¾ÆÀÌµð
-	private String pwd;		// »ç¿ëÀÚ ÆÐ½º¿öµå
-	private String email;	// »ç¿ëÀÚ ÀÌ¸ÞÀÏ
-	private String phone;	// »ç¿ëÀÚ ÀüÈ­¹øÈ£
-	private String addr;		// »ç¿ëÀÚ ÁÖ¼Ò
-	private int lev;				// »ç¿ëÀÚ µî±Þ
-	private Double coin;	//	ÄÚÀÎ
+	private String id;			// ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìµï¿½
+	private String pwd;		// ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ð½ï¿½ï¿½ï¿½ï¿½ï¿½
+	private String email;	// ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½
+	private String phone;	// ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È­ï¿½ï¿½È£
+	private String addr;		// ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö¼ï¿½
+	private int lev;				// ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+	private Long coin;	//	ï¿½ï¿½ï¿½ï¿½
 	
-	public MembersVo() {} // µðÆúÆ®»ý¼ºÀÚ
+	public MembersVo() {} // ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
-	// »ý¼ºÀÚ
-	public MembersVo(String id, String pwd, String email, String phone, String addr, int lev, Double coin) {
+	public MembersVo(String id, String pwd, String email, String phone, String addr, int lev, Long coin) {
 		super();
 		this.id = id;
 		this.pwd = pwd;
@@ -23,7 +22,6 @@ public class MembersVo {
 		this.coin = coin;
 	}
 
-	
 	public String getId() {
 		return id;
 	}
@@ -72,12 +70,12 @@ public class MembersVo {
 		this.lev = lev;
 	}
 
-	public Double getCoin() {
+	public Long getCoin() {
 		return coin;
 	}
 
-	public void setCoin(Double coin) {
+	public void setCoin(Long coin) {
 		this.coin = coin;
 	}
-	
+
 }	
