@@ -18,7 +18,7 @@ create table board(
 	content varchar2(100), --내용
 	orgfilename varchar2(100), --오리지널파일네임
 	savefilename varchar2(100), --전장파일네임
-	starttime date default sysdate, --경매시작시간
+	starttime varchar2(30), --경매시작시간
 	startprice number(38)default 0 NOT NULL, --시작경매가
 	hit number(10)default 0 NOT NULL, --조회수
 	regv number(10)default 0 NOT NULL, -- 예약자수
@@ -86,7 +86,7 @@ create table chat(
 )tablespace semi;
 create sequence chat_seq;
 
-sssssss
+
 ######입찰진행 호가    #######
 create table mprice(
 	mp_no number(38) primary key, --입찰번호

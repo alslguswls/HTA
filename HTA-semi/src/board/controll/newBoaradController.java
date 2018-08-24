@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.websocket.Session;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
@@ -52,7 +53,7 @@ public class newBoaradController extends HttpServlet {
 					0, 0, null);
 			int n = dao.insert(vo);
 			if (n > 0) {
-				res.sendRedirect("/boardList.do");
+				res.sendRedirect("/HTA-semi/boardList.do");
 			} else {
 				req.setAttribute("errMsg", "오류로 인해 저장에 실패 했습니다.");
 				req.getRequestDispatcher("/layout.jsp?page=error.jsp").forward(req, res);
