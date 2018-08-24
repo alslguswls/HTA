@@ -10,6 +10,7 @@ create table users(
 )tablespace semi;
 
 ######  게시판 테이블    #######
+drop table board;
 create table board( 
 	bnum number(38), --게시글 번호
 	id varchar2(100), --아이디
@@ -39,6 +40,7 @@ create sequence cate_seq;
 
 
 ######  예약 테이블    #######
+drop table reservation;
 create table reservation(
 	vnum number(10) primary key, --예약자 번호
 	bnum number(38), --게시글번호
@@ -49,6 +51,7 @@ create table reservation(
 create sequence reservation_seq;
 
 ######  댓글 테이블    #######
+drop table comments;
 create table comments(
 	cnum number(38) primary key, --댓글번호
 	bnum number(38), --게시글 번호
@@ -63,6 +66,7 @@ create table comments(
 create sequence comment_seq;
 
 ######  입찰내역 테이블    #######
+drop table result;
 create table result(
 	rnum number(38) primary key, --판매번호 
 	bnum number(38), -- 글번호
@@ -76,6 +80,7 @@ create sequence result_seq;
 
 
 ######  채팅 테이블    #######
+drop table chat;
 create table chat(
 	chat_no number(38) primary key, --채팅번호
 	bnum number(38), --글번호
@@ -88,6 +93,7 @@ create sequence chat_seq;
 
 
 ######입찰진행 호가    #######
+drop table mprice;
 create table mprice(
 	mp_no number(38) primary key, --입찰번호
 	bnum number(38), --글번호
