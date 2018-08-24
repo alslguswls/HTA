@@ -27,7 +27,7 @@ public class BoardDao {
 				String content = rs.getString("content");
 				String orgfilename = rs.getString("orgfilename");
 				String savefilename = rs.getString("savefilename");
-				Date starttime = rs.getDate("starttime");
+				String starttime = rs.getString("starttime");
 				int startprice = rs.getInt("startprice");
 				int hit = rs.getInt("hit");
 				int regv = rs.getInt("regv");
