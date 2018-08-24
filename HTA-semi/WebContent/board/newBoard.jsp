@@ -6,12 +6,13 @@
 	//카테고리 리스트 가져오기
 	lib lb = new lib();
 	String[] cate=lb.category();
+	String id = (String)session.getAttribute("id");
 %>
 <c:set var="cate" value="<%=cate %>"/>
 <form id="newBoard"  name="newBoard" method="post" action="insertBoard.do" enctype="multipart/form-data">
 	<table>
 		<tr>
-			<th >작성자</th><td>${session.id }<input type="hidden" id="id" name="name" value="${session.id }hyunjin"></td> 
+			<th >작성자</th><td><%=id %><input type="hidden" id="id" name="name" value="<%=id%>"></td> 
 		</tr>
 		<tr>
 			<th >제목</th><td><input type="text" name="title" id="title"></td>
