@@ -30,6 +30,7 @@ public class DetailController extends HttpServlet{
 				request.setAttribute("resv", false);
 			}
 			request.setAttribute("vo", vo);
+			System.out.println("detail.jsp로 이동");
 			request.getRequestDispatcher("/layout.jsp?page=detail.jsp").forward(request, response);
 		}else {
 			request.setAttribute("errMsg", "오류로 인해 조회에 실패했습니다.");

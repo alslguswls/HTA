@@ -22,6 +22,7 @@ public class BoardDao {
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				String id = rs.getString("id");
+				System.out.println(id);
 				int cate = rs.getInt("cate");
 				String title = rs.getString("title");
 				String content = rs.getString("content");

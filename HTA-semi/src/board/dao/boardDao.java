@@ -61,7 +61,7 @@ public class boardDao {
 	}
 	//게시글 리스트 불러오기 카테고리별
 	public ArrayList<boardVo> list(int startRow, int endRow, int cate) {
-		String sql = "select X.bnum, X.id, X.title, X.hit,X.status, X.regdate from ( select rownum as bnum, A.id, A.title, A.hit, A.status, A.regdate from ( select bnum, id,cate, title,hit,status, regdate  from board order by regdate) A where rownum <= ? and A.cate=?) X where X.bnum >= ?";
+		String sql = "select X.bnum, X.id, X.title, X.hit,X.status, X.regdate from ( select rownum as xno, A.bnum , A.id, A.title, A.hit, A.status, A.regdate from ( select bnum, id, cate, title, hit, status, regdate  from board order by regdate desc) A where rownum <= ? and A.cate=?) X where X.xno >= ?";
 		try {
 			con = DBConnection.getConn();
 			pstmt = con.prepareStatement(sql);
@@ -72,7 +72,6 @@ public class boardDao {
 			ArrayList<boardVo> list = new ArrayList<>();
 			while (rs.next()) {
 				int bnum = rs.getInt("bnum");
-				System.out.println(bnum);
 				String id=rs.getString("id");
 				String title= rs.getString("title");
 				int hit = rs.getInt("hit");
