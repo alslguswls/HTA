@@ -14,7 +14,7 @@
 	function timer() {
 		timeXhr = new XMLHttpRequest();
 		timeXhr.onreadystatechange = timerCallback;
-		timeXhr.open('get','enter.do?cmd=timer',true);
+		timeXhr.open('get','enter.do?cmd=timer&bnum='+${param.bnum },true);
 		timeXhr.send();
 	}
 	function timerCallback() {
@@ -22,13 +22,31 @@
 			var txt = timeXhr.responseText;
 			var json = JSON.parse(txt);
 			var time = document.getElementById("time")
+			var id = document.getElementById("id")
+			var maxPrice = document.getElementById("maxPrice")
 			time.innerHTML = json.time;
+			id.innerHTML = json.id;
+			maxPrice.innerHTML = json.maxPrice;
 		}
 	}
 	setInterval(timer, 1000);
 	
+	var callXhr = null;
 	function priceCall() {
-		
+		var price = document.getElementById("price").value;
+		callXhr = new XMLHttpRequest();
+		callXhr.onreadystatechange = callCallback;
+		callXhr.open('get','enter.do?cmd=call&bnum='+${param.bnum }+'&price='+price,true);
+		callXhr.send();
+	}
+	function callCallback() {
+		if(callXhr.readyState==4 && callXhr.status==200){
+			var txt = callXhr.responseText;
+			var json = JSON.parse(txt);
+			if(json.msg != "success"){
+				alert(json.msg);
+			}
+		}
 	}
 </script>
 </head>
@@ -52,7 +70,10 @@
 <input type="text" size="50" id="msg">
 <input type="submit" value="입력">
 </form>
-<input type="button" value="호가하기" onclick="priceCall()">
+<form action="javascript:return false;"onsubmit="priceCall()">
+<input type="text" size="20" id="price">
+<input type="submit" value="호가하기">
+</form>
 
 
 

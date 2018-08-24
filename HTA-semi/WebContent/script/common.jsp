@@ -153,7 +153,7 @@
 			var txt = enterXhr.responseText;
 			var json = JSON.parse(txt);
 			if(json.resv){
-				location.href = "layout.jsp?page=enter.jsp";
+				location.href = "layout.jsp?page=enter.jsp?bnum="+${vo.bnum };
 			}else{
 				alert("경매참여가 불가능합니다.");
 			}
