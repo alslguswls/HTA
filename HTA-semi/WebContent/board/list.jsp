@@ -8,6 +8,15 @@
 <div><a href="<%=context %>/layout.jsp?page=/board/newBoard.jsp">글작성</a></div>
 <table>
 	<tr>
+		<th colspan="5">
+		<div>
+		<a href="<%=context %>/layout.jsp?page=boardList.do?cul=1">조회순</a>
+		<a href="<%=context %>/layout.jsp?page=boardList.do?cul=0">최근등록일</a>
+		<a href="<%=context %>/layout.jsp?page=boardList.do?cul=2">경매임박순</a>
+		</th>
+		</div>
+	</tr>
+	<tr>
 		<th>글번호</th><th>제목</th><th>작성자</th><th>조회수</th><th>작성일</th>
 	</tr>
 		<c:forEach var="n" items="${list}">
@@ -19,6 +28,8 @@
 				<td>${n.regdate }<td>
 			</tr>
 		</c:forEach>
+		
+		
 	<tr>
 		<td colspan="5">
 		<!-- 페이징 -->
@@ -56,6 +67,19 @@
 			</c:choose>
 			
 		</div>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="5">
+			<form method="post" action="<%=context %>/boardList.do">
+			<select name="searchSel">
+				<option value="0">제목or내용</option>
+				<option value="1">아이디</option>
+			</select>
+			<input type="text" name="search">
+			<input type="submit" value="조회">
+			<input type="hidden" name="cate" value="${cate }">
+			</form>
 		</td>
 	</tr>
 </table>

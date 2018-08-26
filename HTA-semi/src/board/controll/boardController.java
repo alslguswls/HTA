@@ -11,16 +11,50 @@ import javax.servlet.http.HttpServletResponse;
 
 import board.dao.boardDao;
 import board.vo.boardVo;
+import lib.lib;
 
 @WebServlet("/boardList.do")
 public class boardController extends HttpServlet {
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String ck=request.getParameter("cate");
-		int cate=0;
-		if(ck!=null) {
-			cate=Integer.parseInt(ck);
+		response.setContentType("text/plain;charset=utf-8");
+		request.setCharacterEncoding("UTF-8");
+		
+		
+		String category_no=request.getParameter("cate");
+		String order=request.getParameter("cul");
+		String where = "";
+		String search = request.getParameter("search");
+		System.out.println(search);
+		
+		//정렬 체크
+		int cul = 0;
+		if(order!=null) {
+			cul = Integer.parseInt(order);
 		}
+		order = lib.orderBy(cul);
+		if(cul==3) {
+			//경매 마감을 제외한 경매임박순
+			where = "and status=0";
+		}
+		
+		//카테고리 체크
+		int cate=0;
+		if(category_no!=null) {
+			cate=Integer.parseInt(category_no);
+		}
+		
+		//조회 검색 체크
+		if(search!=null) {
+			System.out.println("12312312");
+			String sel = request.getParameter("searchSel");
+			if(sel.equals("0")) {
+				where += " and title like '%"+search+"%' or content like '%"+search+"%'";
+			}else {
+				where +=" and id like '%"+search+"%'";
+			}
+		}
+		System.out.println(where);
 		String spageNum=request.getParameter("pageNum");
 		int pageNum=1;
 		if(spageNum!=null) {
@@ -29,7 +63,7 @@ public class boardController extends HttpServlet {
 		int startRow=(pageNum-1)*10+1;
 		int endRow=startRow+9;
 		boardDao dao=boardDao.getInstance();
-		ArrayList<boardVo> list=dao.list(startRow, endRow, cate);
+		ArrayList<boardVo> list=dao.list(startRow, endRow, cate, order, where);
 		//전체페이지갯수구하기
 		int pageCount=(int)Math.ceil(dao.getCount(cate)/10.0);
 		//시작페이지번호
@@ -44,6 +78,8 @@ public class boardController extends HttpServlet {
 		request.setAttribute("startPage",startPage);
 		request.setAttribute("endPage",endPage);
 		request.setAttribute("pageNum",pageNum);
+		request.setAttribute("cate",cate);
+		request.setAttribute("search",search);
 		request.getRequestDispatcher("/layout.jsp?page=/board/list.jsp").forward(request, response);
 	}
 }

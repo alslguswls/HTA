@@ -7,12 +7,15 @@
 	lib lb = new lib();
 	String[] cate=lb.category();
 	String id = (String)session.getAttribute("id");
+	if(id==null){ 
+		pageContext.forward("/layout.jsp?page=login.jsp");
+	}
 %>
 <c:set var="cate" value="<%=cate %>"/>
 <form id="newBoard"  name="newBoard" method="post" action="insertBoard.do" enctype="multipart/form-data">
 	<table>
 		<tr>
-			<th >작성자</th><td><%=id %><input type="hidden" id="id" name="name" value="<%=id%>"></td> 
+			<th >작성자</th><td><%=id %><input type="hidden" id="id" name="id" value="<%=id%>"></td> 
 		</tr>
 		<tr>
 			<th >제목</th><td><input type="text" name="title" id="title"></td>

@@ -10,7 +10,8 @@ public class boardVo {
 	private String content; //내용
 	private String orgfilename; //업로드 파일 이름
 	private String savefilename;//서버저장 파일 이름
-	private String starttime;//경매시작시간
+	private String starttime;//경매시작시간 넣을때 
+	private Date starttime_Date;//경매시작시간 가져올때 사용
 	private int startprice;//경매시작가
 	private int hit;//조회수
 	private int regv;//경매 예약자 수
@@ -20,7 +21,7 @@ public class boardVo {
 	public boardVo() {}
 	
 	//전체 데이터 변수 사용
-	public boardVo(int bnum,String id,int cate, String title, String content, String orgfilename,String savefilename,String starttime,int startprice,int hit,int regv,int status,Date regdate) {
+	public boardVo(int bnum,String id,int cate, String title, String content, String orgfilename,String savefilename,String starttime,Date starttime_Date,int startprice,int hit,int regv,int status,Date regdate) {
 		this.bnum=bnum;
 		this.id=id;
 		this.cate=cate;
@@ -29,6 +30,7 @@ public class boardVo {
 		this.orgfilename=orgfilename;
 		this.savefilename=savefilename;
 		this.starttime=starttime;
+		this.starttime_Date=starttime_Date;
 		this.startprice=startprice;
 		this.hit=hit;
 		this.regv=regv;
@@ -138,6 +140,14 @@ public class boardVo {
 
 	public void setRegdate(Date regdate) {
 		this.regdate = regdate;
+	}
+
+	public Date getStarttime_Date() {
+		return starttime_Date;
+	}
+
+	public void setStarttime_Date(Date starttime_Date) {
+		this.starttime_Date = starttime_Date;
 	}
 	
 }

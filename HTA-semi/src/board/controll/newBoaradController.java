@@ -49,7 +49,7 @@ public class newBoaradController extends HttpServlet {
 			
 			//DB SAVE
 			boardDao dao = boardDao.getInstance();
-			boardVo vo = new boardVo(0, id, cate, title, content, orgfilename, savefilename, starttime, startprice, 0,
+			boardVo vo = new boardVo(0, id, cate, title, content, orgfilename, savefilename, starttime,null, startprice, 0,
 					0, 0, null);
 			int n = dao.insert(vo);
 			if (n > 0) {
