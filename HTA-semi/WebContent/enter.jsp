@@ -6,8 +6,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript">
+	var chatXhr = null;
 	function chat() {
-		alert("ASD");
+		chatXhr = new XMLHttpRequest();
+		chatXhr.onreadystatechange = chatCallback;
+		chatXhr.open('get','enter.do?cmd=chat&bnum='+${param.bnum }+'&',true);
 	}
 	
 	var timeXhr = null;

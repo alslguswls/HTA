@@ -86,6 +86,7 @@ create table chat(
 	bnum number(38), --글번호
 	id varchar2(100), --아이디
 	str varchar2(2000), --채팅내용
+	status number(1) default 0 NOT NULL, --상태값
 	CONSTRAINT fk_chat_users FOREIGN KEY(bnum) references board(bnum),
 	CONSTRAINT fk_chat_board FOREIGN KEY(id) references users(id)
 )tablespace semi;
