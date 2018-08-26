@@ -3,6 +3,7 @@ package controller.ms;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import javax.servlet.ServletException;
@@ -11,10 +12,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import dao.ms.ChatDao;
 import dao.ms.MpriceDao;
 import dao.ms.ReservationDao;
+import vo.ms.ChatVo;
+import vo.ms.CommentsVo;
 import vo.ms.MpriceVo;
 import vo.ms.ReservationVo;
 
@@ -32,6 +37,10 @@ public class EnterController extends HttpServlet{
 			timer(request, response);
 		}else if(cmd != null && cmd.equals("call")) {
 			call(request, response);
+		}else if(cmd != null && cmd.equals("chat")) {
+			chat(request, response);
+		}else if(cmd != null && cmd.equals("road")) {
+			road(request, response);
 		}
 	}
 	protected void resv(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -97,6 +106,46 @@ public class EnterController extends HttpServlet{
 			}else {
 				json.put("msg", "현재 최고호가 이상의 금액을 입력하세요.");
 			}
+		}
+		PrintWriter pw = response.getWriter();
+		pw.println(json.toString());
+		pw.close();
+	}
+	protected void chat(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int bnum = Integer.parseInt(request.getParameter("bnum"));
+		String id = (String)request.getSession().getAttribute("id");
+		String msg = request.getParameter("msg");
+		ChatDao dao = new ChatDao();
+		int n = dao.insert(new ChatVo(0, bnum, id, msg, 0));
+		JSONObject json = new JSONObject();
+		if(n>0) {
+			json.put("msg", "success");
+		}else {
+			json.put("msg", "오류로 인해 전송에 실패했습니다.");
+		}
+		PrintWriter pw = response.getWriter();
+		pw.println(json.toString());
+		pw.close();
+	}
+	protected void road(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int bnum = Integer.parseInt(request.getParameter("bnum"));
+		ChatDao dao = new ChatDao();
+		ArrayList<ChatVo> list = dao.list(bnum);
+		JSONArray arr = new JSONArray();
+		for(ChatVo vo : list) {
+			JSONObject obj = new JSONObject();
+			obj.put("chat_no", vo.getChat_no());
+			obj.put("bnum", vo.getBnum());
+			obj.put("id", vo.getId());
+			obj.put("str", vo.getStr());
+			obj.put("status", vo.getStatus());
+			arr.add(obj);
+		}
+		JSONObject json = new JSONObject();
+		if(list != null) {
+			json.put("list", arr);
+		}else {
+			json.put("msg", "오류로 인해 채팅 불러오기를 실패하였습니다.");
 		}
 		PrintWriter pw = response.getWriter();
 		pw.println(json.toString());

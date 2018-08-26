@@ -10,7 +10,22 @@
 	function chat() {
 		chatXhr = new XMLHttpRequest();
 		chatXhr.onreadystatechange = chatCallback;
-		chatXhr.open('get','enter.do?cmd=chat&bnum='+${param.bnum }+'&',true);
+		chatXhr.open('post','enter.do?cmd=chat',true);
+		chatXhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+		var msg = document.getElementById("msg").value;
+		var param = "bnum="+${param.bnum }+"&msg="+msg;
+		chatXhr.send(param);
+	}
+	function chatCallback() {
+		if(chatXhr.readyState==4 && chatXhr.status==200){
+			var msg = document.getElementById("msg");
+			var txt = chatXhr.responseText;
+			var json = JSON.parse(txt);
+			if(json.msg != "success"){
+				alert(json.msg);
+			}
+			msg.value="";
+		}
 	}
 	
 	var timeXhr = null;
@@ -33,6 +48,34 @@
 		}
 	}
 	setInterval(timer, 1000);
+	
+	var roadXhr = null;
+	function road() {
+		roadXhr = new XMLHttpRequest();
+		roadXhr.onreadystatechange = roadCallback;
+		roadXhr.open('get','enter.do?cmd=road&bnum='+${param.bnum },true);
+		roadXhr.send();
+	}
+	function roadCallback() {
+		if(roadXhr.readyState==4 && roadXhr.status==200){
+			var area = document.getElementById("area");
+			var txt = roadXhr.responseText;
+			var json = JSON.parse(txt);
+			if(json.msg != undefined){
+				alert(json.msg);
+			}else{
+				area.innerHTML = "";
+				var html = "";
+				html += "<table border='1'>";
+				for(var i = 0;i < json.list.length;i++){
+					html += "<tr><th>"+json.list[i].id+"</th><td>"+json.list[i].str+"</td></tr>"
+				}
+				html += "</table>";
+				area.innerHTML = html;
+			}
+		}
+	}
+	setInterval(road, 2000);
 	
 	var callXhr = null;
 	function priceCall() {
@@ -57,7 +100,8 @@
 
 
 
-<table border="1">
+
+<table border='1'>
 	<tr>
 		<th>최고호가</th>
 		<td id="maxPrice">0</td>
@@ -67,7 +111,7 @@
 		<td id="time">0:00</td>
 	</tr>
 </table>
-<div style="background-color: yellow;width: 800px;height: 500px;">
+<div style="background-color: yellow;width: 800px;height: 500px;" id="area">
 </div>
 <form action="javascript:return false;"onsubmit="chat()">
 <input type="text" size="50" id="msg">

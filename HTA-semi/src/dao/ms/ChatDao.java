@@ -50,7 +50,7 @@ public class ChatDao {
 		ResultSet rs = null;
 		try {
 			con = DBConnection.getConn();
-			String sql = "select * from chat where bnum=? and status=0";
+			String sql = "select * from chat where bnum=? order by chat_no";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, bnum);
 			rs = pstmt.executeQuery();
