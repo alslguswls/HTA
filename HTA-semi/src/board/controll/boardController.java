@@ -46,15 +46,13 @@ public class boardController extends HttpServlet {
 		
 		//조회 검색 체크
 		if(search!=null) {
-			System.out.println("12312312");
 			String sel = request.getParameter("searchSel");
 			if(sel.equals("0")) {
-				where += " and title like '%"+search+"%' or content like '%"+search+"%'";
+				where += " and title like '%"+search+"%'";
 			}else {
 				where +=" and id like '%"+search+"%'";
 			}
 		}
-		System.out.println(where);
 		String spageNum=request.getParameter("pageNum");
 		int pageNum=1;
 		if(spageNum!=null) {

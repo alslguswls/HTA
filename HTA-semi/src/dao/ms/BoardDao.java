@@ -5,24 +5,25 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Calendar;
 
+import board.vo.boardVo;
 import db.DBConnection;
-import vo.ms.BoardVo;
+
 
 public class BoardDao {
-	public BoardVo detail(int bnum) {
+	public boardVo detail(int bnum) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
 			con = DBConnection.getConn();
-			String sql = "select * from board where bnum=?";
+			String sql = "select id,cate,title,content,orgfilename,savefilename,to_char(starttime, 'YYYY-MM-DD HH24:MI:SS') as starttime,startprice,hit,regv,status,regdate from (select id,cate,title,content,orgfilename,savefilename,to_date(starttime, 'YYYY-MM-DD HH24:MI') as starttime,startprice,hit,regv,status,regdate from board where bnum=?)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, bnum);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				String id = rs.getString("id");
-				System.out.println(id);
 				int cate = rs.getInt("cate");
 				String title = rs.getString("title");
 				String content = rs.getString("content");
@@ -34,7 +35,7 @@ public class BoardDao {
 				int regv = rs.getInt("regv");
 				int status = rs.getInt("status");
 				Date regdate = rs.getDate("regdate");
-				return new BoardVo(bnum, id, cate, title, content, orgfilename, savefilename, starttime, startprice, hit, regv, status, regdate);
+				return new boardVo(bnum, id, cate, title, content, orgfilename, savefilename, starttime,null, startprice, hit, regv, status, regdate);
 			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());

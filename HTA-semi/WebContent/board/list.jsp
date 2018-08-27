@@ -73,10 +73,10 @@
 		<td colspan="5">
 			<form method="post" action="<%=context %>/boardList.do">
 			<select name="searchSel">
-				<option value="0">제목or내용</option>
+				<option value="0">제목</option>
 				<option value="1">아이디</option>
 			</select>
-			<input type="text" name="search">
+			<input type="text" name="search" value="${search}">
 			<input type="submit" value="조회">
 			<input type="hidden" name="cate" value="${cate }">
 			</form>

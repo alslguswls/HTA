@@ -42,7 +42,7 @@ public class boardDao {
 		String savefilename = vo.getSavefilename();
 		String starttime = vo.getStarttime();
 		int startprice = vo.getStartprice();
-		sql = "insert into board values(board_seq.nextval,?,?,?,?,?,?,to_date(?,'yyyy-MM-dd HH24:mi'),?,0,0,0,sysdate)";
+		sql = "insert into board values(board_seq.nextval,?,?,?,?,?,?,to_date(?,'yyyy-MM-dd hh24:mi:ss'),?,0,0,0,sysdate)";
 		try {
 			con = DBConnection.getConn();
 			pstmt = con.prepareStatement(sql);
@@ -115,3 +115,6 @@ public class boardDao {
 	}
 
 }
+
+
+
