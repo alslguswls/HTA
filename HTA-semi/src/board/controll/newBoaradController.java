@@ -1,5 +1,6 @@
 package board.controll;
 
+import java.io.File;
 import java.io.IOException;
 import java.sql.Date;
 import java.text.ParseException;
@@ -27,8 +28,17 @@ public class newBoaradController extends HttpServlet {
 		req.setCharacterEncoding("utf-8");
 		res.setContentType("text/plain;charset=utf-8");
 			
-		String path = getServletContext().getRealPath("/upload");
-			MultipartRequest data = new MultipartRequest(
+		String path = getServletContext().getRealPath("/upload/");
+		SimpleDateFormat dateForm = new SimpleDateFormat("yyyyMMdd");
+		java.util.Date cu = new java.util.Date();
+		String addPath= dateForm.format(cu);
+		path += addPath;
+		//날짜 경로 추가
+		File file = new File(path);
+		if(!file.exists()) {
+			file.mkdirs();
+		}
+		MultipartRequest data = new MultipartRequest(
 					req, 
 					path, 
 					1024 * 1024 * 10,
@@ -40,7 +50,7 @@ public class newBoaradController extends HttpServlet {
 			int cate = Integer.parseInt(data.getParameter("cate"));
 			String content = data.getParameter("content");
 			String orgfilename = data.getOriginalFileName("orgfile");
-			String savefilename = data.getFilesystemName("orgfile");
+			String savefilename = addPath+"/"+data.getFilesystemName("orgfile");
 			int startprice = Integer.parseInt(data.getParameter("price"));
 			String sdate = data.getParameter("sdate");
 			String hh = data.getParameter("hh");
