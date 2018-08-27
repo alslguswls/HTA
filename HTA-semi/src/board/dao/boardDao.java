@@ -33,7 +33,6 @@ public class boardDao {
 
 	// 게시글 인서트
 	public int insert(boardVo vo) {
-		Statement st=null;
 		String id = vo.getId();
 		int cate = vo.getCate();
 		String title = vo.getTitle();
@@ -42,7 +41,7 @@ public class boardDao {
 		String savefilename = vo.getSavefilename();
 		String starttime = vo.getStarttime();
 		int startprice = vo.getStartprice();
-		sql = "insert into board values(board_seq.nextval,?,?,?,?,?,?,to_date(?,'yyyy-MM-dd hh24:mi:ss'),?,0,0,0,sysdate)";
+		sql = "insert into board values(board_seq.nextval,?,?,?,?,?,?,to_date(?,'yyyy/mm/dd hh24:mi:ss'),?,0,0,0,sysdate)";
 		try {
 			con = DBConnection.getConn();
 			pstmt = con.prepareStatement(sql);

@@ -18,7 +18,7 @@ public class BoardDao {
 		ResultSet rs = null;
 		try {
 			con = DBConnection.getConn();
-			String sql = "select id,cate,title,content,orgfilename,savefilename,to_char(starttime, 'YYYY-MM-DD HH24:MI:SS') as starttime,startprice,hit,regv,status,regdate from (select id,cate,title,content,orgfilename,savefilename,to_date(starttime, 'YYYY-MM-DD HH24:MI') as starttime,startprice,hit,regv,status,regdate from board where bnum=?)";
+			String sql = "select id,cate,title,content,orgfilename,savefilename,to_char(starttime, 'YYYY/MM/DD HH24:MI:SS') as starttime,startprice,hit,regv,status,regdate from (select id,cate,title,content,orgfilename,savefilename,to_date(starttime, 'YYYY/MM/DD HH24:MI') as starttime,startprice,hit,regv,status,regdate from board where bnum=?)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, bnum);
 			rs = pstmt.executeQuery();

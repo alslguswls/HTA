@@ -42,7 +42,7 @@ public class newBoaradController extends HttpServlet {
 			String sdate = data.getParameter("sdate");
 			String hh = data.getParameter("hh");
 			String mm =data.getParameter("mm");
-			String starttime = sdate.substring(0, 4)+"-"+sdate.substring(4, 6)+"-"+sdate.substring(6, 8)+" "+hh+":"+mm+":00";
+			String starttime = sdate.substring(0, 4)+"/"+sdate.substring(4, 6)+"/"+sdate.substring(6, 8)+" "+hh+":"+mm+":00";
 			//DB SAVE
 			boardDao dao = boardDao.getInstance();
 			boardVo vo = new boardVo(0, id, cate, title, content, orgfilename, savefilename, starttime,null, startprice, 0,
