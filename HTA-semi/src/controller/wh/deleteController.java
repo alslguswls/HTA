@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import dao.wh.MembersDao;
 
 /**
- * Servlet implementation class deleteController
+2018-08-27	회원 삭제 기능 작성		윤우현
  */
 @WebServlet("/memberDelete.do")
 public class deleteController extends HttpServlet {
@@ -26,7 +26,7 @@ public class deleteController extends HttpServlet {
 			// 삭제 되었을시
 			response.sendRedirect("memberList.do");
 		}else {
-			request.setAttribute("errMsg", "오류로 인해 삭제를 실패하였습니다.");
+			request.setAttribute("errMsg", "오류로 인해 회원삭제를 실패하였습니다.");
 			RequestDispatcher rd=request.getRequestDispatcher("/error.jsp");
 			rd.forward(request, response);
 		}

@@ -133,12 +133,14 @@ public class MembersDao {
 		PreparedStatement pstmt=null;
 		try {
 			con=DBConnection.getConn();
-			String sql="update users set pwd=?,email=?, phone=?, addr=? where id=?";
+			String sql="update users set pwd=?,email=?, phone=?, addr=?, coin=? where id=?";
 			pstmt=con.prepareStatement(sql);
 			pstmt.setString(1,vo.getPwd());
 			pstmt.setString(2,vo.getEmail());
 			pstmt.setString(3,vo.getPhone());
 			pstmt.setString(4,vo.getAddr());
+			pstmt.setLong(5,vo.getCoin());
+			pstmt.setString(6, vo.getId());
 			int n=pstmt.executeUpdate();
 			return n;
 		}catch(Exception e) {

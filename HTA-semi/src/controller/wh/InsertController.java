@@ -12,7 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 import dao.wh.MembersDao;
 import javafx.scene.control.Alert;
 import vo.wh.MembersVo;
-
+/*
+2018-08-24	회원 가입 기능 작성		윤우현 
+ */
 @WebServlet("/membeInsert.do")
 public class InsertController extends HttpServlet {
 	@Override

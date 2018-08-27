@@ -1,13 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- 
 작업자:윤우현
  -->
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>join.jsp</title>
+<title>update.jsp</title>
 <script type="text/javascript">
 	var xhr=null;
 	function idcheck(){
@@ -92,7 +93,7 @@
 			alert("주소를 입력하세요");
 			return false;
 		}
-		alert("가입을 축하합니다")
+		alert("수정 되었습니다.")
 		
 	}
 	
@@ -100,54 +101,56 @@
 </script>
 </head>
 <body align="center">
-<h1> 회원 가입</h1>
-<form name="f" method="post" action="membeInsert.do" onsubmit="return check()" >  <!-- 가입버튼을 누르면 membeInsert.do 서블릿으로 이동 -->
+<h1> 회원 정보 수정</h1>
+
+<!-- 수정버튼을 누르면 membeInsert.do 서블릿으로 이동 -->
+<form name="f" method="post" action="memberUpdate.do" onsubmit="return check()" >  
 <table border="1" width="300" style="margin:auto;text-align:center;">
-	<!--  가입시 lev 0, coin 0을 입력하는 기능. 미사용
-	<input type="hidden" name="lev" value="0">  
-	<input type="hidden" name="coin" value="0">  
-	-->
 	
 	<tr>
 		<td>아이디</td>
 		<td>
-			<input type="text" name="id" id="id" onkeyup="idcheck()">
-			<!-- 아이디 중복검사 기능 -->
-			<div id="idcheck" style="color:red;font-size:12px"></div>
+			<input type="text" id="id" name="id" value="${requestScope.id }" readonly="readonly">
 		</td>
 	</tr>
 	<tr>
 		<td>패스워드</td>
-		<td><input type="password" id="pwd" name="pwd"></td>
+		<td>
+			<input type="password" id="pwd" name="pwd" value="${requestScope.pwd }">
+		</td>
 	</tr>
 	<tr>
 		<td>패스워드 확인</td>
 		<td>
-			<input type="password" name="pwd2" onkeyup="pwdcheck()">
+			<input type="password" name="pwd2" onkeyup="pwdcheck()" >
 			<div id="pwdcheck" style="color:red;font-size:12px"></div>
 		</td>
 	</tr>
 	<tr>
 		<td>이메일</td>
-		<td><input type="text" id="email" name="email"></td>
+		<td><input type="text" id="email" name="email" value="${requestScope.email }"></td>
 	</tr>
 	<tr>
 		<td>전화번호</td>
-		<td><input type="text" id="phone" name="phone"></td>
+		<td><input type="text" id="phone" name="phone" value="${requestScope.phone }"></td>
 	</tr>
 	<tr>
 		<td>주소</td>
-		<td><input type="text" id="addr" name="addr"></td>
+		<td><input type="text" id="addr" name="addr" value="${requestScope.addr }"></td>
+	</tr>
+	<tr>
+		<td>코인</td>
+		<td><input type="text" id="coin" name="coin" value="${requestScope.coin }"></td>
 	</tr>
 	<tr>
 		<td colspan="2" align="center">
-				<input type="submit" value="가입">
+				<input type="submit" value="수정">
 				<input type="reset" value="취소">
 		</td>
 	</tr>
 </table>
 </form>
-메인으로 이동...<a href="main.jsp">메인</a>
+메인으로 이동...<a href="layout.jsp">메인</a>
 회원목록...<a href="memberList.do">이동</a>
 
 </body>

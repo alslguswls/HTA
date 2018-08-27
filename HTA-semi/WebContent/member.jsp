@@ -22,7 +22,7 @@
 				<td>${vo.id }</td>
 				<td>${vo.email }</td>
 				<td>${vo.phone }</td>
-				<td><a href="memberUpdate.do?id=${vo.id }">수정</a></td>
+				<td><a href="memberGetinfo.do?id=${vo.id }">수정</a></td>
 				<td><a href="memberDelete.do?id=${vo.id }">삭제</a></td>
 			</tr>
 		</c:forEach>
