@@ -25,7 +25,6 @@ public class boardController extends HttpServlet {
 		String order=request.getParameter("cul");
 		String where = "";
 		String search = request.getParameter("search");
-		System.out.println(search);
 		
 		//정렬 체크
 		int cul = 0;
