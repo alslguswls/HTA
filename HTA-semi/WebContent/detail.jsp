@@ -2,14 +2,18 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <div>
+<c:set var="id" value="${vo.id }" />
 	<table border="1">
 		<tr>
 			<th>글번호</th>
-			<td>${vo.bnum }</td>
+			<td>${vo.bnum }
+			<input type="button" value="수정" onclick="javascript:boardModify()">
+			<input type="button" value="삭제" onclick="javascript:boardDelete()">
+			</td>
 		</tr>
 		<tr>
 			<th>작성자</th>
-			<td>${vo.id }</td>
+			<td><input type="hidden" name="id">${vo.id }</td>
 		</tr>
 		<tr>
 			<th>카테고리</th>
