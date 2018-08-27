@@ -37,11 +37,13 @@ public class listController extends HttpServlet {
 			if(endPage>pageCount) {
 				endPage=pageCount;
 			}
+			// 결과값(전체회원정보)를 스코프에 담기
 			request.setAttribute("list",list);
 			request.setAttribute("pageCount",pageCount);
 			request.setAttribute("pageNum", pageNum);
 			request.setAttribute("startPage", startPage);
 			request.setAttribute("endPage", endPage);
+			// 페이지로 이동하기
 			request.getRequestDispatcher("/member.jsp").forward(request, response);
 	}
 

@@ -1,4 +1,9 @@
 /board/
 /controller/
 /dao/
+/db/
+/lib/
+/q/
+/test/
+/test01_batch/
 /vo/

@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!-- 
+작업자:윤우현
+ -->
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -98,7 +101,7 @@
 </head>
 <body align="center">
 <h1> 회원 가입</h1>
-<form name="f" method="post" action="insert.do" onsubmit="return check()" >  <!-- 가입버튼을 누르면 insert.do 서블릿으로 이동 -->
+<form name="f" method="post" action="membeInsert.do" onsubmit="return check()" >  <!-- 가입버튼을 누르면 membeInsert.do 서블릿으로 이동 -->
 <table border="1" width="300" style="margin:auto;text-align:center;">
 	<!--  가입시 lev 0, coin 0을 입력하는 기능. 미사용
 	<input type="hidden" name="lev" value="0">  

@@ -22,8 +22,8 @@
 				<td>${vo.id }</td>
 				<td>${vo.email }</td>
 				<td>${vo.phone }</td>
-				<td><input type="button" value="수정"></td>
-				<td><input type="button" value="삭제"></td>
+				<td><a href="memberUpdate.do?id=${vo.id }">수정</a></td>
+				<td><a href="memberDelete.do?id=${vo.id }">삭제</a></td>
 			</tr>
 		</c:forEach>
 	</table>
