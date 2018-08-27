@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -82,6 +83,7 @@ public class EnterController extends HttpServlet{
 		pw.close();
 	}
 	protected void call(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
 		int bnum = Integer.parseInt(request.getParameter("bnum"));
 		String id = (String)request.getSession().getAttribute("id");
 		int price = Integer.parseInt(request.getParameter("price"));
