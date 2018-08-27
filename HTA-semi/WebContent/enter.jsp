@@ -66,15 +66,6 @@
 				alert(json.msg);
 			}else{
 				var html = "";
-				/*
-				area.innerHTML = "";
-				html += "<table border='1'>";
-				for(var i = 0;i < json.list.length;i++){
-					html += "<tr><th>"+json.list[i].id+"</th><td>"+json.list[i].str+"</td></tr>"
-				}
-				html += "</table>";
-				area.innerHTML = html;
-				*/
 				for(var i = 0;i < json.list.length;i++){
 					html += json.list[i].id+" / "+json.list[i].str+"\r\n"
 				}
@@ -87,6 +78,7 @@
 	
 	var callXhr = null;
 	function priceCall() {
+		alert(${delay });
 		var price = document.getElementById("price").value;
 		callXhr = new XMLHttpRequest();
 		callXhr.onreadystatechange = callCallback;
