@@ -13,7 +13,7 @@ import dao.wh.MembersDao;
 import vo.wh.MembersVo;
 
 /**
- * Servlet implementation class listController
+2018-08-24	회원 목록 조회 기능 작성		윤우현 
  */
 @WebServlet("/memberList.do")
 public class listController extends HttpServlet {

@@ -75,13 +75,31 @@ public class MembersDao {
 		}
 	}
 	
-	// 사용자 삭제
+	// 사용자 삭제(삭제는 사용안함)
 	public int delete(String id) {
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		try {
 			con=db.DBConnection.getConn();
 			String sql="delete from users where id=?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			return pstmt.executeUpdate();
+		}catch(SQLException e) {
+			System.out.println(e.getMessage());
+			return -1;
+		}finally {
+			db.DBConnection.closeConn(null, pstmt, con);
+		}
+	}
+	
+	// 사용자 삭제처리(lev 컬럼을 '9'로 처리')
+	public int del(String id) {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		try {
+			con=db.DBConnection.getConn();
+			String sql="update users set lev='9' where id=?";
 			pstmt=con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			return pstmt.executeUpdate();
@@ -133,12 +151,14 @@ public class MembersDao {
 		PreparedStatement pstmt=null;
 		try {
 			con=DBConnection.getConn();
-			String sql="update users set pwd=?,email=?, phone=?, addr=? where id=?";
+			String sql="update users set pwd=?,email=?, phone=?, addr=?, coin=? where id=?";
 			pstmt=con.prepareStatement(sql);
 			pstmt.setString(1,vo.getPwd());
 			pstmt.setString(2,vo.getEmail());
 			pstmt.setString(3,vo.getPhone());
 			pstmt.setString(4,vo.getAddr());
+			pstmt.setLong(5,vo.getCoin());
+			pstmt.setString(6, vo.getId());
 			int n=pstmt.executeUpdate();
 			return n;
 		}catch(Exception e) {
