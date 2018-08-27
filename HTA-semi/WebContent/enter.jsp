@@ -59,23 +59,31 @@
 	function roadCallback() {
 		if(roadXhr.readyState==4 && roadXhr.status==200){
 			var area = document.getElementById("area");
+			var chatlog = document.getElementById("chatlog");
 			var txt = roadXhr.responseText;
 			var json = JSON.parse(txt);
 			if(json.msg != undefined){
 				alert(json.msg);
 			}else{
-				area.innerHTML = "";
 				var html = "";
+				/*
+				area.innerHTML = "";
 				html += "<table border='1'>";
 				for(var i = 0;i < json.list.length;i++){
 					html += "<tr><th>"+json.list[i].id+"</th><td>"+json.list[i].str+"</td></tr>"
 				}
 				html += "</table>";
 				area.innerHTML = html;
+				*/
+				for(var i = 0;i < json.list.length;i++){
+					html += json.list[i].id+" / "+json.list[i].str+"\r\n"
+				}
+				chatlog.value = html;
+				chatlog.scrollTop = chatlog.scrollHeight;
 			}
 		}
 	}
-	setInterval(road, 2000);
+	setInterval(road, 500);
 	
 	var callXhr = null;
 	function priceCall() {
@@ -100,7 +108,6 @@
 
 
 
-
 <table border='1'>
 	<tr>
 		<th>최고호가</th>
@@ -112,6 +119,7 @@
 	</tr>
 </table>
 <div style="background-color: yellow;width: 800px;height: 500px;" id="area">
+<textarea rows="34" cols="60" id="chatlog" ></textarea>
 </div>
 <form action="javascript:return false;"onsubmit="chat()">
 <input type="text" size="50" id="msg">
