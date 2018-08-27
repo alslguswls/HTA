@@ -20,10 +20,10 @@ public class deleteController extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String id = request.getParameter("id");
 		MembersDao dao = new MembersDao();
-		int n = dao.delete(id);
+		int n = dao.del(id);
 		
 		if(n>0) {
-			// 삭제 되었을시
+			// lev '9'로 업데이트 되었을시
 			response.sendRedirect("memberList.do");
 		}else {
 			request.setAttribute("errMsg", "오류로 인해 회원삭제를 실패하였습니다.");

@@ -75,13 +75,31 @@ public class MembersDao {
 		}
 	}
 	
-	// 사용자 삭제
+	// 사용자 삭제(삭제는 사용안함)
 	public int delete(String id) {
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		try {
 			con=db.DBConnection.getConn();
 			String sql="delete from users where id=?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			return pstmt.executeUpdate();
+		}catch(SQLException e) {
+			System.out.println(e.getMessage());
+			return -1;
+		}finally {
+			db.DBConnection.closeConn(null, pstmt, con);
+		}
+	}
+	
+	// 사용자 삭제처리(lev 컬럼을 '9'로 처리')
+	public int del(String id) {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		try {
+			con=db.DBConnection.getConn();
+			String sql="update users set lev='9' where id=?";
 			pstmt=con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			return pstmt.executeUpdate();
