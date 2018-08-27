@@ -85,7 +85,7 @@ public class EnterController extends HttpServlet{
 	protected void call(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		int bnum = Integer.parseInt(request.getParameter("bnum"));
-		String id = (String)request.getSession().getAttribute("id");
+		String id = (String)session.getAttribute("id");
 		int price = Integer.parseInt(request.getParameter("price"));
 		MpriceDao dao = new MpriceDao();
 		MpriceVo vo = dao.select(bnum);
@@ -94,6 +94,7 @@ public class EnterController extends HttpServlet{
 			int n = dao.insert(new MpriceVo(0, bnum, id, price));
 			if(n>0) {
 				json.put("msg", "success");
+				session.setAttribute("delay", "delay");
 			}else {
 				json.put("msg", "오류로 인해 호가에 실패했습니다.");
 			}
@@ -102,6 +103,7 @@ public class EnterController extends HttpServlet{
 				int n = dao.update(new MpriceVo(0, bnum, id, price));
 				if(n>0) {
 					json.put("msg", "success");
+					session.setAttribute("delay", "delay");
 				}else {
 					json.put("msg", "오류로 인해 호가에 실패했습니다.");
 				}

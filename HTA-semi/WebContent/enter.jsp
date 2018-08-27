@@ -78,7 +78,8 @@
 	
 	var callXhr = null;
 	function priceCall() {
-		alert(${delay });
+		var callBtn = document.getElementById("callBtn");
+		callBtn.disabled = "disabled";
 		var price = document.getElementById("price").value;
 		callXhr = new XMLHttpRequest();
 		callXhr.onreadystatechange = callCallback;
@@ -91,8 +92,16 @@
 			var json = JSON.parse(txt);
 			if(json.msg != "success"){
 				alert(json.msg);
+				removeDelay();
+				return;
 			}
+			setTimeout(removeDelay, 3000);
 		}
+	}
+	
+	function removeDelay() {
+		var callBtn = document.getElementById("callBtn");
+		callBtn.disabled = null;
 	}
 </script>
 </head>
@@ -119,7 +128,7 @@
 </form>
 <form action="javascript:return false;"onsubmit="priceCall()">
 <input type="text" size="20" id="price">
-<input type="submit" value="호가하기">
+<input type="submit" value="호가하기" id="callBtn">
 </form>
 
 
