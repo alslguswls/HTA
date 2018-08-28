@@ -30,7 +30,7 @@
 <body align="center">
 <%
 	String errMsg = (String)request.getAttribute("errMsg");
- 	if(errMsg==null){
+ 	if(errMsg==null){	// 필요없을것 처럼 보이지만 이부분 처리를 안해주면 'null' 이라는 문자가 표시됨
 				errMsg=""; 
  	}
 %>

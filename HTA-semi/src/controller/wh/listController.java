@@ -13,7 +13,7 @@ import dao.wh.MembersDao;
 import vo.wh.MembersVo;
 
 /**
-2018-08-24	회원 목록 조회 기능 작성		윤우현 
+2018. 8. 24	회원 목록 조회 기능 작성		윤우현 
  */
 @WebServlet("/memberList.do")
 public class listController extends HttpServlet {
@@ -32,8 +32,8 @@ public class listController extends HttpServlet {
 			int pageCount=(int)Math.ceil(dao.getCount()/10.0);
 			// 시작 페이지 번호
 			int startPage = ((pageNum-1)/10*10)+1;
-			// 끝 페이지 번호
-			int endPage = startPage+1;
+			// 끝 페이지 번호★★
+			int endPage = startPage+9;
 			if(endPage>pageCount) {
 				endPage=pageCount;
 			}
