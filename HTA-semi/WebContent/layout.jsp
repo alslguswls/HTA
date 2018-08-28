@@ -15,6 +15,8 @@
 	<%
 		String page1 = request.getParameter("page");
 		if(page1 == null) page1 = "/boardList.do?mod=list";
+		String cate1 = request.getParameter("cate");
+		if(cate1 == null) cate1 = "/board/category.jsp";
 		//달력 스크립트 글게시시 사용
 		if(page1.equals("/board/newBoard.jsp")){
 	%>
@@ -41,7 +43,7 @@
 			<jsp:include page="header.jsp"></jsp:include>
 		</div>
 		<div id="category">
-			<jsp:include page="/board/category.jsp"></jsp:include>
+			<jsp:include page="<%=cate1 %>"></jsp:include>
 		</div>
 		<div id="content">
 			<jsp:include page="<%=page1 %>"></jsp:include>

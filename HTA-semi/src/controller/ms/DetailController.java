@@ -1,12 +1,15 @@
 package controller.ms;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.json.simple.JSONObject;
 
 import dao.ms.BoardDao;
 import dao.ms.ReservationDao;
@@ -22,9 +25,12 @@ public class DetailController extends HttpServlet{
 		
 		String cmd = request.getParameter("cmd");
 		if(cmd != null && cmd.equals("detail")) {
-			
+			detail(request, response);
+		}else if(cmd != null && cmd.equals("check")) {
+			check(request, response);
 		}
-		
+	}
+	protected void detail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int bnum = Integer.parseInt(request.getParameter("bnum"));
 		BoardDao dao = new BoardDao();
 		BoardVo vo = dao.detail(bnum);
@@ -43,5 +49,13 @@ public class DetailController extends HttpServlet{
 			request.setAttribute("errMsg", "오류로 인해 조회에 실패했습니다.");
 			request.getRequestDispatcher("/layout.jsp?page=error.jsp").forward(request, response);
 		}
+	}
+	protected void check(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int bnum = Integer.parseInt(request.getParameter("bnum"));
+		JSONObject json = new JSONObject();
+		json.put("rst", "rst");
+		PrintWriter pw = response.getWriter();
+		pw.println(json.toString());
+		pw.close();
 	}
 }
