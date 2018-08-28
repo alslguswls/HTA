@@ -26,7 +26,7 @@
 			}
 		%>
 		
-		<li><a href="layout.jsp?page=notice.jsp">공지사항</a></li>
+		<li><a href="noticeList.do?page=notice.jsp">공지사항</a></li>
 		<li><a href="layout.jsp?page=list.jsp">경매품보기</a></li>
 		<%
 			String id = (String)session.getAttribute("id");
