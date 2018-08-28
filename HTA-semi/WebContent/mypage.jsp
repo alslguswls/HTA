@@ -5,15 +5,8 @@
 <!-- 
 2018-08-28	윤우현	마이페이지 작성
  -->
-<div>
-	<div> 마이페이지</div>
-<%
-	//카테고리 리스트 가져오기
-	lib lb = new lib();
-	String[] cate=lb.category();
-%>
-	<c:set var="cate" value="<%=cate %>"/>
-	<c:forEach var="n" items="${cate }" varStatus="cate">
-	<a href="layout.jsp?page=/boardList.do?cate=${cate.index}">${n }</a><br>
-	</c:forEach>
+<div align="center">
+	<div align="center"> 마이페이지</div>
+	<ul><a href="javascript:alert('준비중 입니다')"> 코인 충전</a></ul>
+	<ul><a href="javascript:alert('준비중 입니다')"> 경매 이력 확인 </a></ul>
 </div>

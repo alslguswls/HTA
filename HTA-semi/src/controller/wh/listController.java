@@ -44,7 +44,7 @@ public class listController extends HttpServlet {
 			request.setAttribute("startPage", startPage);
 			request.setAttribute("endPage", endPage);
 			// 페이지로 이동하기
-			request.getRequestDispatcher("/member.jsp").forward(request, response);
+			request.getRequestDispatcher("layout.jsp?page=member.jsp").forward(request, response);
 	}
 
 }
