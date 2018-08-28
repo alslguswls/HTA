@@ -5,7 +5,7 @@
 %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <h2>게시글목록</h2>     
-<div><a href="<%=context %>/layout.jsp?cmd=detail&page=/board/newBoard.jsp">글작성</a></div>
+<div><a href="<%=context %>/layout.jsp?page=/board/newBoard.jsp">글작성</a></div>
 <table>
 	<tr>
 		<th colspan="5">
@@ -13,8 +13,9 @@
 		<a href="<%=context %>/layout.jsp?page=boardList.do?cul=1">조회순</a>
 		<a href="<%=context %>/layout.jsp?page=boardList.do?cul=0">최근등록일</a>
 		<a href="<%=context %>/layout.jsp?page=boardList.do?cul=2">경매임박순</a>
-		</th>
 		</div>
+		</th>
+		
 	</tr>
 	<tr>
 		<th>글번호</th><th>제목</th><th>작성자</th><th>조회수</th><th>작성일</th>
@@ -22,7 +23,7 @@
 		<c:forEach var="n" items="${list}">
 			<tr>
 				<td>${n.bnum }<td>
-				<td><a href="<%=context %>/layout.jsp?page=detail.do?bnum=${n.bnum}">${n.title }</a><td>
+				<td><a href="<%=context %>/layout.jsp?page=detail.do?cmd=detail&bnum=${n.bnum}">${n.title }</a><td>
 				<td>${n.id }<td>
 				<td>${n.hit }<td>
 				<td>${n.regdate }<td>
