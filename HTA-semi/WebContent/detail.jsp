@@ -9,7 +9,7 @@ String sid = (String)session.getAttribute("id");
 	}
 %>
  <% 
- 	String sessionLev = (String)session.getAttribute("isAdmin");	
+ 	String sessionLev = (String)session.getAttribute("isAdmin");
 %> 
 <div>
 <c:set var="id" value="${vo.id }" />
@@ -19,11 +19,14 @@ String sid = (String)session.getAttribute("id");
 		<tr>
 			<th>글번호</th>
 			<td>${vo.bnum }
-			<c:if test="${id  eq sid or lev eq '1' }">
-			<input type="button" value="수정" onclick="javascript:boardModify(${vo.bnum})">
-				<c:if test="${vo.status ne '9'}">
-				<input type="button" value="삭제" onclick="javascript:boardDelete(${vo.bnum})">
+			<!--  status 1번 경매 진행중에는 삭제 수정 불가 
+							   2번 경매 종료 후 수정 불가능 
+			 -->
+			<c:if test="${id  eq sid or lev eq '1' or vo.status ne '1' }">
+				<c:if test="${vo.status ne '2'}">
+				<input type="button" value="수정" onclick="javascript:boardModify(${vo.bnum})">
 				</c:if>
+				<input type="button" value="삭제" onclick="javascript:boardDelete(${vo.bnum})">
 			</c:if>
 			</td>
 		</tr>

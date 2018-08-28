@@ -42,7 +42,7 @@ public class boardController extends HttpServlet {
 		boardDao dao = boardDao.getInstance();
 		int n=dao.delete(bnum);
 		if(n>0) {
-			
+			response.sendRedirect("boardList.do?mod=list");
 		}else {
 			request.setAttribute("errMsg", "오류로 인해 저장에 실패 했습니다.");
 			request.getRequestDispatcher("/layout.jsp?page=error.jsp").forward(request, response);
@@ -115,7 +115,6 @@ public class boardController extends HttpServlet {
 		int bnum = Integer.parseInt(request.getParameter("bnum"));
 		BoardDao dao=new BoardDao();
 		BoardVo vo = dao.detail(bnum);
-		
 		request.setAttribute("vo",vo);
 		request.getRequestDispatcher("/layout.jsp?page=/board/newBoard.jsp").forward(request, response);
 	}

@@ -107,7 +107,7 @@ public class newBoaradController extends HttpServlet {
 				0, 0, null);
 		int n = dao.insert(vo);
 		if (n > 0) {
-			res.sendRedirect("/HTA-semi/boardList.do?mod=list");
+			res.sendRedirect("./boardList.do?mod=list");
 		} else {
 			req.setAttribute("errMsg", "오류로 인해 저장에 실패 했습니다.");
 			req.getRequestDispatcher("/layout.jsp?page=error.jsp").forward(req, res);

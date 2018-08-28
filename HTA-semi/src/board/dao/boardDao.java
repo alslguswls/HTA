@@ -64,7 +64,7 @@ public class boardDao {
 	}
 	//게시글 리스트 불러오기 카테고리별
 	public ArrayList<boardVo> list(int startRow, int endRow, int cate,String order, String where) {
-		String sql = "select X.bnum, X.id, X.title, X.hit,X.status, X.regdate from ( select rownum as xno, A.bnum , A.id, A.title, A.hit, A.status, A.regdate from ( select bnum, id, cate, title, hit, status, regdate  from board order by "+order+") A where rownum <= ? and A.cate=?"+where+") X where X.xno >= ?";
+		String sql = "select X.bnum, X.id, X.title, X.hit,X.status, X.regdate from ( select rownum as xno, A.bnum , A.id, A.title, A.hit, A.status, A.regdate from ( select bnum, id, cate, title, hit, status, regdate  from board order by "+order+") A where rownum <= ? and A.cate=?"+where+"and status!=9) X where X.xno >= ?";
 		try {
 			con = DBConnection.getConn();
 			pstmt = con.prepareStatement(sql);
@@ -112,11 +112,11 @@ public class boardDao {
 			DBConnection.closeConn(rs, pstmt, con);
 		}
 	}
-	//게시글 업데이트
+	//게시글 업데이트 status 2번일 경우 경매 종료 후 수정 불가능 
 	public int update(boardVo vo) {
 		try {
 			con = DBConnection.getConn();
-			String sql = "update board set cate=?, title=?, content=?, orgfilename=?, savefilename=?,  starttime=to_date(?,'yyyyMMdd hh24:mi:ss'), startprice=? where bnum=?";
+			String sql = "update board set cate=?, title=?, content=?, orgfilename=?, savefilename=?,  starttime=to_date(?,'yyyyMMdd hh24:mi:ss'), startprice=? where bnum=? and status!=2";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, vo.getCate());
 			pstmt.setString(2, vo.getTitle());

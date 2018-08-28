@@ -37,7 +37,8 @@
 		<tr>
 			<th >작성자</th>
 			<td>
-				<%=id %><input type="hidden" id="id" name="id" value="<%=id%>">
+				${vo.getId() }
+				<input type="hidden" id="id" name="id" value="${vo.getId() }">
 				<input type="text" name="bnum" value="${vo.getBnum }">
 			</td> 
 		</tr>
