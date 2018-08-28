@@ -35,7 +35,7 @@
  	}
 %>
 
-
+<br>
 <h1>로그인</h1>
 
 <form name="f" method="post" action="loginOk.jsp" onsubmit="return check()" align="center">

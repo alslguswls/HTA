@@ -100,9 +100,10 @@
 </script>
 </head>
 <body align="center">
+<br>
 <h1> 회원 가입</h1>
 <form name="f" method="post" action="membeInsert.do" onsubmit="return check()" >  <!-- 가입버튼을 누르면 membeInsert.do 서블릿으로 이동 -->
-<table border="1" width="300" style="margin:auto;text-align:center;">
+<table border="1" width="400" style="margin:auto;text-align:center;">
 	<!--  가입시 lev 0, coin 0을 입력하는 기능. 미사용
 	<input type="hidden" name="lev" value="0">  
 	<input type="hidden" name="coin" value="0">  

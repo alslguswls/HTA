@@ -9,8 +9,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>member.jsp</title>
+<style>table {margin:auto;text-align:center }</style>
 </head>
 <body align="center">
+<br>
 <h1>회원관리 페이지</h1>
 	<table border="1" align="center" width="800">
 		<tr>
