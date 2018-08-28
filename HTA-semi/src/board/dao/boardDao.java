@@ -80,7 +80,7 @@ public class boardDao {
 				int hit = rs.getInt("hit");
 				int status = rs.getInt("status");
 				Date regdate = rs.getDate("regdate");
-				boardVo vo = new boardVo(bnum,id,cate,title,null,null,null,null,null,0,hit,0,status,regdate);
+				boardVo vo = new boardVo(bnum,id,cate,title,null,null,null,null,0,hit,0,status,regdate);
 				list.add(vo);
 			}
 			return list;
@@ -111,6 +111,11 @@ public class boardDao {
 		} finally {
 			DBConnection.closeConn(rs, pstmt, con);
 		}
+	}
+
+	public int update(boardVo vo) {
+		
+		return 0;
 	}
 
 }

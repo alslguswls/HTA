@@ -10,9 +10,9 @@
 	<tr>
 		<th colspan="5">
 		<div>
-		<a href="<%=context %>/layout.jsp?page=boardList.do?cul=1">조회순</a>
-		<a href="<%=context %>/layout.jsp?page=boardList.do?cul=0">최근등록일</a>
-		<a href="<%=context %>/layout.jsp?page=boardList.do?cul=2">경매임박순</a>
+		<a href="<%=context %>/layout.jsp?page=boardList.do?mod=list&cul=1">조회순</a>
+		<a href="<%=context %>/layout.jsp?page=boardList.do?mod=list&cul=0">최근등록일</a>
+		<a href="<%=context %>/layout.jsp?page=boardList.do?mod=list&cul=2">경매임박순</a>
 		</div>
 		</th>
 		
@@ -38,7 +38,7 @@
 			<!-- 이전 -->
 			<c:choose>
 				<c:when test="${startPage>10 }">
-					<a href="boardList.do?pageNum=${startPage-1 }">[이전]</a>
+					<a href="boardList.do?mod=list&pageNum=${startPage-1 }">[이전]</a>
 				</c:when>
 				<c:otherwise>
 					[이전]
@@ -48,10 +48,10 @@
 			<c:forEach var="i" begin="${startPage }" end="${endPage }">
 			<c:choose>
 				<c:when test="${pageNum==i }"><%-- 현재페이지인경우--%>
-					<a href="boardList.do?pageNum=${i }"><span style="color:red" >[${i }]</span></a>
+					<a href="boardList.do?mod=list&pageNum=${i }"><span style="color:red" >[${i }]</span></a>
 				</c:when>
 				<c:otherwise>
-					<a href="boardList.do?pageNum=${i }"><span style="color:#555" >[${i }]</span></a>
+					<a href="boardList.do?mod=list&pageNum=${i }"><span style="color:#555" >[${i }]</span></a>
 				</c:otherwise>
 			</c:choose>	
 			</c:forEach>
@@ -60,7 +60,7 @@
 			<!-- 다음 -->
 			<c:choose>
 				<c:when test="${endPage<pageCount }">
-					<a href="boardList.do?pageNum=${endPage+1 }">[다음]</a>
+					<a href="boardList.do?mod=list&pageNum=${endPage+1 }">[다음]</a>
 				</c:when>
 				<c:otherwise>
 					[다음]
@@ -72,7 +72,7 @@
 	</tr>
 	<tr>
 		<td colspan="5">
-			<form method="post" action="<%=context %>/boardList.do">
+			<form method="post" action="<%=context %>/boardList.do?mod=list">
 			<select name="searchSel">
 				<option value="0">제목</option>
 				<option value="1">아이디</option>

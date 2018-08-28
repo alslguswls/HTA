@@ -1,7 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%
+	String context = (String) request.getContextPath();
+%>
 <script type="text/javascript">
-	function check() {
+	function check(mod) {
 		var fm = document.newBoard;
 		var title = document.getElementById("title").value;
 		var cate = document.getElementById("cate").value;
@@ -59,6 +62,7 @@
 			return false;
 			}
 		}
+		fm.action = "<%=context%>/insertBoard.do?mod="+mod;
 		fm.submit();
 	}
 </script>
