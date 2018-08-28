@@ -1,14 +1,28 @@
+<%@page import="board.vo.boardVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<% 
+String sid = (String)session.getAttribute("id");
+	if(sid==null){ 
+		pageContext.forward("/layout.jsp?page=login.jsp");
+	}
+%>
+ <% 
+ 	String sessionLev = (String)session.getAttribute("isAdmin");	
+%> 
 <div>
 <c:set var="id" value="${vo.id }" />
+<c:set var="sid" value="<%=sid %>" />
+<c:set var="lev"	value="<%=sessionLev %>" />
 	<table border="1">
 		<tr>
 			<th>글번호</th>
 			<td>${vo.bnum }
-			<input type="button" value="수정" onclick="javascript:boardModify()">
-			<input type="button" value="삭제" onclick="javascript:boardDelete()">
+			<c:if test="${id  eq sid or lev eq '1'}">
+			<input type="button" value="수정" onclick="javascript:boardModify(${vo.bnum})">
+			<input type="button" value="삭제" onclick="javascript:boardDelete(${vo.bnum})">
+			</c:if>
 			</td>
 		</tr>
 		<tr>

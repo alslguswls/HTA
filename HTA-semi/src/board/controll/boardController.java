@@ -20,7 +20,15 @@ public class boardController extends HttpServlet {
 		response.setContentType("text/plain;charset=utf-8");
 		request.setCharacterEncoding("UTF-8");
 		
+		String mod = request.getParameter("mod");
 		
+		if(!mod.equals("") && mod.equals("list")) {
+			list(request,response);
+		}
+		
+	}
+
+	private void list(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		String category_no=request.getParameter("cate");
 		String order=request.getParameter("cul");
 		String where = "";

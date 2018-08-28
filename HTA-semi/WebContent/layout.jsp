@@ -14,7 +14,7 @@
 </head>
 	<%
 		String page1 = request.getParameter("page");
-		if(page1 == null) page1 = "/boardList.do";
+		if(page1 == null) page1 = "/boardList.do?mod=list";
 		//달력 스크립트 글게시시 사용
 		if(page1.equals("/board/newBoard.jsp")){
 	%>

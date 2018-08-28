@@ -4,8 +4,11 @@
 	function boardModify(){
 		var id_ck="${vo.id }";
 		var id="<%=session.getAttribute("id") %>";
+		var level = "${isAdmin}";
 		if( id != id_ck){
-			alert(id_ck);
+			alert("작성");
+		}else if(id==id_ck && isAdmin=="1" ){
+			
 		}
 	}
 
