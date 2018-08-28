@@ -11,6 +11,6 @@
 %>
 	<c:set var="cate" value="<%=cate %>"/>
 	<c:forEach var="n" items="${cate }" varStatus="cate">
-	<a href="layout.jsp?page=/boardList.do?cate=${cate.index}">${n }</a><br>
+	<a href="layout.jsp?page=/boardList.do?mod=list&cate=${cate.index}">${n }</a><br>
 	</c:forEach>
 </div>

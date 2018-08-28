@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import board.dao.boardDao;
 import board.vo.boardVo;
+import dao.ms.BoardDao;
 import lib.lib;
+import vo.ms.BoardVo;
 
 @WebServlet("/boardList.do")
 public class boardController extends HttpServlet {
@@ -24,9 +26,21 @@ public class boardController extends HttpServlet {
 		
 		if(!mod.equals("") && mod.equals("list")) {
 			list(request,response);
+		}else if(!mod.equals("") && mod.equals("getInfo")) {//글정보 가져오기
+			getInfo(request,response);
+		}else if(!mod.equals("") && mod.equals("delete")) {
+			delete(request,response);
 		}
 		
 	}
+
+	
+
+	private void delete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		
+	}
+
+
 
 	private void list(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		String category_no=request.getParameter("cate");
@@ -86,5 +100,14 @@ public class boardController extends HttpServlet {
 		request.setAttribute("cate",cate);
 		request.setAttribute("search",search);
 		request.getRequestDispatcher("/layout.jsp?page=/board/list.jsp").forward(request, response);
+	}
+	
+	private void getInfo(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
+		int bnum = Integer.parseInt(request.getParameter("bnum"));
+		BoardDao dao=new BoardDao();
+		BoardVo vo = dao.detail(bnum);
+		
+		request.setAttribute("vo",vo);
+		request.getRequestDispatcher("/layout.jsp?page=/board/newBoard.jsp").forward(request, response);
 	}
 }
