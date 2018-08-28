@@ -42,7 +42,7 @@
 			var time = document.getElementById("time")
 			var id = document.getElementById("id")
 			var maxPrice = document.getElementById("maxPrice")
-			time.innerHTML = json.time;
+			time.innerHTML = json.time + "초";
 			id.innerHTML = json.id;
 			maxPrice.innerHTML = json.maxPrice;
 		}
