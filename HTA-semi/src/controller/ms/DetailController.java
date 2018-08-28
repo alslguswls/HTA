@@ -8,19 +8,26 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import board.vo.boardVo;
 import dao.ms.BoardDao;
 import dao.ms.ReservationDao;
-
+import vo.ms.BoardVo;
 import vo.ms.ReservationVo;
 
 @WebServlet("/detail.do")
 public class DetailController extends HttpServlet{
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/plain;charset=utf-8");
+		
+		String cmd = request.getParameter("cmd");
+		if(cmd != null && cmd.equals("detail")) {
+			
+		}
+		
 		int bnum = Integer.parseInt(request.getParameter("bnum"));
 		BoardDao dao = new BoardDao();
-		boardVo vo = dao.detail(bnum);
+		BoardVo vo = dao.detail(bnum);
 		if(vo != null) {
 			dao.hitup(bnum);
 			String id = (String)request.getSession().getAttribute("id");

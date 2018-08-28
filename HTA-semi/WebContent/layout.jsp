@@ -27,7 +27,7 @@
 		}else if(page1.equals("detail.jsp")){
 	%>
 			<jsp:include page="/script/detailScript.jsp"></jsp:include>
-			<body onload="commList()">
+			<body onload="commList();checkStart()">
 			
 	<%
 		}else{

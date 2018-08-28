@@ -95,6 +95,7 @@
 				removeDelay();
 				return;
 			}
+			document.getElementById("price").value = "";
 			setTimeout(removeDelay, 3000);
 		}
 	}

@@ -18,7 +18,6 @@ public class BoardVo {
 	private Date regdate;
 	public BoardVo() {
 	}
-	
 	public BoardVo(int bnum, String id, int cate, String title, String content, String orgfilename, String savefilename,
 			String starttime, int startprice, int hit, int regv, int status, Date regdate) {
 		this.bnum = bnum;
@@ -35,7 +34,6 @@ public class BoardVo {
 		this.status = status;
 		this.regdate = regdate;
 	}
-
 	public int getBnum() {return bnum;}
 	public void setBnum(int bnum) {this.bnum = bnum;}
 	public String getId() {return id;}
@@ -50,8 +48,6 @@ public class BoardVo {
 	public void setOrgfilename(String orgfilename) {this.orgfilename = orgfilename;}
 	public String getSavefilename() {return savefilename;}
 	public void setSavefilename(String savefilename) {this.savefilename = savefilename;}
-	public String getStarttime() {return starttime;}
-	public void setStarttime(String starttime) {this.starttime = starttime;}
 	public int getStartprice() {return startprice;}
 	public void setStartprice(int startprice) {this.startprice = startprice;}
 	public int getHit() {return hit;}
@@ -62,4 +58,6 @@ public class BoardVo {
 	public void setStatus(int status) {this.status = status;}
 	public Date getRegdate() {return regdate;}
 	public void setRegdate(Date regdate) {this.regdate = regdate;}
+	public String getStarttime() {return starttime;}
+	public void setStarttime(String starttime) {this.starttime = starttime;}
 }

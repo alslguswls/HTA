@@ -5,14 +5,13 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Calendar;
 
-import board.vo.boardVo;
 import db.DBConnection;
+import vo.ms.BoardVo;
 
 
 public class BoardDao {
-	public boardVo detail(int bnum) {
+	public BoardVo detail(int bnum) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -35,7 +34,7 @@ public class BoardDao {
 				int regv = rs.getInt("regv");
 				int status = rs.getInt("status");
 				Date regdate = rs.getDate("regdate");
-				return new boardVo(bnum, id, cate, title, content, orgfilename, savefilename, starttime,null, startprice, hit, regv, status, regdate);
+				return new BoardVo(bnum, id, cate, title, content, orgfilename, savefilename, starttime, startprice, hit, regv, status, regdate);
 			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());

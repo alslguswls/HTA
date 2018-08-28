@@ -159,6 +159,27 @@
 			}
 		}
 	}
+	
+	var csXhr = null;
+	function checkStart() {
+		var bnum = ${vo.bnum };
+		var id = "<%=session.getAttribute("id") %>";
+		csXhr = new XMLHttpRequest();
+		csXhr.onreadystatechange = checkStartCallback;
+		csXhr.open('get','detail.do?cmd=check&bnum='+bnum+'&id='+id,true);
+		csXhr.send();
+	}
+	function checkStartCallback() {
+		if(csXhr.readyState==4 && csXhr.status==200){
+			var txt = csXhr.responseText;
+			var json = JSON.parse(txt);
+			if(json.resv){
+				location.href = "layout.jsp?page=enter.jsp?bnum="+${vo.bnum };
+			}else{
+				alert("경매참여가 불가능합니다.");
+			}
+		}
+	}
 </script>
 
 <a ></a>
