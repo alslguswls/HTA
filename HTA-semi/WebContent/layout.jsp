@@ -2,6 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!-- 
+2018-08-28	cate -> left 로 수정(윤우현)
+ -->
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -15,6 +18,8 @@
 	<%
 		String page1 = request.getParameter("page");
 		if(page1 == null) page1 = "/boardList.do?mod=list";
+		String left1 = request.getParameter("left");
+		if(left1 == null) left1 = "/board/category.jsp";
 		//달력 스크립트 글게시시 사용
 		if(page1.equals("/board/newBoard.jsp")){
 	%>
@@ -41,7 +46,7 @@
 			<jsp:include page="header.jsp"></jsp:include>
 		</div>
 		<div id="category">
-			<jsp:include page="/board/category.jsp"></jsp:include>
+			<jsp:include page="<%=left1 %>"></jsp:include>
 		</div>
 		<div id="content">
 			<jsp:include page="<%=page1 %>"></jsp:include>

@@ -20,13 +20,20 @@ public class ReservationController extends HttpServlet{
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/plain;charset=utf-8");
+		
+		String cmd = request.getParameter("cmd");
+		if(cmd != null && cmd.equals("resv")) {
+			resv(request, response);
+		}
+	}
+	protected void resv(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int bnum = Integer.parseInt(request.getParameter("bnum"));
 		String id = request.getParameter("id");
 		
 		ReservationDao dao = new ReservationDao();
 		int n = dao.insert(new ReservationVo(0, bnum, id));
 		JSONObject json = new JSONObject();
-		response.setContentType("text/plain;charset=utf-8");
 		if(n > 0) {
 			new BoardDao().resvup(bnum);
 			json.put("result", true);

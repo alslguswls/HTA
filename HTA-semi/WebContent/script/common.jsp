@@ -6,7 +6,7 @@
 		var id = "<%=session.getAttribute("id") %>";
 		resvXhr = new XMLHttpRequest();
 		resvXhr.onreadystatechange = resvCallback;
-		resvXhr.open('get','resv.do?bnum=${vo.bnum }&id='+id,true);
+		resvXhr.open('get','resv.do?cmd=resv&bnum=${vo.bnum }&id='+id,true);
 		resvXhr.send();
 	}
 	function resvCallback() {
@@ -173,11 +173,6 @@
 		if(csXhr.readyState==4 && csXhr.status==200){
 			var txt = csXhr.responseText;
 			var json = JSON.parse(txt);
-			if(json.resv){
-				location.href = "layout.jsp?page=enter.jsp?bnum="+${vo.bnum };
-			}else{
-				alert("경매참여가 불가능합니다.");
-			}
 		}
 	}
 </script>

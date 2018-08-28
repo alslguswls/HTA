@@ -7,6 +7,8 @@
 <div>
 	<ul>
 		<li><a href="layout.jsp?page=main.jsp">홈으로</a></li>
+		
+		<!-- session에 isAdmin 값에 따라 '회원가입' 매뉴가 달라짐-->
 		<%
 			String isAdmin = (String)session.getAttribute("isAdmin");
 			if (isAdmin == null) {
@@ -15,11 +17,11 @@
 		<%
 			} else if (isAdmin.equals("1") ) {
 		%>
-			<li><a href="layout.jsp?page=memberList.do">회원관리</a></li>
+			<li><a href="layout.jsp?left=admin.jsp">관리자</a></li>
 		<%
 			} else {
 		%>
-			<li><a href="javascript:alert('준비중입니다.')">마이페이지</a></li>
+			<li><a href="layout.jsp?left=mypage.jsp">마이페이지</a></li>
 		<%
 			}
 		%>
