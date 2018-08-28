@@ -5,19 +5,15 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript">
-//운영자가 아니라서 경고메시지 뜨게 함
-	function closeWindow() {
-		self.close();
-		
-	}
-</script>
 </head>
-<body >
-	  <h3>관리자가 아니면 못합니다.</h3>
-	  <input type="button" value="닫기" onclick="closeWindow()">
-	 <!-- <a href="javascript:closeWindow()">닫기</a>-->
+<body>
+<h3>공지사항 작성</h3>
+<form action="notiinsert.do" name="insert" method="post">
+제목:<input type="text" name="title"><br>
+내용:<textarea rows="5" cols="50" name="content">
 
-
+</textarea><br>
+<input type="submit" value="등록">
+</form>
 </body>
 </html>

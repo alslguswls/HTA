@@ -11,18 +11,18 @@
 	if(request.getAttribute("errMsg")!=null){
 		%>
 		${requestScope.errMsg}
-		<a href="admin/write.jsp">뒤로가기</a>
+		<a href="layout.jsp?page=write.jsp">뒤로가기</a>
 		<%
 	} else if(request.getAttribute("errMsg2")!=null){
 		//공지사항 수정 오류일 경우
 		%>
 		${requestScope.errMsg2}
-		<a href="admin/update.jsp">뒤로가기</a>
+		<a href="layout.jsp?page=update.jsp">뒤로가기</a>
 		<%
 	} else if(request.getAttribute("errMsg3")!=null){
 		%>
 		${requestScope.errMsg3}
-		<a href="notice.jsp">뒤로가기</a>
+		<a href="layout.jsp?page=notice.jsp">뒤로가기</a>
 		<%
 	}
 

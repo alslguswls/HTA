@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -37,7 +38,15 @@ public class boardController extends HttpServlet {
 	
 
 	private void delete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-		
+		int bnum = Integer.parseInt(request.getParameter("bnum"));
+		boardDao dao = boardDao.getInstance();
+		int n=dao.delete(bnum);
+		if(n>0) {
+			
+		}else {
+			request.setAttribute("errMsg", "오류로 인해 저장에 실패 했습니다.");
+			request.getRequestDispatcher("/layout.jsp?page=error.jsp").forward(request, response);
+		}
 	}
 
 

@@ -19,9 +19,11 @@ String sid = (String)session.getAttribute("id");
 		<tr>
 			<th>글번호</th>
 			<td>${vo.bnum }
-			<c:if test="${id  eq sid or lev eq '1'}">
+			<c:if test="${id  eq sid or lev eq '1' }">
 			<input type="button" value="수정" onclick="javascript:boardModify(${vo.bnum})">
-			<input type="button" value="삭제" onclick="javascript:boardDelete(${vo.bnum})">
+				<c:if test="${vo.status ne '9'}">
+				<input type="button" value="삭제" onclick="javascript:boardDelete(${vo.bnum})">
+				</c:if>
 			</c:if>
 			</td>
 		</tr>

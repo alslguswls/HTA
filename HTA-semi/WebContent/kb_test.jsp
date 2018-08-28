@@ -7,12 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form action="insert.do" name="insert" method="post">
-제목:<input type="text" name="title"><br>
-내용:<textarea rows="5" cols="50" name="content">
 
-</textarea><br>
-<input type="submit" value="등록">
-</form>
 </body>
 </html>
