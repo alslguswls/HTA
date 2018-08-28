@@ -112,12 +112,49 @@ public class boardDao {
 			DBConnection.closeConn(rs, pstmt, con);
 		}
 	}
-
+	//게시글 업데이트
 	public int update(boardVo vo) {
-		
-		return 0;
+		try {
+			con = DBConnection.getConn();
+			String sql = "update board set cate=?, title=?, content=?, orgfilename=?, savefilename=?,  starttime=to_date(?,'yyyyMMdd hh24:mi:ss'), startprice=? where bnum=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, vo.getCate());
+			pstmt.setString(2, vo.getTitle());
+			pstmt.setString(3, vo.getContent());
+			pstmt.setString(4, vo.getOrgfilename());
+			pstmt.setString(5, vo.getSavefilename());
+			pstmt.setString(6, vo.getStarttime());
+			pstmt.setInt(7, vo.getStartprice());
+			pstmt.setInt(8, vo.getBnum());
+			int n = pstmt.executeUpdate();
+			if (rs.next()) {
+				return n;
+			} else {
+				return 0;
+			}
+		} catch (SQLException se) {
+			System.out.println(se.getMessage());
+			return -1;
+		} finally {
+			DBConnection.closeConn(null, pstmt, con);
+		}
 	}
-
+	//글삭제 상태값 9번으로 변경
+	public int delete(int bnum) {
+		try {
+			con = DBConnection.getConn();
+			String sql = "update board set status=9 where bnum=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, bnum);
+			int n = pstmt.executeUpdate();
+			return n;
+		} catch (SQLException se) {
+			System.out.println(se.getMessage());
+			return -1;
+		} finally {
+			DBConnection.closeConn(null, pstmt, con);
+		}
+	}
 }
 
 
