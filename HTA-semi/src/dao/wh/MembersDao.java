@@ -13,10 +13,13 @@ import com.sun.org.apache.bcel.internal.generic.Select;
 
 import db.DBConnection;
 import vo.wh.MembersVo;
+/*
+2018. 8. 26	윤우현		사용자 로그인 처리 여부 수정(전체 데이터 서치 방법 폐기. id, pw 존재 여부만 확인)
+ */
 
 public class MembersDao {
 	
-	// 사용자 리스트 조회 
+	// 사용자 로그인 처리(DB에 id, pwd 존재 여부 확인) 
 	public MembersVo loginCheck(MembersVo vo){
 		Connection con=null;
 		PreparedStatement pstmt=null;
@@ -176,7 +179,7 @@ public class MembersDao {
 		ResultSet rs=null;
 		try {
 			con=DBConnection.getConn();
-			String sql="select count(1) cnt from users";
+			String sql="select count(1) cnt from users where lev != '9' "; // lev가 '9'(삭제처리)인 것은 카운팅 안 함
 			pstmt=con.prepareStatement(sql);
 			rs=pstmt.executeQuery();
 			if(rs.next()) {
@@ -191,7 +194,7 @@ public class MembersDao {
 			DBConnection.closeConn(rs, pstmt, con);
 		}
 	}
-	
+	// 리스트 불러오기
 	public ArrayList<MembersVo> list(int startRow, int endRow){
 		String sql="select * from " + 
 				"    (" + 

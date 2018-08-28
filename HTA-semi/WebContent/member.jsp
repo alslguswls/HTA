@@ -2,6 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!-- 
+윤우현	페이징 기능추가중
+ -->
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -10,13 +13,13 @@
 <body align="center">
 <h1>회원관리 페이지</h1>
 	<table border="1" align="center" width="800">
-			<tr>
-				<td>id</td>
-				<td>email</td>
-				<td>phone</td>
-				<td>수정</td>
-				<td>삭제</td>
-			</tr>
+		<tr>
+			<th>id</th>
+			<th>email</th>
+			<th>phone</th>
+			<th>수정</th>
+			<th>삭제</th>
+		</tr>
 		<c:forEach var="vo" items="${list }">
 			<tr>
 				<td>${vo.id }</td>
@@ -27,5 +30,36 @@
 			</tr>
 		</c:forEach>
 	</table>
+	<div>
+		<!-- 이전 -->
+		<c:choose>
+			<c:when test="${startPage>10 }">
+				<a href="memberList.do?pageNum=${startPage-1 }">[이전]</a>
+			</c:when>
+			<c:otherwise>
+				[이전]
+			</c:otherwise>
+		</c:choose>
+		<c:forEach var="i" begin="${startPage }" end="${endPage }">
+			<c:choose>
+				<c:when test="${pageNum==i }">
+					<%--현재페이지인경우 --%>
+					<a href="memberList.do?pageNum=${i }"><span style="color: red">[${i }]</span></a>
+				</c:when>
+				<c:otherwise>
+					<a href="memberList.do?pageNum=${i }"><span style="color: #555">[${i }]</span></a>
+				</c:otherwise>
+			</c:choose>
+		</c:forEach>
+		<!-- 다음 -->
+		<c:choose>
+			<c:when test="${endPage<pageCount }">
+				<a href="memberList.do?pageNum=${endPage+1 }">[다음]</a>
+			</c:when>
+			<c:otherwise>
+				[다음]
+			</c:otherwise>
+		</c:choose>
+	</div>
 </body>
 </html>
