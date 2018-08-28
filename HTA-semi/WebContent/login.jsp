@@ -29,18 +29,18 @@
 </head>
 <body align="center">
 <%
-		String errMsg = (String)request.getAttribute("errMsg");
-		if(errMsg==null){
-				errMsg="";
-	}
+	String errMsg = (String)request.getAttribute("errMsg");
+ 	if(errMsg==null){
+				errMsg=""; 
+ 	}
 %>
 
 
 <h1>로그인</h1>
 
 <form name="f" method="post" action="loginOk.jsp" onsubmit="return check()" align="center">
+	<div style="color:red;font-size:12px"><%=errMsg %></div>
 	<table align="center" border="1" width="250" height="100"  >
-		<div style="color:red;font-size:12px"><%=errMsg %></div>
 		<tr>
 			<td>아이디</td>
 			<td><input type="text" name="id"></td>

@@ -17,18 +17,19 @@ import vo.wh.MembersVo;
 public class MembersDao {
 	
 	// 사용자 리스트 조회 
-	public ArrayList<MembersVo> list(){
+	public MembersVo loginCheck(MembersVo vo){
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		try {
 			con=db.DBConnection.getConn();
-			String sql="select * from users";
+			String sql="select * from users where id = ? and pwd = ? and lev != '9' ";
 			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1, vo.getId());
+			pstmt.setString(2, vo.getPwd());
 			rs=pstmt.executeQuery();
-			ArrayList<MembersVo> list=new ArrayList<>();
 			
-			while(rs.next()) {
+			if(rs.next()) {
 				String id=rs.getString("id");
 				String pwd=rs.getString("pwd");
 				String email=rs.getString("email");
@@ -37,11 +38,10 @@ public class MembersDao {
 				Integer lev=rs.getInt("lev");
 				Long coin=rs.getLong("coin"); 
 				
-				MembersVo vo=new MembersVo(id, pwd, email, phone, addr, lev, coin);
-				list.add(vo);
+				MembersVo loginVo=new MembersVo(id, pwd, email, phone, addr, lev, coin);
+				return loginVo;
 			}
-			return list;
-			
+			return null;
 		}catch(SQLException se) {
 			System.out.println(se.getMessage());
 			return null;
@@ -197,7 +197,7 @@ public class MembersDao {
 				"    (" + 
 				"        select AA.*,rownum rnum from " + 
 				"        (" + 
-				"            select * from users order by id asc" + 
+				"            select * from users where lev != '9' order by id asc" +  // lev가 '9'(삭제처리)인 것은 안나오게 함
 				"        ) " + 
 				"    AA) " + 
 				"where rnum>=? and rnum<=?";

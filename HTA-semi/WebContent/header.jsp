@@ -1,10 +1,29 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<!--
+2018. 8. 28	오전 9:14:29	- 로그인 여부로 '회원 가입' 매뉴 출력 방법을 변경함.(로그인 전 : 회원가입 출력, 로그인 후 : 회원관리(관리자)/마이페이지(이용자)
+-->
 <h1>경매사이트</h1>
 <div>
 	<ul>
 		<li><a href="layout.jsp?page=main.jsp">홈으로</a></li>
-		<li><a href="layout.jsp?page=join.jsp">회원가입</a></li>
+		<%
+			String isAdmin = (String)session.getAttribute("isAdmin");
+			if (isAdmin == null) {
+		%>
+			<li><a href="layout.jsp?page=join.jsp">회원가입</a></li>
+		<%
+			} else if (isAdmin.equals("1") ) {
+		%>
+			<li><a href="layout.jsp?page=memberList.do">회원관리</a></li>
+		<%
+			} else {
+		%>
+			<li><a href="javascript:alert('준비중입니다.')">마이페이지</a></li>
+		<%
+			}
+		%>
+		
 		<li><a href="layout.jsp?page=notice.jsp">공지사항</a></li>
 		<li><a href="layout.jsp?page=list.jsp">경매품보기</a></li>
 		<%

@@ -11,14 +11,31 @@
 </head>
 <body>
 <%
-	String id=request.getParameter("id");
-	String pwd=request.getParameter("pwd");
-	ArrayList<MembersVo> list = new ArrayList<>();
+	MembersVo vo = new MembersVo();
+	MembersVo paramVo = new MembersVo();
+	paramVo.setId(request.getParameter("id"));
+	paramVo.setPwd(request.getParameter("pwd"));
+	
 	MembersDao dao= new MembersDao();
-	list = dao.list();
-	boolean f = true;
+	vo = dao.loginCheck(paramVo);
+	
+	// 로그인 성공시
+	if(vo != null){
+		// 아이디, 패스워드 값이 일치하면 세션 스코프에 값 담기
+		session.setAttribute("id", vo.getId());
+		session.setAttribute("isAdmin", String.valueOf(vo.getLev())); // 로그인시 어드민 여부 체크
+		response.sendRedirect("layout.jsp");
+	// 로그인 실패시
+	}else {
+		request.setAttribute("errMsg","아이디 또는 패스워드가 맞지 않습니다");
+		// error.jsp로 이동
+		RequestDispatcher rd=request.getRequestDispatcher("layout.jsp?page=login.jsp");
+		rd.forward(request,response);
+	}
+	
+	/* boolean f = true;
 	for (MembersVo vo:list){
-		if(id.equals(vo.getId()) && pwd.equals(vo.getPwd())){
+		if(id.equals(vo.getId()) && pwd.equals(vo.getPwd()) && ){
 			// 아이디, 패스워드 값이 일치하면 세션 스코프에 값 담기
 			session.setAttribute("id", id);
 			response.sendRedirect("layout.jsp");
@@ -33,7 +50,7 @@
 		// 로그인 jsp로 이동
 		RequestDispatcher rd=request.getRequestDispatcher("layout.jsp?page=login.jsp");
 		rd.forward(request,response);
-	}
+	} */
 	
 	
 %>
