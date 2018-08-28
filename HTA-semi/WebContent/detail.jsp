@@ -82,7 +82,7 @@ String sid = (String)session.getAttribute("id");
 	<%
 		}
 	%>
-	<input type="button" value="경매참여" id="enterBtn" onclick="enter()">
+	<input type="button" value="경매참여" id="enterBtn" onclick="enter()" disabled="disabled">
 	<br>
 	<form action="javascript:return false;" onsubmit="comm1()" method="post">
 		댓글 : <input type="text" id="comm" size="20">

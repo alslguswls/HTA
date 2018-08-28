@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.servlet.ServletException;
@@ -16,9 +17,11 @@ import javax.servlet.http.HttpSession;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import dao.ms.BoardDao;
 import dao.ms.ChatDao;
 import dao.ms.MpriceDao;
 import dao.ms.ReservationDao;
+import vo.ms.BoardVo;
 import vo.ms.ChatVo;
 import vo.ms.CommentsVo;
 import vo.ms.MpriceVo;
@@ -61,14 +64,25 @@ public class EnterController extends HttpServlet{
 		pw.close();
 	}
 	protected void timer(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Date d = new Date();
-		SimpleDateFormat sdf = new SimpleDateFormat("hh:mm:ss");
-		String time = sdf.format(d);
-		
 		int bnum = Integer.parseInt(request.getParameter("bnum"));
 		MpriceDao dao = new MpriceDao();
 		MpriceVo vo = dao.select(bnum);
 		
+		BoardDao bdao = new BoardDao();
+		BoardVo bvo = bdao.detail(bnum);
+		int status = bvo.getStatus();
+		String starttime = bvo.getStarttime();
+		String[] day = starttime.substring(0,10).split("-");
+		int year = Integer.parseInt(day[0]);
+		int month = Integer.parseInt(day[1]);
+		int date = Integer.parseInt(day[2]);
+		int hourOfDay = Integer.parseInt(starttime.substring(11,13));
+		int minute = Integer.parseInt(starttime.substring(14,16));
+		Calendar cal = Calendar.getInstance();
+		cal.set(year, month-1, date, hourOfDay, minute, 0);
+		Calendar sysdate = Calendar.getInstance();
+		long more10 = cal.getTimeInMillis() + (1*60*1000);
+		long time = (more10 - sysdate.getTimeInMillis()) / 1000L;
 		JSONObject json = new JSONObject();
 		json.put("time", time);
 		if(vo != null) {
