@@ -8,11 +8,10 @@
 	//카테고리 리스트 가져오기
 	lib lb = new lib();
 	String[] cate=lb.category();
-	String id = (String)session.getAttribute("id");
-	if(id==null){ 
+	String sid = (String)session.getAttribute("id");
+	if(sid==null){ 
 		pageContext.forward("/layout.jsp?page=login.jsp");
 	}
-	
 	//게시글 수정시 사용
 	BoardVo vo=null;
 	vo= (BoardVo)request.getAttribute("vo");
@@ -28,18 +27,28 @@
 	}
 	
 %>
+<c:set var="sid" value="<%=sid %>"/>
 <c:set var="cate" value="<%=cate %>"/>
 <c:set var="day" value="<%=day %>"/>
 <c:set var="hour" value="<%=hour %>"/>
 <c:set var="minute" value="<%=minute %>"/>
+<c:set var="id" value="${vo.getId() }"/>
 <form id="newBoard"  name="newBoard" method="post" action="insertBoard.do" enctype="multipart/form-data">
 	<table>
 		<tr>
 			<th >작성자</th>
 			<td>
-				${vo.getId() }
-				<input type="hidden" id="id" name="id" value="${vo.getId() }">
-				<input type="text" name="bnum" value="${vo.getBnum }">
+				<c:choose>
+					<c:when test="${id ne null }">
+						<span>${id }</span>
+						<input type="hidden" id="id" name="id" value="${id }">
+					</c:when>
+					<c:otherwise>
+						<span>${sid }</span>
+						<input type="hidden" id="id" name="id" value="${sid }">
+					</c:otherwise>
+				</c:choose>
+				<input type="hidden" name="bnum" id="bnum" value="${vo.getBnum() }">
 			</td> 
 		</tr>
 		<tr>
