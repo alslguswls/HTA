@@ -59,21 +59,19 @@ public class DetailController extends HttpServlet{
 		BoardDao dao = new BoardDao();
 		BoardVo vo = dao.detail(bnum);
 		int status = vo.getStatus();
-		String time = vo.getStarttime();
-		String[] day = time.substring(0,10).split("-");
-		int year = Integer.parseInt(day[0]);
-		int month = Integer.parseInt(day[1]);
-		int date = Integer.parseInt(day[2]);
-		int hourOfDay = Integer.parseInt(time.substring(11,13));
-		int minute = Integer.parseInt(time.substring(14,16));
-		Calendar cal = Calendar.getInstance();
-		cal.set(year, month-1, date, hourOfDay, minute);
-		Calendar sysdate = Calendar.getInstance();
+//		String time = vo.getStarttime();
+//		String[] day = time.substring(0,10).split("-");
+//		int year = Integer.parseInt(day[0]);
+//		int month = Integer.parseInt(day[1]);
+//		int date = Integer.parseInt(day[2]);
+//		int hourOfDay = Integer.parseInt(time.substring(11,13));
+//		int minute = Integer.parseInt(time.substring(14,16));
+//		Calendar cal = Calendar.getInstance();
+//		cal.set(year, month-1, date, hourOfDay, minute);
+//		Calendar sysdate = Calendar.getInstance();
 		
 		JSONObject json = new JSONObject();
-		System.out.println(cal.getTime().getTime());
-		System.out.println(sysdate.getTime().getTime());
-		if(cal.getTime().getTime()<=sysdate.getTime().getTime() && status == 0) {
+		if(status == 1) {
 			json.put("open", true);
 		}else {
 			json.put("open", false);

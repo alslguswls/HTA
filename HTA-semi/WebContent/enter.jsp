@@ -42,12 +42,16 @@
 			var time = document.getElementById("time")
 			var id = document.getElementById("id")
 			var maxPrice = document.getElementById("maxPrice")
-			time.innerHTML = json.time + "초";
-			id.innerHTML = json.id;
-			maxPrice.innerHTML = json.maxPrice;
+			if(json.time != 0){
+				time.innerHTML = json.time + "초";
+				id.innerHTML = json.id;
+				maxPrice.innerHTML = json.maxPrice;
+				setTimeout(timer, 1000)
+			}else{
+				
+			}
 		}
 	}
-	setInterval(timer, 1000);
 	
 	var roadXhr = null;
 	function road() {

@@ -81,7 +81,7 @@ public class EnterController extends HttpServlet{
 		Calendar cal = Calendar.getInstance();
 		cal.set(year, month-1, date, hourOfDay, minute, 0);
 		Calendar sysdate = Calendar.getInstance();
-		long more10 = cal.getTimeInMillis() + (1*60*1000);
+		long more10 = cal.getTimeInMillis() + (10*60*1000);
 		long time = (more10 - sysdate.getTimeInMillis()) / 1000L;
 		JSONObject json = new JSONObject();
 		json.put("time", time);
