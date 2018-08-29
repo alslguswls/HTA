@@ -28,7 +28,6 @@ public class newBoaradController extends HttpServlet {
 		req.setCharacterEncoding("utf-8");
 		res.setContentType("text/plain;charset=utf-8");
 		String mod = req.getParameter("mod");
-		
 		if (!mod.equals("") && mod.equals("insert")) {
 			insert(req, res);// insert newBoard
 		} else if (!mod.equals("") && mod.equals("update")) {
@@ -38,7 +37,13 @@ public class newBoaradController extends HttpServlet {
 	}
 
 	private void update(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		int bnum= Integer.parseInt(req.getParameter("bnum"));
+		String  Sbnum= req.getParameter("boardNum");
+		int bnum=0;
+		if(Sbnum!=null) {
+			System.out.println(Sbnum);
+			bnum=Integer.parseInt(Sbnum);
+		}
+		
 		String path = getServletContext().getRealPath("/upload/");
 		SimpleDateFormat dateForm = new SimpleDateFormat("yyyyMMdd");
 		java.util.Date cu = new java.util.Date();

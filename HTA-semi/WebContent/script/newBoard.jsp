@@ -62,6 +62,7 @@
 			return false;
 			}
 		}
+		
 		fm.action = "<%=context%>/insertBoard.do?mod="+mod;
 		fm.submit();
 	}

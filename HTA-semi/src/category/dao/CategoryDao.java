@@ -31,10 +31,11 @@ public class CategoryDao {
 	public int rename(CategoryVo vo) {
 		try {
 			con=DBConnection.getConn();
-			sql="update category set name=? where cate=?";
+			sql="update category set name=? where cate=? and name != ?";
 			pstmt=con.prepareStatement(sql);
 			pstmt.setString(1, vo.getName());
 			pstmt.setInt(2, vo.getCate());
+			pstmt.setString(3, vo.getName());
 			n=pstmt.executeUpdate();
 			return n;
 		} catch (SQLException e) {
@@ -84,12 +85,14 @@ public class CategoryDao {
 	}
 	
 	//get list category
-	public ArrayList<CategoryVo> list() {
+	public ArrayList<CategoryVo> list(int startRow,int endRow) {
 		ArrayList<CategoryVo> list= new ArrayList<CategoryVo>();
 		try {
 			con=DBConnection.getConn();
-			sql="select * from category";
+			sql="select * from (select AA.*, rownum rnum from (select * from category order by cate desc) AA) where rnum>=? and rnum<=?";
 			pstmt=con.prepareStatement(sql);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				CategoryVo vo=new CategoryVo(rs.getInt("cate"),rs.getString("name"));
@@ -123,4 +126,47 @@ public class CategoryDao {
 			DBConnection.closeConn(null, pstmt, con);
 		}
 	}
+	
+		// 전체 글의 갯수 구하기
+		public int getCount() {
+			try {
+				con = DBConnection.getConn();
+				String sql = "select NVL(count(cate),0) cnt from category";
+				pstmt = con.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+				if (rs.next()) {
+					return rs.getInt("cnt");
+				} else {
+					return 0;
+				}
+			} catch (SQLException se) {
+				System.out.println(se.getMessage());
+				return -1;
+			} finally {
+				DBConnection.closeConn(rs, pstmt, con);
+			}
+		}
+		
+		
+		//leftList category
+		public ArrayList<CategoryVo> leftList() {
+			ArrayList<CategoryVo> list=new ArrayList<CategoryVo>();
+			try {
+				con = DBConnection.getConn();
+				String sql = "select * from category";
+				pstmt = con.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+				while(rs.next()) {
+					CategoryVo vo= new CategoryVo(rs.getInt("cate"),rs.getString("name"));
+					list.add(vo);
+				} 
+				return list;
+			} catch (SQLException se) {
+				System.out.println(se.getMessage());
+				return null;
+			} finally {
+				DBConnection.closeConn(rs, pstmt, con);
+			}
+		 
+		}
 }
