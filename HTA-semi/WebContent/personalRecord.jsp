@@ -120,7 +120,36 @@
 <br>
 <h3>경매 참여 기록 확인</h3>
 <br>
-
+<table>
+	<tr>
+		<th>채팅번호</th><th>경매창 번호</th><th>내용</th>
+	</tr>
+	<c:forEach var="chatvo" items="${listChat }">
+		<tr>
+			<td>${chatvo.chat_no }</td>
+			<td>${chatvo.bnum }</td>
+			<td>${chatvo.str }</td>
+		</tr>
+	</c:forEach>
+</table>
+<div>
+	<c:choose>
+		<c:when test="${startPage>10 }">
+			<a href="joinChat.do?pageNum=${startPage-1 }">[이전]</a>
+		</c:when>
+		<c:otherwise>
+			[이전]
+		</c:otherwise>
+	</c:choose>
+	<c:forEach var="i " begin="${startPage }" end="${endPage }">
+		<c:choose>
+		<c:when test="${pageNum==i }">
+			<a href="joinChat.do?pageNum=${i }"><span>[${i}]</span> </a>
+		</c:when>
+		</c:choose>
+		
+	</c:forEach>
+</div>
 
 </body>
 </html>

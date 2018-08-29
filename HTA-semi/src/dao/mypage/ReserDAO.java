@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import db.DBConnection;
+import vo.ms.ChatVo;
 import vo.ms.MpriceVo;
 import vo.ms.ReservationVo;
 import vo.notice.NoticeVO;
@@ -148,6 +149,61 @@ public class ReserDAO {
 			System.out.println(sq.getMessage());
 			return -1;
 		} finally {
+			DBConnection.closeConn(re, pre, con);
+		}
+	}
+	
+	public ArrayList<ChatVo> chatTable(String id, int startRow, int endRow ){
+		Connection con = null;
+		PreparedStatement pre = null;
+		String sql="select * from (select aa.* , rownum rnum from (select * from chat where id=? order by chat_no desc) aa) where rnum>=? and rnum<=?";
+		ResultSet re = null;
+		try {
+			ArrayList<ChatVo> list = new ArrayList<>();
+			con=DBConnection.getConn();
+			pre=con.prepareStatement(sql);
+			pre.setString(1, id);
+			pre.setInt(2, startRow);
+			pre.setInt(3, endRow);
+			re=pre.executeQuery();
+			while (re.next()) {
+				int chat_no=re.getInt("chat_no");
+				int bnum = re.getInt("bnum");
+				String chatid = re.getString("id");
+				String str = re.getString("str");
+				int status = re.getInt("status");
+				ChatVo vo = new ChatVo(chat_no,bnum,chatid,str,status);
+				list.add(vo);
+			}
+			return list;
+			
+		} catch(SQLException sq) {
+			System.out.println(sq.getMessage());
+			return null;
+		}finally {
+			DBConnection.closeConn(re, pre, con);
+		}
+	}
+	
+	public int getChatCount(String id) {
+		Connection con = null;
+		PreparedStatement pre = null;
+		String sql="select NVL(count(chat_no),0) cnt from chat where id=?";
+		ResultSet re = null;
+		try {
+			con = DBConnection.getConn();
+			pre=con.prepareStatement(sql);
+			pre.setString(1, id);
+			re=pre.executeQuery();
+			if(re.next()) {
+				return re.getInt("cnt");
+			} else {
+				return 0;
+			}
+		} catch(SQLException sq) {
+			System.out.println(sq.getMessage());
+			return -1;
+		}finally {
 			DBConnection.closeConn(re, pre, con);
 		}
 	}
