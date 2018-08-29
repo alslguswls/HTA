@@ -24,7 +24,7 @@
 <h2>공지사항</h2>
 <%	if(session.getAttribute("id")!=null){
 	id2 = (String)session.getAttribute("id");
-	String admin1 = (String)session.getAttribute("idAdmin"); 
+	String admin1 = (String)session.getAttribute("isAdmin"); 
 	 if(admin1.equals("1")){//운영자일때
 		%>
 		<table border="1" width="500">
