@@ -80,7 +80,7 @@ public class ReserDAO {
 	public int getReserCount(String id) {
 		Connection con = null;
 		PreparedStatement pre = null;
-		String sql="(select NVL(count(vnum),0) cnt from reservation  where id=? ";
+		String sql="select NVL(count(vnum),0) cnt from reservation  where id=? ";
 		ResultSet re = null;
 		try {
 			con = DBConnection.getConn();
@@ -103,7 +103,7 @@ public class ReserDAO {
 	public ArrayList<MpriceVo> dealJoin(String id, int startRow, int endRow ){
 		Connection con = null;
 		PreparedStatement pre = null;
-		String sql="select * from (select aa.*, rownum rnum from(select * from mprice  where id=? order by mp_no desc) aa) where rnum>=? and rnum<=?";
+		String sql="select * from (select aa.*, rownum rnum from (select * from mprice  where id=? order by mp_no desc) aa) where rnum>=? and rnum<=?";
 		ResultSet re = null;
 		try {
 			ArrayList<MpriceVo> list = new ArrayList<>();
@@ -133,7 +133,7 @@ public class ReserDAO {
 	public int getMyDealCount(String id) {
 		Connection con = null;
 		PreparedStatement pre = null;
-		String sql="(select NVL(count(mp_no),0) cnt from mprice  where id=? ";
+		String sql="select NVL(count(mp_no),0) cnt from mprice  where id=?";
 		ResultSet re = null;
 		try {
 			con = DBConnection.getConn();

@@ -22,6 +22,7 @@ public class JoinDealController extends HttpServlet {
 	//경매참여목록 출력 컨트롤러
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		request.setCharacterEncoding("utf-8");
 		HttpSession session = request.getSession();
 		String dealId=(String)session.getAttribute("id");
 		ReserDAO dao = new ReserDAO();

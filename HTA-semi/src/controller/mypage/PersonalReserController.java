@@ -23,6 +23,7 @@ public class PersonalReserController extends HttpServlet {
 		//예약목록 출력 관련 컨트롤러
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		request.setCharacterEncoding("utf-8");
 		HttpSession session = request.getSession();
 		String perId = (String)session.getAttribute("id");
 		ReservationVo vo = new ReservationVo();

@@ -23,8 +23,9 @@ public class JoinChatController extends HttpServlet {
 	
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		request.setCharacterEncoding("utf-8");
 		HttpSession session = request.getSession();
-		int n =Integer.parseInt(request.getParameter("n"));
+		//int n =Integer.parseInt(request.getParameter("n"));
 		String charId = (String)session.getAttribute("id");
 		ReserDAO dao = new ReserDAO();
 		String spageNum=request.getParameter("pageNum");
@@ -42,7 +43,7 @@ public class JoinChatController extends HttpServlet {
 		if (endPage>pageCount) {
 			endPage=pageCount;
 		}
-		request.setAttribute("n", n);
+		//request.setAttribute("n", n);
 		request.setAttribute("listChat", list);
 		request.setAttribute("pageNum", pageNum);
 		request.setAttribute("pageCount", pageCount);

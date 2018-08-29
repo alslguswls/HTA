@@ -28,26 +28,26 @@
 <div>
 	<c:choose>
 		<c:when test="${startPage>10 }">
-			<a href="joinChat.do?pageNum=${startPage-1 }">[이전]</a>
+			<a href="joinchat.do?pageNum=${startPage-1 }">[이전]</a>
 		</c:when>
 		<c:otherwise>
 			[이전]
 		</c:otherwise>
 	</c:choose>
-	<c:forEach var="i " begin="${startPage }" end="${endPage }">
+	<c:forEach var="i" begin="${startPage }" end="${endPage }">
 		<c:choose>
 		<c:when test="${pageNum==i }">
-			<a href="joinChat.do?pageNum=${i }"><span style="color: red;">[${i}]</span></a>
+			<a href="joinchat.do?pageNum=${i }"><span style="color: red;">[${i}]</span></a>
 		</c:when>
 		<c:otherwise>
-			<a href="joinChat.do?pageNum=${i }"><span style="color: #555;">[${i}]</span></a>
+			<a href="joinchat.do?pageNum=${i }"><span style="color: #555;">[${i}]</span></a>
 		</c:otherwise>
 		</c:choose>
 		
 	</c:forEach>
 	<c:choose>
 		<c:when test="${endPage<pageCount }">
-			<a href="joinChat.do?pageNum=${endPage+1 }">[다음]</a>
+			<a href="joinchat.do?pageNum=${endPage+1 }">[다음]</a>
 		</c:when>
 		<c:otherwise>
 		

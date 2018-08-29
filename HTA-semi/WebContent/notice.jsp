@@ -59,11 +59,11 @@
 		<c:forEach var="i" begin="${startPage }" end="${endPage }">
 		<c:choose>
 			<c:when test="${pageNum==i }">
-				<a href="noticeList.do?pageNum=${i }"><span style="color: red;">[${i }]</span></a>
+				<a href="noticeList.do?pageNum=${i }"><span style="color: red;">[${i}]</span></a>
 		
 		</c:when>
 		<c:otherwise>
-			<a href="noticeList.do?pageNum=${i }"><span style="color: #555;">[${i }]</span></a>
+			<a href="noticeList.do?pageNum=${i }"><span style="color: #555;">[${i}]</span></a>
 		</c:otherwise>
 		
 		</c:choose>
