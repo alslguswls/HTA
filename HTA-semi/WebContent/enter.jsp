@@ -42,14 +42,37 @@
 			var time = document.getElementById("time")
 			var id = document.getElementById("id")
 			var maxPrice = document.getElementById("maxPrice")
-			if(json.time != 0){
+			if(json.time >= 0){
 				time.innerHTML = json.time + "초";
 				id.innerHTML = json.id;
 				maxPrice.innerHTML = json.maxPrice;
 				setTimeout(timer, 1000)
 			}else{
-				
+				endTime();
 			}
+		}
+	}
+	
+	var endXhr = null;
+	function endTime() {
+		endXhr = new XMLHttpRequest();
+		endXhr.onreadystatechange = endTimeCallBack;
+		endXhr.open('get','enter.do?cmd=end&bnum='+${param.bnum },true);
+		endXhr.send();
+	}
+	function endTimeCallBack() {
+		if(endXhr.readyState==4 && endXhr.status==200){
+			var txt = endXhr.responseText;
+			var json = JSON.parse(txt);
+			var enterbody = document.getElementById("enterbody");
+			enterbody.innerHTML = "<table border='1'>"+
+								"<tr>"+
+									"<th>낙찰가</th>"+
+									"<td id=\"maxPrice\">"+json.price+"</td>"+
+									"<th>낙찰자</th>"+
+									"<td id=\"id\">"+json.id+"</td>"+
+								"</tr>"+
+							"</table>";
 		}
 	}
 	
@@ -110,31 +133,32 @@
 	}
 </script>
 </head>
-<body>
+<body onload="timer()">
 
 
-
-<table border='1'>
-	<tr>
-		<th>최고호가</th>
-		<td id="maxPrice">0</td>
-		<th>아이디</th>
-		<td id="id">id</td>
-		<th>남은시간</th>
-		<td id="time">0:00</td>
-	</tr>
-</table>
-<div style="background-color: yellow;width: 800px;height: 500px;" id="area">
-<textarea rows="34" cols="60" id="chatlog" ></textarea>
+<div id="enterbody">
+	<table border='1'>
+		<tr>
+			<th>최고호가</th>
+			<td id="maxPrice">0</td>
+			<th>아이디</th>
+			<td id="id">id</td>
+			<th>남은시간</th>
+			<td id="time">0:00</td>
+		</tr>
+	</table>
+	<div style="background-color: yellow;width: 800px;height: 500px;" id="area">
+		<textarea rows="34" cols="60" id="chatlog" ></textarea>
+	</div>
+	<form action="javascript:return false;"onsubmit="chat()">
+		<input type="text" size="50" id="msg">
+		<input type="submit" value="입력">
+	</form>
+	<form action="javascript:return false;"onsubmit="priceCall()">
+		<input type="text" size="20" id="price">
+		<input type="submit" value="호가하기" id="callBtn">
+	</form>
 </div>
-<form action="javascript:return false;"onsubmit="chat()">
-<input type="text" size="50" id="msg">
-<input type="submit" value="입력">
-</form>
-<form action="javascript:return false;"onsubmit="priceCall()">
-<input type="text" size="20" id="price">
-<input type="submit" value="호가하기" id="callBtn">
-</form>
 
 
 
