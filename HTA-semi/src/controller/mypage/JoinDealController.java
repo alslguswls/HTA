@@ -47,7 +47,7 @@ public class JoinDealController extends HttpServlet {
 		request.setAttribute("pageCount", pageCount);
 		request.setAttribute("startPage", startPage);
 		request.setAttribute("endPage", endPage);
-		RequestDispatcher rd = request.getRequestDispatcher("/layout.jsp?page=personalRecord.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/layout.jsp?page=personalDeal.jsp&left=mypage.jsp");
 		rd.forward(request, response);
 	}
 

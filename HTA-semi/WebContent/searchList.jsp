@@ -30,7 +30,7 @@ function writeSearch() {
 	
 	if(session.getAttribute("id")!=null){
 		idSearch = (String)session.getAttribute("id");
-		String admin1 = (String)session.getAttribute("idAdmin"); 
+		String admin1 = (String)session.getAttribute("isAdmin"); 
 	if(admin1.equals("1")){//운영자일때
 		
 		 if(list33!=null){//검색된 공지사항 있을때

@@ -24,6 +24,7 @@ public class JoinChatController extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
+		int n =Integer.parseInt(request.getParameter("n"));
 		String charId = (String)session.getAttribute("id");
 		ReserDAO dao = new ReserDAO();
 		String spageNum=request.getParameter("pageNum");
@@ -41,12 +42,13 @@ public class JoinChatController extends HttpServlet {
 		if (endPage>pageCount) {
 			endPage=pageCount;
 		}
+		request.setAttribute("n", n);
 		request.setAttribute("listChat", list);
 		request.setAttribute("pageNum", pageNum);
 		request.setAttribute("pageCount", pageCount);
 		request.setAttribute("startPage", startPage);
 		request.setAttribute("endPage", endPage);
-		RequestDispatcher rd = request.getRequestDispatcher("/layout.jsp?page=personalRecord.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/layout.jsp?page=personalChat.jsp&left=mypage.jsp");
 		rd.forward(request, response);
 		
 	}

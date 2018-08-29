@@ -55,7 +55,7 @@ public class PersonalReserController extends HttpServlet {
 		
 		
 		//request.setAttribute("reserList", list);
-		RequestDispatcher rd = request.getRequestDispatcher("/layout.jsp?page=personalRecord.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/layout.jsp?page=personalRecord.jsp&left=mypage.jsp");
 				rd.forward(request, response);
 		
 	}
