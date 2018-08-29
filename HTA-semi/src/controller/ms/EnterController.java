@@ -21,11 +21,13 @@ import dao.ms.BoardDao;
 import dao.ms.ChatDao;
 import dao.ms.MpriceDao;
 import dao.ms.ReservationDao;
+import dao.ms.ResultDao;
 import vo.ms.BoardVo;
 import vo.ms.ChatVo;
 import vo.ms.CommentsVo;
 import vo.ms.MpriceVo;
 import vo.ms.ReservationVo;
+import vo.ms.ResultVo;
 
 @WebServlet("/enter.do")
 public class EnterController extends HttpServlet{
@@ -45,6 +47,8 @@ public class EnterController extends HttpServlet{
 			chat(request, response);
 		}else if(cmd != null && cmd.equals("road")) {
 			road(request, response);
+		}else if(cmd != null && cmd.equals("end")) {
+			end(request, response);
 		}
 	}
 	protected void resv(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -103,26 +107,31 @@ public class EnterController extends HttpServlet{
 		int price = Integer.parseInt(request.getParameter("price"));
 		MpriceDao dao = new MpriceDao();
 		MpriceVo vo = dao.select(bnum);
+		BoardDao bdao = new BoardDao();
+		BoardVo bvo = bdao.detail(bnum);
+		int status = bvo.getStatus();
 		JSONObject json = new JSONObject();
-		if(vo == null) {
-			int n = dao.insert(new MpriceVo(0, bnum, id, price));
-			if(n>0) {
-				json.put("msg", "success");
-				session.setAttribute("delay", "delay");
-			}else {
-				json.put("msg", "오류로 인해 호가에 실패했습니다.");
-			}
-		}else{
-			if(vo.getMaxprice() < price) {
-				int n = dao.update(new MpriceVo(0, bnum, id, price));
+		if(status == 2) {
+			json.put("msg", "경매가 종료되어 호가에 실패했습니다..");
+		}else {
+			if(vo == null) {
+				int n = dao.insert(new MpriceVo(0, bnum, id, price));
 				if(n>0) {
 					json.put("msg", "success");
-					session.setAttribute("delay", "delay");
 				}else {
 					json.put("msg", "오류로 인해 호가에 실패했습니다.");
 				}
-			}else {
-				json.put("msg", "현재 최고호가 이상의 금액을 입력하세요.");
+			}else{
+				if(vo.getMaxprice() < price) {
+					int n = dao.update(new MpriceVo(0, bnum, id, price));
+					if(n>0) {
+						json.put("msg", "success");
+					}else {
+						json.put("msg", "오류로 인해 호가에 실패했습니다.");
+					}
+				}else {
+					json.put("msg", "현재 최고호가 이상의 금액을 입력하세요.");
+				}
 			}
 		}
 		PrintWriter pw = response.getWriter();
@@ -165,6 +174,26 @@ public class EnterController extends HttpServlet{
 		}else {
 			json.put("msg", "오류로 인해 채팅 불러오기를 실패하였습니다.");
 		}
+		PrintWriter pw = response.getWriter();
+		pw.println(json.toString());
+		pw.close();
+	}
+	protected void end(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int bnum = Integer.parseInt(request.getParameter("bnum"));
+		MpriceDao dao = new MpriceDao();
+		MpriceVo vo = dao.select(bnum);
+		ResultDao rdao = new ResultDao();
+		ResultVo rvo = rdao.select(bnum);
+		JSONObject json = new JSONObject();
+		if(rvo == null) {
+			int n = rdao.insert(new ResultVo(0, bnum, vo.getId(), vo.getMaxprice(), new Date()));
+			if(n>0) {
+				end(request, response);
+				return;
+			}
+		}
+		json.put("id", rvo.getId());
+		json.put("price", rvo.getPrice());
 		PrintWriter pw = response.getWriter();
 		pw.println(json.toString());
 		pw.close();

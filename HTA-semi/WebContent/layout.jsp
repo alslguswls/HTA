@@ -10,6 +10,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>Insert title here</title>
 	<jsp:include page="/script/common.jsp"></jsp:include>
+	<jsp:include page="/script/cate_ck.jsp"></jsp:include>
 	<%
 		String context = application.getContextPath();
 	%>

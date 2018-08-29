@@ -72,7 +72,7 @@ create table result(
 	bnum number(38), -- 글번호
 	id varchar2(100), --구매자
 	price number(38), --구매가격 
-	endtime number(38), --종료시간/구매일시
+	endtime Date, --종료시간/구매일시
 	CONSTRAINT fk_comment_users FOREIGN KEY(bnum) references board(bnum),
 	CONSTRAINT fk_comment_board FOREIGN KEY(id) references users(id)
 )tablespace semi;
