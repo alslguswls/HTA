@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <h2>카테고리목록</h2>
 <div "cate_in">	
-	<form method="post" action="/Category.do?mod=insert" id="cateForm">
+	<form method="post" action="/Category.do?mod=insert" id="cateForm" name="cateForm">
 	<span>카테고리 추가하기</span>
 	<input type="text" name="cate_n" id="cate_n"> 
 	<input type="button" value="추가" onclick="name_ck()">

@@ -41,6 +41,7 @@ public class CategoryController extends HttpServlet {
 	}
 
 	private void nameCk(HttpServletRequest req, HttpServletResponse res) throws IOException {
+		res.setContentType("text/xml;charset=utf-8");
 		String name=req.getParameter("cate_n");
 		CategoryDao dao= CategoryDao.getInstance();
 		int n = dao.nameCK(name);
@@ -49,7 +50,7 @@ public class CategoryController extends HttpServlet {
 			ck=false;
 		}
 		PrintWriter pw=res.getWriter();
-		pw.println("<?xml version='1.0' encoding='utf-8'?>");
+		pw.println("<?xml version='1.0' encoding='utf-8' ?>");
 		pw.println("<result>");
 		pw.println("<check>" + ck + "</check>");
 		pw.println("</result>");
