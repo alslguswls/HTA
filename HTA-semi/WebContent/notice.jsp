@@ -24,8 +24,8 @@
 <h2>공지사항</h2>
 <%	if(session.getAttribute("id")!=null){
 	id2 = (String)session.getAttribute("id");
-
-	 if(id2.equals("admin2")){//운영자일때
+	String admin1 = (String)session.getAttribute("idAdmin"); 
+	 if(admin1.equals("1")){//운영자일때
 		%>
 		<table border="1" width="500">
 		<tr>
@@ -36,7 +36,7 @@
 		<tr>
 			<td>${vo2.noti_no }</td>
 			<td>${vo2.title }</td>
-			<td>${vo2.content }</td>
+			<td><a href="detailContent.do?noti_no=${vo2.noti_no}">${vo2.content }</a></td>
 			<td>${vo2.regdate }</td>
 			<td><a href="notiupdate.do?noti_no=${vo2.noti_no}">수정</a></td>
 			<td><a href="deleteWarning.jsp?noti_no=${vo2.noti_no}">삭제</a></td>
@@ -90,7 +90,7 @@
 	<br>
 	<input type="button" value="글 작성" onclick="writeNext()">
 	<%
-	} else if(!id2.equals("admin2")){//관리자가 아닌 일반회원일 경우
+	} else if(!admin1.equals("1")){//관리자가 아닌 일반회원일 경우
 			%>
 			<table border="1" width="500">
 			<tr>
@@ -100,7 +100,7 @@
 			<tr>
 				<td>${voNo.noti_no }</td>
 				<td>${voNo.title }</td>
-				<td>${voNo.content }</td>
+				<td><a href="detail.do?noti_no=${voNo.noti_no}">${voNo.content }</a></td>
 				<td>${voNo.regdate }</td>
 				
 			</tr>
@@ -163,7 +163,7 @@
 		<tr>
 			<td>${vo4.noti_no }</td>
 			<td>${vo4.title }</td>
-			<td>${vo4.content }</td>
+			<td><a href="detail.do?noti_no=${vo4.noti_no}">${vo4.content }</a></td>
 			<td>${vo4.regdate }</td>
 			
 		</tr>

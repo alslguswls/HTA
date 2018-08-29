@@ -30,8 +30,8 @@ function writeSearch() {
 	
 	if(session.getAttribute("id")!=null){
 		idSearch = (String)session.getAttribute("id");
-	
-	if(idSearch.equals("admin2")){//운영자일때
+		String admin1 = (String)session.getAttribute("idAdmin"); 
+	if(admin1.equals("1")){//운영자일때
 		
 		 if(list33!=null){//검색된 공지사항 있을때
 		%>
@@ -43,7 +43,7 @@ function writeSearch() {
 		<tr>
 		<td>${voSe.noti_no }</td>
 			<td>${voSe.title }</td>
-			<td>${voSe.content }</td>
+			<td><a href="detail.do?noti_no=${voSe.noti_no}">${voSe.content }</a></td>
 			<td>${voSe.regdate }</td>
 			<td><a href="notiupdate.do?noti_no=${voSe.noti_no}">수정</a></td>
 			<td><a href="deleteWarning.jsp?noti_no=${voSe.noti_no}">삭제</a></td>
@@ -91,7 +91,7 @@ function writeSearch() {
 		<h3>검색된 공지사항이 없습니다</h3>
 		<%
 	}
-	}else if(!idSearch.equals("admin2")){ //운영자가 아닌 일반 회원일 경우
+	}else if(!admin1.equals("1")){ //운영자가 아닌 일반 회원일 경우
 			if(list33!=null){//공지사항 있을떄
 		
 		%>
@@ -103,7 +103,7 @@ function writeSearch() {
 		<tr>
 			<td>${voSe2.noti_no }</td>
 			<td>${voSe2.title }</td>
-			<td>${voSe2.content }</td>
+			<td><a href="detail.do?noti_no=${voSe2.noti_no}">${voSe2.content }</a></td>
 			<td>${voSe2.regdate }</td>
 	</tr>
 		
@@ -161,7 +161,7 @@ function writeSearch() {
 		<tr>
 			<td>${voSe3.noti_no }</td>
 			<td>${voSe3.title }</td>
-			<td>${voSe3.content }</td>
+			<td><a href="detail.do?noti_no=${voSe3.noti_no}">${voSe3.content }</a></td>
 			<td>${voSe3.regdate }</td>
 	</tr>
 		

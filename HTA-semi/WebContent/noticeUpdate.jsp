@@ -57,7 +57,7 @@
 		</tr>
 		<tr style="border: 1px solid;">
 		<th style="border: 1px solid;">
-			가입일
+			등록일
 		</th>
 			<th>
 				<input type="text" value="<%=vo3.getRegdate() %>" name="regdate"

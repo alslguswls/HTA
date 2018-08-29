@@ -20,6 +20,7 @@ public class UpdateResultController extends HttpServlet {
 	//수정 결과를 처리하는 컨트롤러
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		request.setCharacterEncoding("utf-8");
 		int num = Integer.parseInt(request.getParameter("noti_no"));
 		System.out.println(num);
 		String title = request.getParameter("title");
