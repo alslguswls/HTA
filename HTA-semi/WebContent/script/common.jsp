@@ -18,7 +18,7 @@
 				resvBtn.disabled = "disabled";
 				resvBtn.value = "예약완료"
 			}else{
-				alert("오류로 인해 예약이 실패하였습니다.");
+				alert("예약에 실패하였습니다.");
 			}
 		}
 	}

@@ -13,6 +13,7 @@ import org.json.simple.JSONObject;
 
 import dao.ms.BoardDao;
 import dao.ms.ReservationDao;
+import vo.ms.BoardVo;
 import vo.ms.ReservationVo;
 
 @WebServlet("/resv.do")
@@ -32,12 +33,18 @@ public class ReservationController extends HttpServlet{
 		String id = request.getParameter("id");
 		
 		ReservationDao dao = new ReservationDao();
-		int n = dao.insert(new ReservationVo(0, bnum, id));
+		BoardDao bdao = new BoardDao();
+		BoardVo vo = bdao.detail(bnum);
 		JSONObject json = new JSONObject();
-		if(n > 0) {
-			new BoardDao().resvup(bnum);
-			json.put("result", true);
-		}else{
+		if(vo.getStatus() == 0) {
+			int n = dao.insert(new ReservationVo(0, bnum, id));
+			if(n > 0) {
+				new BoardDao().resvup(bnum);
+				json.put("result", true);
+			}else{
+				json.put("result", false);
+			}
+		}else {
 			json.put("result", false);
 		}
 		PrintWriter pw = response.getWriter();

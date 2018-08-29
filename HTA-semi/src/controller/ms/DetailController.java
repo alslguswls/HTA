@@ -38,6 +38,7 @@ public class DetailController extends HttpServlet{
 		int bnum = Integer.parseInt(request.getParameter("bnum"));
 		BoardDao dao = new BoardDao();
 		BoardVo vo = dao.detail(bnum);
+		request.setAttribute("status", vo.getStatus());
 		if(vo != null) {
 			dao.hitup(bnum);
 			String id = (String)request.getSession().getAttribute("id");

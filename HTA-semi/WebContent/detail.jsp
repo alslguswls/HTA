@@ -76,15 +76,22 @@ String sid = (String)session.getAttribute("id");
 		</tr>
 	</table>
 	<%
-		boolean resv = (boolean)request.getAttribute("resv");
-		if(resv){
+		int status = (int)request.getAttribute("status");
+		if(status != 0){
 	%>
-			<input type="button" value="예약완료" id="resvBtn" disabled="disabled">
+			<input type="button" value="예약불가" id="resvBtn" disabled="disabled">
 	<%
 		}else{
+			boolean resv = (boolean)request.getAttribute("resv");
+			if(resv){
 	%>
-			<input type="button" value="예약" id="resvBtn" onclick="resv()" >
+				<input type="button" value="예약완료" id="resvBtn" disabled="disabled">
 	<%
+			}else{
+	%>
+				<input type="button" value="예약" id="resvBtn" onclick="resv()" >
+	<%
+			}
 		}
 	%>
 	<input type="button" value="경매참여" id="enterBtn" onclick="enter()" disabled="disabled">

@@ -69,9 +69,6 @@ public class EnterController extends HttpServlet{
 	}
 	protected void timer(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int bnum = Integer.parseInt(request.getParameter("bnum"));
-		MpriceDao dao = new MpriceDao();
-		MpriceVo vo = dao.select(bnum);
-		
 		BoardDao bdao = new BoardDao();
 		BoardVo bvo = bdao.detail(bnum);
 		int status = bvo.getStatus();
@@ -87,14 +84,19 @@ public class EnterController extends HttpServlet{
 		Calendar sysdate = Calendar.getInstance();
 		long more10 = cal.getTimeInMillis() + (10*60*1000);
 		long time = (more10 - sysdate.getTimeInMillis()) / 1000L;
+		
 		JSONObject json = new JSONObject();
 		json.put("time", time);
+		
+		MpriceDao dao = new MpriceDao();
+		MpriceVo vo = dao.select(bnum);
+		
 		if(vo != null) {
 			json.put("id", vo.getId());
 			json.put("maxPrice", vo.getMaxprice());
 		}else {
-			json.put("id", "-");
-			json.put("maxPrice", 0);
+			json.put("id", "시작가");
+			json.put("maxPrice", bvo.getStartprice());
 		}
 		PrintWriter pw = response.getWriter();
 		pw.println(json.toString());
@@ -182,18 +184,23 @@ public class EnterController extends HttpServlet{
 		int bnum = Integer.parseInt(request.getParameter("bnum"));
 		MpriceDao dao = new MpriceDao();
 		MpriceVo vo = dao.select(bnum);
-		ResultDao rdao = new ResultDao();
-		ResultVo rvo = rdao.select(bnum);
 		JSONObject json = new JSONObject();
-		if(rvo == null) {
-			int n = rdao.insert(new ResultVo(0, bnum, vo.getId(), vo.getMaxprice(), new Date()));
-			if(n>0) {
-				end(request, response);
-				return;
+		if(vo != null) {
+			ResultDao rdao = new ResultDao();
+			ResultVo rvo = rdao.select(bnum);
+			if(rvo == null) {
+				int n = rdao.insert(new ResultVo(0, bnum, vo.getId(), vo.getMaxprice(), new Date()));
+				if(n>0) {
+					end(request, response);
+					return;
+				}
 			}
+			json.put("id", rvo.getId());
+			json.put("price", rvo.getPrice());
+		}else {
+			json.put("id", "낙찰자 없음");
+			json.put("price", "-");
 		}
-		json.put("id", rvo.getId());
-		json.put("price", rvo.getPrice());
 		PrintWriter pw = response.getWriter();
 		pw.println(json.toString());
 		pw.close();
