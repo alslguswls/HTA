@@ -171,8 +171,12 @@
 	}
 	function checkStartCallback() {
 		if(csXhr.readyState==4 && csXhr.status==200){
+			var enterBtn = document.getElementById("enterBtn");
 			var txt = csXhr.responseText;
 			var json = JSON.parse(txt);
+			if(json.open){
+				enterBtn.disabled = null;
+			}
 		}
 	}
 </script>

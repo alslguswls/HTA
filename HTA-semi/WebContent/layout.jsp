@@ -35,6 +35,11 @@
 			<body onload="commList();checkStart()">
 			
 	<%
+		}else if(page1.equals("enter.jsp")){
+	%>
+			<body onload="timer()">
+			
+	<%
 		}else{
 	%>
 			<body>

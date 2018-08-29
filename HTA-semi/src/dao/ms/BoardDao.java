@@ -75,4 +75,21 @@ public class BoardDao {
 			DBConnection.closeConn(null, pstmt, con);
 		}
 	}
+	public int statusup(int bnum, int status) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+			con = DBConnection.getConn();
+			String sql = "update board set status=? where bnum=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, status);
+			pstmt.setInt(2, bnum);
+			return pstmt.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			return -1;
+		}finally {
+			DBConnection.closeConn(null, pstmt, con);
+		}
+	}
 }

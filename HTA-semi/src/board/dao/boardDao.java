@@ -6,12 +6,17 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.sql.Statement;
 
 
 import board.vo.boardVo;
+import dao.ms.BoardDao;
 import db.DBConnection;
 import lib.lib;
+import vo.ms.BoardVo;
 
 public class boardDao {
 	Connection con = null;
@@ -33,6 +38,7 @@ public class boardDao {
 
 	// 게시글 인서트
 	public int insert(boardVo vo) {
+		int bnum = getMaxNum() + 1;
 		String id = vo.getId();
 		int cate = vo.getCate();
 		String title = vo.getTitle();
@@ -41,19 +47,53 @@ public class boardDao {
 		String savefilename = vo.getSavefilename();
 		String starttime = vo.getStarttime();
 		int startprice = vo.getStartprice();
-		sql = "insert into board values(board_seq.nextval,?,?,?,?,?,?,to_date(?,'yyyy/mm/dd hh24:mi:ss'),?,0,0,0,sysdate)";
+		sql = "insert into board values(?,?,?,?,?,?,?,to_date(?,'yyyy/mm/dd hh24:mi:ss'),?,0,0,0,sysdate)";
 		try {
 			con = DBConnection.getConn();
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, id);
-			pstmt.setInt(2, cate);
-			pstmt.setString(3, title);
-			pstmt.setString(4, content);
-			pstmt.setString(5, orgfilename);
-			pstmt.setString(6, savefilename);
-			pstmt.setString(7, starttime);
-			pstmt.setInt(8, startprice);
+			pstmt.setInt(1, bnum);
+			pstmt.setString(2, id);
+			pstmt.setInt(3, cate);
+			pstmt.setString(4, title);
+			pstmt.setString(5, content);
+			pstmt.setString(6, orgfilename);
+			pstmt.setString(7, savefilename);
+			pstmt.setString(8, starttime);
+			pstmt.setInt(9, startprice);
 			n = pstmt.executeUpdate();
+			if(n>0) {
+				BoardDao dao = new BoardDao();
+				BoardVo bvo = dao.detail(bnum);
+				String time = bvo.getStarttime();
+				String[] day = time.substring(0,10).split("-");
+				int year = Integer.parseInt(day[0]);
+				int month = Integer.parseInt(day[1]);
+				int date = Integer.parseInt(day[2]);
+				int hourOfDay = Integer.parseInt(time.substring(11,13));
+				int minute = Integer.parseInt(time.substring(14,16));
+				TimerTask task = new TimerTask() {
+					@Override
+					public void run() { 
+						if(bvo.getStatus() == 0) {
+							dao.statusup(bnum, 1);
+							TimerTask task = new TimerTask() {
+								@Override
+								public void run() { 
+									dao.statusup(bnum, 2);
+								}
+							};
+							Calendar cal = Calendar.getInstance();
+							cal.set(year, month-1, date, hourOfDay, minute, 0);
+							Timer timer = new Timer(true);
+							timer.schedule(task, new Date(cal.getTimeInMillis()+(10*60*1000)));
+						}
+					}
+				};
+				Calendar cal = Calendar.getInstance();
+				cal.set(year, month-1, date, hourOfDay, minute, 0);
+				Timer timer = new Timer(true);
+				timer.schedule(task, new Date(cal.getTimeInMillis()));
+			}
 			return n;
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -64,7 +104,7 @@ public class boardDao {
 	}
 	//게시글 리스트 불러오기 카테고리별
 	public ArrayList<boardVo> list(int startRow, int endRow, int cate,String order, String where) {
-		String sql = "select X.bnum, X.id, X.title, X.hit,X.status, X.regdate from ( select rownum as xno, A.bnum , A.id, A.title, A.hit, A.status, A.regdate from ( select bnum, id, cate, title, hit, status, regdate  from board order by "+order+") A where rownum <= ? and A.cate=?"+where+") X where X.xno >= ?";
+		String sql = "select X.bnum, X.id, X.title, X.hit,X.status, X.regdate from ( select rownum as xno, A.bnum , A.id, A.title, A.hit, A.status, A.regdate from ( select bnum, id, cate, title, hit, status, regdate  from board order by "+order+") A where rownum <= ? and A.cate=?"+where+"and status!=9) X where X.xno >= ?";
 		try {
 			con = DBConnection.getConn();
 			pstmt = con.prepareStatement(sql);
@@ -112,11 +152,31 @@ public class boardDao {
 			DBConnection.closeConn(rs, pstmt, con);
 		}
 	}
-	//게시글 업데이트
+	
+	// 현재 게시글 마지막 번호
+	public int getMaxNum() {
+		try {
+			con = DBConnection.getConn();
+			String sql = "select NVL(max(bnum),0) maxnum from board";
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				return rs.getInt("maxnum");
+			} else {
+				return 0;
+			}
+		} catch (SQLException se) {
+			System.out.println(se.getMessage());
+			return -1;
+		} finally {
+			DBConnection.closeConn(rs, pstmt, con);
+		}
+	}
+	//게시글 업데이트 status 2번일 경우 경매 종료 후 수정 불가능 
 	public int update(boardVo vo) {
 		try {
 			con = DBConnection.getConn();
-			String sql = "update board set cate=?, title=?, content=?, orgfilename=?, savefilename=?,  starttime=to_date(?,'yyyyMMdd hh24:mi:ss'), startprice=? where bnum=?";
+			String sql = "update board set cate=?, title=?, content=?, orgfilename=?, savefilename=?,  starttime=to_date(?,'yyyyMMdd hh24:mi:ss'), startprice=? where bnum=? and status!=2";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, vo.getCate());
 			pstmt.setString(2, vo.getTitle());
