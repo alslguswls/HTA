@@ -21,12 +21,20 @@
 	String idde = null;
 	
 %>
+<script type="text/javascript">
+	function deleteSomething(){
+		document.location.href="deleteWarning.jsp?noti_no=<%=vode.getNoti_no()%>";
+	}
+</script>
 <%
 		if(session.getAttribute("id")!=null){
-			idde = (String)session.getAttribute("id");
-			String admin1 = (String)session.getAttribute("idAdmin"); 
+			//idde = (String)session.getAttribute("id");
+			String admin1 = (String)session.getAttribute("isAdmin"); 
+			System.out.print(admin1);
+			if(admin1.equals("1")){
 			%>
-	
+
+
 			
 <h2>세부사항</h2>
 <form action="notiupdate.do" method="post" name="updatearticle">
@@ -79,15 +87,67 @@
 		
 	</table>
 	<br>
-	<%
-		if(!admin1.equals("1")){
-	%>
-			<input type="submit" value="수정">
-			</form>
-<br>
-<input type="button" value="삭제" onclick="deleteSomething()">
+	<input type="submit" value="수정">
+	<br>
+	</form>
+	<input type="button" value="삭제" onclick="deleteSomething()">
+	
+
 			<%
-		} else{
+		} else if(admin1.equals("0")){
+			%>
+			<h2>세부사항</h2>
+			<form action="notiupdate.do" method="post" name="updatearticle">
+				<table style="border: 1px solid; border-collapse: collapse; ">
+					<tr style="border: 1px solid;">
+					<th style="border: 1px solid;">
+						번호
+					</th>
+						<th>
+							<input type="text" value="<%=vode.getNoti_no() %>" name="noti_no"
+								size="20" style="width: 100%; border: 0;"  readonly="readonly">
+						</th>
+						
+					</tr>
+				
+					<tr style="border: 1px solid;">
+					<td style="border: 1px solid;">
+						제목
+					</td>
+						<td>
+							<input type="text" value="<%=vode.getTitle() %>" name="title"
+								size="20" style="width: 100%; border: 0;" readonly="readonly">
+						</td>
+						
+					</tr>
+					
+					<tr style="border: 1px solid;">
+					<td style="border: 1px solid;">
+						내용
+					</td>
+						<td>
+							<textarea rows="10"  name="content"
+								style="width: 100%; border: 0; resize: none;" readonly="readonly">
+							<%=vode.getContent() %>
+							</textarea>
+							
+						</td>
+						
+					</tr>
+					<tr style="border: 1px solid;">
+					<th style="border: 1px solid;">
+						등록일
+					</th>
+						<th>
+							<input type="text" value="<%=vode.getRegdate() %>" name="regdate"
+								size="20" style="width: 100%; border: 0;" readonly="readonly">
+						</th>
+						
+					</tr>
+					
+				</table>
+				</form>
+			<%
 			
 		}
 		} else if(session.getAttribute("id")==null){
@@ -142,11 +202,14 @@
 					</tr>
 					
 				</table>
+				
+</form>
 				<%
 		}
 	%>
 
-</form>
+
+
 </body>
 
 </html>

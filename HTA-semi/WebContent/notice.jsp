@@ -20,11 +20,13 @@
 	String id2 = null;
 	ArrayList<NoticeVO> list = (ArrayList<NoticeVO>)request.getAttribute("list22");
 	//System.out.print(id2);
+	
 %>
 <h2>공지사항</h2>
 <%	if(session.getAttribute("id")!=null){
 	id2 = (String)session.getAttribute("id");
 	String admin1 = (String)session.getAttribute("isAdmin"); 
+	System.out.print(admin1);
 	 if(admin1.equals("1")){//운영자일때
 		%>
 		<table border="1" width="500">
@@ -90,7 +92,7 @@
 	<br>
 	<input type="button" value="글 작성" onclick="writeNext()">
 	<%
-	} else if(!admin1.equals("1")){//관리자가 아닌 일반회원일 경우
+	} else if(admin1.equals("0")){//관리자가 아닌 일반회원일 경우
 			%>
 			<table border="1" width="500">
 			<tr>
@@ -100,7 +102,7 @@
 			<tr>
 				<td>${voNo.noti_no }</td>
 				<td>${voNo.title }</td>
-				<td><a href="detail.do?noti_no=${voNo.noti_no}">${voNo.content }</a></td>
+				<td><a href="detailContent.do?noti_no=${voNo.noti_no}">${voNo.content }</a></td>
 				<td>${voNo.regdate }</td>
 				
 			</tr>
@@ -163,7 +165,7 @@
 		<tr>
 			<td>${vo4.noti_no }</td>
 			<td>${vo4.title }</td>
-			<td><a href="detail.do?noti_no=${vo4.noti_no}">${vo4.content }</a></td>
+			<td><a href="detailContent.do?noti_no=${vo4.noti_no}">${vo4.content }</a></td>
 			<td>${vo4.regdate }</td>
 			
 		</tr>
