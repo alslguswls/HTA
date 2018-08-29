@@ -108,7 +108,7 @@ public class boardController extends HttpServlet {
 		request.setAttribute("pageNum",pageNum);
 		request.setAttribute("cate",cate);
 		request.setAttribute("search",search);
-		request.getRequestDispatcher("/board/list.jsp").forward(request, response);
+		request.getRequestDispatcher("/layout.jsp?page=/board/list.jsp").forward(request, response);
 	}
 	
 	private void getInfo(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {

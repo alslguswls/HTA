@@ -71,7 +71,7 @@ public class CategoryController extends HttpServlet {
 	}
 
 	private void update(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-
+		
 	}
 
 	private void delete(HttpServletRequest req, HttpServletResponse res)  throws ServletException, IOException{
@@ -89,6 +89,6 @@ public class CategoryController extends HttpServlet {
 		ArrayList<CategoryVo> list = new ArrayList<CategoryVo>();
 		list=dao.list();
 		req.setAttribute("C_list", list);
-		req.getRequestDispatcher("/layout.jsp?page=/category/adminCate.jsp&left=admin.jsp").forward(req, res);
+		req.getRequestDispatcher("layout.jsp?page=/category/adminCate.jsp&left=admin.jsp").forward(req, res);
 	}
 }
