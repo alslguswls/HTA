@@ -39,7 +39,6 @@ public class newBoaradController extends HttpServlet {
 
 	private void update(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		int bnum= Integer.parseInt(req.getParameter("bnum"));
-		
 		String path = getServletContext().getRealPath("/upload/");
 		SimpleDateFormat dateForm = new SimpleDateFormat("yyyyMMdd");
 		java.util.Date cu = new java.util.Date();

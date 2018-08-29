@@ -5,7 +5,6 @@
 	function name_ck() {
 		var cate_n = document.getElementById("cate_n").value;
 		var cate = cate_n.replace(" ", "");
-
 		if (cate == "") {
 			return; // 메소드 끝내기
 		}
@@ -16,11 +15,12 @@
 	}
 	function name_rs() { // 콜백 메소드
 		if (cateXhr.readyState == 4 && cateXhr.status == 200) {
+			var fm =document.cateForm;
 			var xml = cateXhr.responseXML;
 			var result = xml.getElementsByTagName("check")[0];
 			var row = result.firstChild.nodeValue;
 			if (eval(row) == true) {
-				document.cateForm.submit();
+				fm.submit();
 			} else {
 				alert("이미사용중인 카테고리입니다.");
 			}
