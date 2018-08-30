@@ -48,7 +48,7 @@
 						<input type="hidden" id="id" name="id" value="${sid }">
 					</c:otherwise>
 				</c:choose>
-				<input type="hidden" name="bnum" id="bnum" value="${vo.getBnum() }">
+				<input type="hidden" name="boardNum" id="boardNum" value="${vo.getBnum() }">
 			</td> 
 		</tr>
 		<tr>

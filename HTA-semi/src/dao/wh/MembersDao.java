@@ -235,6 +235,26 @@ public class MembersDao {
 			DBConnection.closeConn(rs, pstmt, con);
 		}
 	}
+	
+	// 사용자 수정
+		public int coinUpdate(String id2, Long coin2) {
+			Connection con=null;
+			PreparedStatement pstmt=null;
+			try {
+				con=DBConnection.getConn();
+				String sql="update users set coin=coin + ? where id=?";
+				pstmt=con.prepareStatement(sql);
+				pstmt.setLong(1, coin2);
+				pstmt.setString(2, id2);
+				int n=pstmt.executeUpdate();
+				return n;
+			}catch(Exception e) {
+				System.out.println(e.getMessage());
+				return -1;
+			}finally {
+				DBConnection.closeConn(null,pstmt,con);
+			}
+		}
 }
 
 
