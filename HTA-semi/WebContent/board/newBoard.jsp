@@ -32,16 +32,16 @@
 <c:set var="day" value="<%=day %>"/>
 <c:set var="hour" value="<%=hour %>"/>
 <c:set var="minute" value="<%=minute %>"/>
-<c:set var="id" value="${vo.getId() }"/>
+<c:set var="id1" value="${vo.getId() }"/>
 <form id="newBoard"  name="newBoard" method="post" action="insertBoard.do" enctype="multipart/form-data">
 	<table>
 		<tr>
 			<th >작성자</th>
 			<td>
 				<c:choose>
-					<c:when test="${id ne null }">
-						<span>${id }</span>
-						<input type="hidden" id="id" name="id" value="${id }">
+					<c:when test="${id1 ne null }">
+						<span>${id1 }</span>
+						<input type="hidden" id="id" name="id" value="${id1 }">
 					</c:when>
 					<c:otherwise>
 						<span>${sid }</span>
