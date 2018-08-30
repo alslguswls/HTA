@@ -62,17 +62,29 @@ public class newBoaradController extends HttpServlet {
 		String mm = data.getParameter("mm");
 		String starttime = sdate.substring(0, 4) + "" + sdate.substring(4, 6) + "" + sdate.substring(6, 8) + "" + hh
 				+ "" + mm + "00";
+		//업데이트시 이전에 올렸던 파일이 있으면db 업데이트 없으면 이전 데이터 
+		String oldOrgfile= data.getParameter("oldOrgfile");
+		String oldSavefile=data.getParameter("oldSavefile");
+		if(orgfilename==null) {
+			orgfilename=oldOrgfile;
+			savefilename=oldSavefile;
+		}else {
+			File f = new File(oldSavefile);
+			if(f.exists()) {
+				f.delete();
+			}
+		}
 		// DB SAVE
-				boardDao dao = boardDao.getInstance();
-				boardVo vo = new boardVo(bnum, null, cate, title, content, orgfilename, savefilename, starttime, startprice, 0,
-						0, 0, null);
-				int n = dao.update(vo);
-				if (n > 0) {
-					res.sendRedirect("detail.do?cmd=detail&bnum="+bnum);
-				} else {
-					req.setAttribute("errMsg", "오류로 인해 저장에 실패 했습니다.");
-					req.getRequestDispatcher("/layout.jsp?page=error.jsp").forward(req, res);
-				}
+		boardDao dao = boardDao.getInstance();
+		boardVo vo = new boardVo(bnum, null, cate, title, content, orgfilename, savefilename, starttime, startprice, 0,
+				0, 0, null);
+		int n = dao.update(vo);
+		if (n > 0) {
+			res.sendRedirect("detail.do?cmd=detail&bnum="+bnum);
+		} else {
+			req.setAttribute("errMsg", "오류로 인해 저장에 실패 했습니다.");
+			req.getRequestDispatcher("/layout.jsp?page=error.jsp").forward(req, res);
+		}
 	}
 
 	private void insert(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
@@ -93,13 +105,18 @@ public class newBoaradController extends HttpServlet {
 		int cate = Integer.parseInt(data.getParameter("cate"));
 		String content = data.getParameter("content");
 		String orgfilename = data.getOriginalFileName("orgfile");
-		String savefilename = addPath + "/" + data.getFilesystemName("orgfile");
 		int startprice = Integer.parseInt(data.getParameter("price"));
 		String sdate = data.getParameter("sdate");
 		String hh = data.getParameter("hh");
 		String mm = data.getParameter("mm");
 		String starttime = sdate.substring(0, 4) + "" + sdate.substring(4, 6) + "" + sdate.substring(6, 8) + "" + hh
 				+ "" + mm + "00";
+		String savefilename;
+		if(orgfilename!=null) {
+			savefilename = addPath + "/" + data.getFilesystemName("orgfile");
+		}else {
+			savefilename=null;
+		}
 		// DB SAVE
 		boardDao dao = boardDao.getInstance();
 		boardVo vo = new boardVo(0, id, cate, title, content, orgfilename, savefilename, starttime,  startprice, 0,
