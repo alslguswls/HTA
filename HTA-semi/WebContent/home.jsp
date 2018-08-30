@@ -3,6 +3,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<%
+	String context = request.getContextPath();
+%>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>Insert title here</title>
 	<style type="text/css">
@@ -17,9 +20,9 @@
 		#name{font-size: 100px;color: #ddd;display: inline;}
 		#sname{font-size: 30px;color: #ddd;display: inline;}
 	</style>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="<%=context %>/css/bootstrap.min.css">
+	<script src="<%=context %>/js/jquery.min.js"></script>
+  	<script src="<%=context %>/js/bootstrap.min.js"></script>
 </head>
 <body class="container-fluid bg-1 text-center">
 	<div id="wrap">
@@ -44,7 +47,7 @@
 				<label>로그인</label>
 			</div>
 			<div onmouseover="over()" onmouseout="out()" class="img-rounded">
-				<a href="layout.jsp?page=/boardList.do?mod=list&cate=0">
+				<a href="layout.jsp?page=/boardList.do?mod=list">
 					<img src="images/list.png" class="img-rounded">
 				</a>
 				<label>경매품 보기</label>

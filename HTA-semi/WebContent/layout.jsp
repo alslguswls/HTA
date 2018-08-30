@@ -7,17 +7,23 @@
  -->
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>Insert title here</title>
-	<jsp:include page="/script/common.jsp"></jsp:include>
-	<jsp:include page="/script/cate_ck.jsp"></jsp:include>
 	<%
 		String context = application.getContextPath();
 	%>
-	<link rel="stylesheet" type="text/css" href="<%=context %>/css/common.css">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<link rel="stylesheet" href="<%=context %>/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  	<script src="<%=context %>/js/bootstrap.js"></script>
+  	
+	<title>Insert title here</title>
+	<jsp:include page="/script/common.jsp"></jsp:include>
+	<jsp:include page="/script/cate_ck.jsp"></jsp:include>
+
+	<link rel="stylesheet" type="text/css" href="<%=context %>/css/common.css">
+<!-- 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
+  	
+  	
 </head>
 	<%
 		String page1 = request.getParameter("page");
