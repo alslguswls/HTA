@@ -7,8 +7,7 @@
  -->
 
 	<div align="center"> 마이페이지</div>
-
-	<ul><a href="javascript:alert('준비중 입니다')"> 코인 충전</a></ul>
+	<ul><a href="layout.jsp?page=coin.do&left=mypage.jsp"> 코인 충전</a></ul>
 	<ul><a href="layout.jsp?page=perReser.do"> 경매 예약 확인 </a></ul>
 	<ul><a href="layout.jsp?page=joinDeal.do"> 경매 낙찰이력 확인 </a></ul>
 	<ul><a href="layout.jsp?page=joinchat.do"> 경매 참여이력 확인 </a></ul>
