@@ -4,7 +4,7 @@
 <div>
 	<div> 카테고리</div>
 <ul>
-	<c:forEach var="n" items="${list }">
+	<c:forEach var="n" items="${list1 }">
 		<li>
 			<a href="layout.jsp?page=/boardList.do?mod=list&cate=${n.cate}">${n.name }</a>
 		</li>
