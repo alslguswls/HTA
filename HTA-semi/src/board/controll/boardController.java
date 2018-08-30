@@ -24,9 +24,7 @@ public class boardController extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/plain;charset=utf-8");
 		request.setCharacterEncoding("UTF-8");
-		
 		String mod = request.getParameter("mod");
-		
 		if(!mod.equals("") && mod.equals("list")) {
 			list(request,response);
 		}else if(!mod.equals("") && mod.equals("getInfo")) {//글정보 가져오기
@@ -37,7 +35,7 @@ public class boardController extends HttpServlet {
 			ArrayList<CategoryVo> list1=new ArrayList<CategoryVo>();
 			list1=leftList();
 			request.setAttribute("list1", list1);
-			request.getRequestDispatcher("/board/newBoard.jsp");
+			request.getRequestDispatcher("/layout.jsp?page=/board/newBoard.jsp").forward(request, response);
 		}
 		
 	}
@@ -123,7 +121,10 @@ public class boardController extends HttpServlet {
 		int bnum = Integer.parseInt(request.getParameter("bnum"));
 		BoardDao dao=new BoardDao();
 		BoardVo vo = dao.detail(bnum);
+		ArrayList<CategoryVo> list1=new ArrayList<CategoryVo>();
+		list1=leftList();
 		request.setAttribute("vo",vo);
+		request.setAttribute("list1",list1);
 		request.getRequestDispatcher("/layout.jsp?page=/board/newBoard.jsp").forward(request, response);
 	}
 	

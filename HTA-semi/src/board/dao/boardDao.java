@@ -184,16 +184,12 @@ public class boardDao {
 			pstmt.setInt(7, vo.getStartprice());
 			pstmt.setInt(8, vo.getBnum());
 			int n = pstmt.executeUpdate();
-			if (rs.next()) {
-				return n;
-			} else {
-				return 0;
-			}
+			return n;
 		} catch (SQLException se) {
 			System.out.println(se.getMessage());
 			return -1;
 		} finally {
-			DBConnection.closeConn(null, pstmt, con);
+			DBConnection.closeConn(rs, pstmt, con);
 		}
 	}
 	//글삭제 상태값 9번으로 변경

@@ -16,6 +16,22 @@ public class lib {
 		return oder[cul];
 	}
 	
+	public static String[] bStatus() {
+		String status[] =  {
+			"경매대기중",
+			"경매진행중",
+			"경매종료",
+			"3",
+			"4",
+			"5",
+			"6",
+			"7",
+			"8",
+			"삭제됨"
+		};
+		return status;
+	}
+	
 	
 	
 }

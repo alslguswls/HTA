@@ -51,11 +51,11 @@
 		<div id="header">
 			<jsp:include page="header.jsp"></jsp:include>
 		</div>
-		<div id="category">
-			<jsp:include page="<%=left1 %>"></jsp:include>
-		</div>
 		<div id="content">
 			<jsp:include page="<%=page1 %>"></jsp:include>
+		</div>
+		<div id="category">
+			<jsp:include page="<%=left1 %>"></jsp:include>
 		</div>
 		<div id="footer">
 			<jsp:include page="footer.jsp"></jsp:include>

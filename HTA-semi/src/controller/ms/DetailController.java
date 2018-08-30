@@ -3,10 +3,6 @@ package controller.ms;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -44,7 +40,6 @@ public class DetailController extends HttpServlet{
 		request.setAttribute("status", vo.getStatus());
 		ArrayList<CategoryVo> list1=new ArrayList<CategoryVo>();
 		list1=leftList();
-		request.setAttribute("list1", list1);
 		if(vo != null) {
 			dao.hitup(bnum);
 			String id = (String)request.getSession().getAttribute("id");
@@ -55,6 +50,7 @@ public class DetailController extends HttpServlet{
 				request.setAttribute("resv", false);
 			}
 			request.setAttribute("vo", vo);
+			request.setAttribute("list1", list1);
 			request.getRequestDispatcher("/layout.jsp?page=detail.jsp").forward(request, response);
 		}else {
 			request.setAttribute("errMsg", "오류로 인해 조회에 실패했습니다.");

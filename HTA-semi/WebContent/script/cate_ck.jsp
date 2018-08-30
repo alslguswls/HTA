@@ -11,9 +11,9 @@
 		cateXhr = new XMLHttpRequest();
 		cateXhr.onreadystatechange = name_rs;
 		cateXhr.open('get', 'Category.do?mod=name_ck&cate_n=' + cate, true);
-		cateXhr.send();
+		cateXhr.send(); 
 	}
-	function name_rs() { // 콜백 메소드
+ 	function name_rs() { // 콜백 메소드
 		if (cateXhr.readyState == 4 && cateXhr.status == 200) {
 			var fm =document.cateForm;
 			var xml = cateXhr.responseXML;
@@ -28,31 +28,47 @@
 	}
 	
 	//카테고리 수정 작업 xml ajax 처리 후 저장 성공시 창새로고침
-	var cateXhr1;
 	function cateInfo(no,str){
-		var fm=document.cateForm;
-		var button=document.getElementById("chButton");
-		button.value="저장";
-		button.onclick="cateModify()";
+		var btn=document.getElementById("chButton").style;
+		btn.display="none";
+		var btn1=document.getElementById("modify").style;
+		btn1.display="inline";
 		var c_name= document.getElementById("cate_n");
 		c_name.value=str;
+		var btn = document.getElementById("cancle").style; 
+		btn.display="inline";
 		var cate= document.getElementById("cate");
 		cate.value=no;
-		fm.action="Category.do?mod=modify";
 	}
+	
+	function cateCancle(){
+		var btn=document.getElementById("chButton").style;
+		btn.display="inline";
+		var btn1=document.getElementById("modify").style;
+		btn1.display="none";
+		var c_name= document.getElementById("cate_n");
+		var btn = document.getElementById("cancle").style;
+		btn.display="none";
+		c_name.value="";
+		var cate= document.getElementById("cate");
+		cate.value="";
+	}
+	var cateXhr1;
 	function cateModify(){
 		var fm=document.cateForm;
-		var c_name= document.getElementById("cate_n");
-		var c_no= document.getElementById("cate");
-		var cate = cate_n.replace(" ", "");
+		fm.action="Category.do?mod=modify";
+		var cate_n = document.getElementById("cate_n").value;
+		var no = document.getElementById("cate").value;
+		var cate = cate_n.replace(' ', '');
 		if (cate == "") {
 			return; // 메소드 끝내기
 		}
 		cateXhr1 = new XMLHttpRequest();
 		cateXhr1.onreadystatechange = cateMCall;
-		cateXhr1.open('get', 'Category.do?mod=update&cate='+c_no+'&cate_n='+cate, true);
-		cateXhr1.send();
+		cateXhr1.open('get', 'Category.do?mod=update&cate_n=' +cate +'&cate='+no, true);
+		cateXhr1.send(); 
 	}
+	
 	function cateMCall(){
 		if (cateXhr1.readyState == 4 && cateXhr1.status == 200) {
 			var fm =document.cateForm;
@@ -72,7 +88,8 @@
 		var ck = confirm("삭제 하시겠습니까?");
 		if(ck==true){
 			alert("삭제되었습니다.");
-			location.href="Category.do?mod=delete?cate="+cate;
+			location.href="Category.do?mod=delete&cate="+no;
 		}
 	}
+	
 </script>

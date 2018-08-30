@@ -22,18 +22,14 @@ public class CategoryController extends HttpServlet {
 		res.setContentType("text/plain;charset=utf-8");
 		req.setCharacterEncoding("UTF-8");
 		String mod = req.getParameter("mod");
-		
 		if(!mod.equals("") && mod.equals("list")) {
 			list(req,res);
 		}else if(!mod.equals("") && mod.equals("insert")) {
 			insert(req,res);
 		}else if(!mod.equals("") && mod.equals("update")) {
-			System.out.println("asdasdasdasd");
 			update(req,res);
 		}else if(!mod.equals("") && mod.equals("delete")) {
 			delete(req,res);
-		}else if(!mod.equals("") && mod.equals("getInfo")) {
-			getInfo(req,res);
 		}else if(!mod.equals("") && mod.equals("name_ck")) {//중복 카테고리 체크
 			nameCk(req,res);
 		}
@@ -94,11 +90,6 @@ public class CategoryController extends HttpServlet {
 		CategoryDao dao= CategoryDao.getInstance();
 		int n = dao.delete(cate);
 		res.sendRedirect("Category.do?mod=list");
-	}
-
-	private void getInfo(HttpServletRequest req, HttpServletResponse res)  throws ServletException, IOException{
-	
-		
 	}
 
 	//카테고리 관리 리스트

@@ -58,8 +58,8 @@
 			<th >카테고리</th>
 			<td>
 				<select id="cate" name="cate">
-					<c:forEach var="n" items="${cate }" varStatus="cate">
-						<option value="${cate.index}" <c:if test="${cate.index eq  reCate}">selected</c:if>>${n }</option>
+					<c:forEach var="n" items="${list1 }" varStatus="cate">
+						<option value="${n.cate}" <c:if test="${cate.index eq  reCate}">selected</c:if>>${n.name }</option>
 					</c:forEach>
 				</select>
 			 </td>
@@ -90,7 +90,12 @@
 			</td>
 		</tr>
 		<tr>
-			<th>이미지</th><td><input type="file" name="orgfile" id="orgfile" value="${vo.getOrgfilename()}">${vo.getOrgfilename()}</input></td>
+			<th>이미지</th>
+			<td>
+				<input type="file" name="orgfile" id="orgfile" value="${vo.getOrgfilename()}">
+				<input type="hidden" name="oldOrgfile" value="${vo.getOrgfilename() }">
+				<input type="hidden" name="oldSavefile" value="${vo.getSavefilename() }">
+			</td>
 		</tr>
 		<tr>
 			<th >내용</th><td><textarea cols="5" rows="10" name="content" id="content" >${vo.getContent()}</textarea> </td>

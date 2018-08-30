@@ -6,6 +6,7 @@ import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
+import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -37,13 +38,6 @@ public class newBoaradController extends HttpServlet {
 	}
 
 	private void update(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		String  Sbnum= req.getParameter("boardNum");
-		int bnum=0;
-		if(Sbnum!=null) {
-			System.out.println(Sbnum);
-			bnum=Integer.parseInt(Sbnum);
-		}
-		
 		String path = getServletContext().getRealPath("/upload/");
 		SimpleDateFormat dateForm = new SimpleDateFormat("yyyyMMdd");
 		java.util.Date cu = new java.util.Date();
@@ -56,6 +50,7 @@ public class newBoaradController extends HttpServlet {
 		}
 		MultipartRequest data = new MultipartRequest(req, path, 1024 * 1024 * 10, "utf-8",
 				new DefaultFileRenamePolicy());
+		int  bnum= Integer.parseInt(data.getParameter("boardNum"));
 		String title = data.getParameter("title");
 		int cate = Integer.parseInt(data.getParameter("cate"));
 		String content = data.getParameter("content");
@@ -73,7 +68,7 @@ public class newBoaradController extends HttpServlet {
 						0, 0, null);
 				int n = dao.update(vo);
 				if (n > 0) {
-					res.sendRedirect("/detail.do?cmd=detail&bnum="+bnum);
+					res.sendRedirect("detail.do?cmd=detail&bnum="+bnum);
 				} else {
 					req.setAttribute("errMsg", "오류로 인해 저장에 실패 했습니다.");
 					req.getRequestDispatcher("/layout.jsp?page=error.jsp").forward(req, res);

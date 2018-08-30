@@ -1,3 +1,4 @@
+<%@page import="lib.lib"%>
 <%@page import="board.vo.boardVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -10,9 +11,11 @@ String sid = (String)session.getAttribute("id");
 %>
  <% 
  	String sessionLev = (String)session.getAttribute("isAdmin");
+ 	String[] bstatus= lib.bStatus();
 %> 
 <div>
 <c:set var="id" value="${vo.id }" />
+<c:set var="bstatus" value="<%=bstatus %>" />
 <c:set var="sid" value="<%=sid %>" />
 <c:set var="lev"	value="<%=sessionLev %>" />
 	<table border="1">
@@ -68,7 +71,7 @@ String sid = (String)session.getAttribute("id");
 		</tr>
 		<tr>
 			<th>경매품상태</th>
-			<td>${vo.status }</td>
+			<td>${bstatus[vo.status] }</td>
 		</tr>
 		<tr>
 			<th>등록일</th>

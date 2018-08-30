@@ -5,7 +5,7 @@
 %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <h2>게시글목록</h2>     
-<div><a href="/boardList.do?mod=getCate">글작성</a></div>
+<div><a href="boardList.do?mod=getCate">글작성</a></div>
 <table>
 	<tr>
 		<th colspan="5">

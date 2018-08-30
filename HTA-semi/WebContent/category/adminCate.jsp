@@ -8,6 +8,8 @@
 	<input type="text" name="cate_n" id="cate_n">
 	<input type="hidden" name="cate" id="cate" value="">
 	<input type="button" value="추가" id="chButton" onclick="name_ck()">
+	<input type="button" style="display:none;" value="저장" id="modify" onclick="cateModify()">
+	<input type="button"  style="display:none;" name="cancle" id="cancle" value="취소" onclick="cateCancle()">
 	</form>
 </div>
 <div id="cate_list">
@@ -20,8 +22,8 @@
 		<tr>
 			<td>${n.cate } </td>
 			<td>${n.name }</td>
-			<td><input type="button" value="수정" onclick="cateInfo(${n.cate },${n.name })"></td>
-			<td><input type="button" value="삭제" onclick="cateDelete(${n.cate })"></td>	
+			<td><input type="button" value="수정" onclick="cateInfo(${n.cate },'${n.name }')" /> </td>
+			<td><input type="button" value="삭제" onclick="cateDelete(${n.cate })" /></td>	
 		</tr>
 	</c:forEach>
 		<tr>
