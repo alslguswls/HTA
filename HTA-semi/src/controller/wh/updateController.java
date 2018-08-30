@@ -14,7 +14,8 @@ import javafx.scene.control.Alert;
 import vo.wh.MembersVo;
 
 /**
-2018-08-27	회원 수정 기능 작성중		윤우현 
+2018-08-27	회원 수정 기능 작성중	윤우현 
+2018-08-28	회원 수정 기능 작성완료	윤우현
  */
 @WebServlet("/memberUpdate.do")
 public class updateController extends HttpServlet {

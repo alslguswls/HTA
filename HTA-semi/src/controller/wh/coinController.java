@@ -14,7 +14,7 @@ import javafx.scene.control.Alert;
 import vo.wh.MembersVo;
 
 /**
-
+2018-08-29	코인 콘트롤러 작성(윤우현)
  */
 @WebServlet("/coin.do")
 public class coinController extends HttpServlet {
@@ -22,6 +22,7 @@ public class coinController extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String cmd = request.getParameter("cmd");
 		
+		// cmd에 내용이 없을 경우 getCoin 메소드 실행. cmd에 update가 있을 경우 update 메소드 실행
 		if (cmd == null || cmd.equals("")) {
 			getCoin(request, response);
 		} else if (cmd.equals("update")) {
@@ -29,6 +30,7 @@ public class coinController extends HttpServlet {
 		}
 	}
 	
+	// 세션에 id값이 있을경우 id와 coin 정보를 반환하는 메소드
 	private void getCoin (HttpServletRequest request, HttpServletResponse response) throws ServletException,IOException {
 		String id = (String)request.getSession().getAttribute("id");
 		MembersDao dao = new MembersDao();
@@ -44,6 +46,7 @@ public class coinController extends HttpServlet {
 		}
 	}
 	
+	// 코인을 업데이트 하기 위한 메소드
 	private void update (HttpServletRequest request, HttpServletResponse response) throws ServletException,IOException {
 		String id = (String)request.getSession().getAttribute("id");
 		Long coin = Long.parseLong(request.getParameter("coin"));
