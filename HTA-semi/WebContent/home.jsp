@@ -13,7 +13,8 @@
 		#icon label{font-size: 30px;color: #dddddd}
 		img{width: 250px;height: 250px;
 			padding: 50px;background-color: #ffff55;}
-		#name{font-size: 100px;color: #dddddd;}
+		#name{font-size: 100px;color: #dddddd;display: inline;}
+		#sname{font-size: 30px;color: #dddddd;display: inline;}
 	</style>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -22,7 +23,9 @@
 <body class="container-fluid bg-1 text-center">
 	<div id="wrap">
 		<div>
-			<label id="name">경매사이트</label>
+			<label id="name">억!</label>
+			<label id="sname">소리나는 옥</label>
+			<label id="name">션</label>
 		</div>
 		<br>
 		<div id="icon">
