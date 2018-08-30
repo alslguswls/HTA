@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import category.dao.CategoryDao;
+import category.vo.CategoryVo;
 import dao.notice.AdminDAO;
 import vo.notice.NoticeVO;
 
@@ -42,8 +44,15 @@ public class NoticeListController extends HttpServlet {
 		if (endPage>pageCount) {
 			endPage=pageCount;
 		}
+		
+		CategoryDao cdao = CategoryDao.getInstance();
+		ArrayList<CategoryVo> list1=new ArrayList<CategoryVo>();
+		list1=cdao.leftList();
+		
+		
 		//System.out.println(page);
 		request.setAttribute("list22", list);
+		request.setAttribute("list1", list1);
 		request.setAttribute("pageNum", pageNum);
 		request.setAttribute("pageCount", pageCount);
 		request.setAttribute("startPage", startPage);

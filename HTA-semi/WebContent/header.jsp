@@ -4,7 +4,7 @@
 2018. 8. 28	오전 9:14:29	- 로그인 여부로 '회원 가입' 매뉴 출력 방법을 변경함.(로그인 전 : 회원가입 출력, 로그인 후 : 회원관리(관리자)/마이페이지(이용자)
 -->
 <img id="logo" src="images/logo.png">
-<h1><a href="#">억!션</a></h1>
+<h1><a href="home.jsp">억!션</a></h1>
 <div>
 	<ul class="list-inline">
 		<li><a href="home.jsp">홈으로</a></li>
@@ -28,7 +28,7 @@
 		%>
 		
 		<li><a href="noticeList.do?page=notice.jsp">공지사항</a></li>
-		<li><a href="layout.jsp?page=/boardList.do?mod=list&cate=0">경매품보기</a></li>
+		<li><a href="layout.jsp?page=/boardList.do?mod=list">경매품보기</a></li>
 		<%
 			String id = (String)session.getAttribute("id");
 			if(id == null){

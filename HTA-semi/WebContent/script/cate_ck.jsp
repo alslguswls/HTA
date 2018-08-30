@@ -85,7 +85,7 @@
 	}
 	
 	function cateDelete(no){
-		var ck = confirm("삭제 하시겠습니까?");
+		var ck = confirm(" 삭제 하시겠습니까? \n 삭제시 카테고리 게시글도 전부 삭제 됩니다.");
 		if(ck==true){
 			alert("삭제되었습니다.");
 			location.href="Category.do?mod=delete&cate="+no;
