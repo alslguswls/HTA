@@ -33,9 +33,11 @@
 			String id = (String)session.getAttribute("id");
 			if(id == null){
 		%>
+		
 			<li><a href="layout.jsp?page=login.jsp">로그인</a></li>
 		<%
 			}else{
+				
 		%>
 			<li><a href="logout.jsp">로그아웃</a></li>
 		<%
