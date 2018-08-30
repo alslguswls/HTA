@@ -20,7 +20,7 @@
 		String page1 = request.getParameter("page");
 		if(page1 == null) page1 = "/boardList.do?mod=list";
 		String left1 = request.getParameter("left");
-		if(left1 == null) left1 = "/Category.do?mod=leftList";
+		if(left1 == null) left1 = "";
 		//달력 스크립트 글게시시 사용
 		if(page1.equals("/board/newBoard.jsp")){
 	%>

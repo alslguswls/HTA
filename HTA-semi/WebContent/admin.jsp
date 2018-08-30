@@ -6,7 +6,7 @@
 2018-08-28	윤우현	관리자 페이지 작성
  -->
 <div align="center">
-	<div align="center"> 관리자 페이지 </div>
+	<div align="center"><th> 관리자 페이지 </th></div>
 	<ul><a href="layout.jsp?page=memberList.do&left=admin.jsp">회원관리</a></ul>
 	<ul><a href="layout.jsp?page=/Category.do?mod=list">카테고리관리</a></ul>
 </div>
