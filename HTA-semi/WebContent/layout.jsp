@@ -52,16 +52,16 @@
 		}
 	%>
 	<div id="wrap">
-		<div id="header">
+		<div id="header" class="img-rounded">
 			<jsp:include page="header.jsp"></jsp:include>
 		</div>
-		<div id="category">
+		<div id="category" class="img-rounded">
 			<jsp:include page="<%=left1 %>"></jsp:include>
 		</div>
-		<div id="content">
+		<div id="content" class="img-rounded">
 			<jsp:include page="<%=page1 %>"></jsp:include>
 		</div>
-		<div id="footer">
+		<div id="footer" class="img-rounded">
 			<jsp:include page="footer.jsp"></jsp:include>
 		</div>
 	</div>
