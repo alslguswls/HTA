@@ -25,7 +25,7 @@ String sid = (String)session.getAttribute("id");
 			<!--  status 1번 경매 진행중에는 삭제 수정 불가 
 							   2번 경매 종료 후 수정 불가능 
 			 -->
-			<c:if test="${id  eq sid or lev eq '1' or vo.status ne '1' }">
+			<c:if test="${id  eq sid or lev eq '1' or vo.status eq '1' }">
 				<c:if test="${vo.status ne '2'}">
 				<input type="button" value="수정" onclick="javascript:boardModify(${vo.bnum})">
 				</c:if>

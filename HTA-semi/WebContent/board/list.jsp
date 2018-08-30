@@ -23,7 +23,7 @@
 		<c:forEach var="n" items="${list}">
 			<tr>
 				<td>${n.bnum }<td>
-				<td><a href="<%=context %>/layout.jsp?page=detail.do?cmd=detail&bnum=${n.bnum}">${n.title }</a><td>
+				<td><a href="detail.do?cmd=detail&bnum=${n.bnum}">${n.title }</a><td>
 				<td>${n.id }<td>
 				<td>${n.hit }<td>
 				<td>${n.regdate }<td>
