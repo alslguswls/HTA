@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import board.dao.boardDao;
 import board.vo.boardVo;
+import category.dao.CategoryDao;
+import category.vo.CategoryVo;
 import dao.ms.BoardDao;
 import lib.lib;
 import vo.ms.BoardVo;
@@ -31,11 +33,14 @@ public class boardController extends HttpServlet {
 			getInfo(request,response);
 		}else if(!mod.equals("") && mod.equals("delete")) {
 			delete(request,response);
+		}else if(!mod.equals("") && mod.equals("getCate")) {
+			ArrayList<CategoryVo> list1=new ArrayList<CategoryVo>();
+			list1=leftList();
+			request.setAttribute("list1", list1);
+			request.getRequestDispatcher("/board/newBoard.jsp");
 		}
 		
 	}
-
-	
 
 	private void delete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		int bnum = Integer.parseInt(request.getParameter("bnum"));
@@ -88,6 +93,8 @@ public class boardController extends HttpServlet {
 		if(spageNum!=null) {
 			pageNum=Integer.parseInt(spageNum);
 		}
+		ArrayList<CategoryVo> list1=new ArrayList<CategoryVo>();
+		list1=leftList();
 		int startRow=(pageNum-1)*10+1;
 		int endRow=startRow+9;
 		boardDao dao=boardDao.getInstance();
@@ -102,6 +109,7 @@ public class boardController extends HttpServlet {
 			endPage=pageCount;
 		}
 		request.setAttribute("list",list);
+		request.setAttribute("list1",list1);
 		request.setAttribute("pageCount",pageCount);
 		request.setAttribute("startPage",startPage);
 		request.setAttribute("endPage",endPage);
@@ -118,4 +126,12 @@ public class boardController extends HttpServlet {
 		request.setAttribute("vo",vo);
 		request.getRequestDispatcher("/layout.jsp?page=/board/newBoard.jsp").forward(request, response);
 	}
+	
+	//left category list
+		private ArrayList<CategoryVo> leftList(){
+			CategoryDao dao= CategoryDao.getInstance();
+			ArrayList<CategoryVo> list = new ArrayList<CategoryVo>();
+			list=dao.leftList();
+			return list;	
+		}
 }

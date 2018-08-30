@@ -36,20 +36,8 @@ public class CategoryController extends HttpServlet {
 			getInfo(req,res);
 		}else if(!mod.equals("") && mod.equals("name_ck")) {//중복 카테고리 체크
 			nameCk(req,res);
-		}else if(!mod.equals("") && mod.equals("leftList")) {
-			leftList(req,res);
 		}
 		
-		
-	}
-	
-	//left category list
-	private void leftList(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
-		CategoryDao dao= CategoryDao.getInstance();
-		ArrayList<CategoryVo> list = new ArrayList<CategoryVo>();
-		list=dao.leftList();
-		req.setAttribute("list",list);
-		req.getRequestDispatcher("layout.jsp?left=/board/category.jsp").forward(req, res);	
 	}
 
 	private void nameCk(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {

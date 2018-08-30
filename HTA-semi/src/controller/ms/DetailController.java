@@ -2,6 +2,7 @@ package controller.ms;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Timer;
@@ -15,6 +16,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.simple.JSONObject;
 
+import category.dao.CategoryDao;
+import category.vo.CategoryVo;
 import dao.ms.BoardDao;
 import dao.ms.ReservationDao;
 import vo.ms.BoardVo;
@@ -39,6 +42,9 @@ public class DetailController extends HttpServlet{
 		BoardDao dao = new BoardDao();
 		BoardVo vo = dao.detail(bnum);
 		request.setAttribute("status", vo.getStatus());
+		ArrayList<CategoryVo> list1=new ArrayList<CategoryVo>();
+		list1=leftList();
+		request.setAttribute("list1", list1);
 		if(vo != null) {
 			dao.hitup(bnum);
 			String id = (String)request.getSession().getAttribute("id");
@@ -81,4 +87,12 @@ public class DetailController extends HttpServlet{
 		pw.println(json.toString());
 		pw.close();
 	}
+	
+	//left category list
+			private ArrayList<CategoryVo> leftList(){
+				CategoryDao dao= CategoryDao.getInstance();
+				ArrayList<CategoryVo> list = new ArrayList<CategoryVo>();
+				list=dao.leftList();
+				return list;	
+			}
 }
