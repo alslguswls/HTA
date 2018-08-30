@@ -6,15 +6,15 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>Insert title here</title>
 	<style type="text/css">
-		.bg-1 {background-color: #444444;}
+		.bg-1 {background-color: #444;}
 		#wrap{padding-top: 100px;}
 		#icon div{width: 250px;height: 250px;margin: 10px;
 			background-color: #ffff99;display: inline-block;}
-		#icon label{font-size: 30px;color: #dddddd}
+		#icon label{font-size: 30px;color: #ddd}
 		img{width: 250px;height: 250px;
 			padding: 50px;background-color: #ffff55;}
-		#name{font-size: 100px;color: #dddddd;display: inline;}
-		#sname{font-size: 30px;color: #dddddd;display: inline;}
+		#name{font-size: 100px;color: #ddd;display: inline;}
+		#sname{font-size: 30px;color: #ddd;display: inline;}
 	</style>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
