@@ -65,7 +65,8 @@
 			var txt = endXhr.responseText;
 			var json = JSON.parse(txt);
 			var enterbody = document.getElementById("enterbody");
-			enterbody.innerHTML = "<table border='1'>"+
+			enterbody.innerHTML = "<h1 id=\"resulthead\">경매 결과!!!</h1>"+
+							"<table id=\"resulttable\" class=\"table\" border=\"5\">"+
 								"<tr>"+
 									"<th>낙찰가</th>"+
 									"<td id=\"maxPrice\">"+json.price+"</td>"+
@@ -137,7 +138,7 @@
 
 
 <div id="enterbody">
-	<table border='1'>
+	<table id="entertable" class="table" border="5">
 		<tr>
 			<th>최고호가</th>
 			<td id="maxPrice">0</td>

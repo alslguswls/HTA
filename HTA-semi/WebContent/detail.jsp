@@ -18,7 +18,8 @@ String sid = (String)session.getAttribute("id");
 <c:set var="bstatus" value="<%=bstatus %>" />
 <c:set var="sid" value="<%=sid %>" />
 <c:set var="lev"	value="<%=sessionLev %>" />
-	<table border="1">
+	<h3>경매품 조회</h3>
+	<table id="detailtable" class="table table-striped" border="2">
 		<tr>
 			<th>글번호</th>
 			<td>${vo.bnum }
@@ -27,81 +28,73 @@ String sid = (String)session.getAttribute("id");
 			 -->
 			<c:if test="${id  eq sid or lev eq '1' or vo.status eq '1' }">
 				<c:if test="${vo.status ne '2'}">
-				<input type="button" value="수정" onclick="javascript:boardModify(${vo.bnum})">
+				<input type="button" value="수정" onclick="javascript:boardModify(${vo.bnum})" class="btn btn-default btn-xs">
 				</c:if>
-				<input type="button" value="삭제" onclick="javascript:boardDelete(${vo.bnum})">
+				<input type="button" value="삭제" onclick="javascript:boardDelete(${vo.bnum})" class="btn btn-default btn-xs">
 			</c:if>
 			</td>
-		</tr>
-		<tr>
 			<th>작성자</th>
 			<td><input type="hidden" name="id">${vo.id }</td>
-		</tr>
-		<tr>
 			<th>카테고리</th>
 			<td>${vo.cate }</td>
 		</tr>
 		<tr>
+		</tr>
+		<tr>
 			<th>제목</th>
-			<td>${vo.title }</td>
+			<td colspan="5">${vo.title }</td>
 		</tr>
 		<tr>
 			<th>설명</th>
-			<td>${vo.content }</td>
+			<td colspan="5">${vo.content }</td>
 		</tr>
 		<tr>
 			<th>사진</th>
-			<td><img src="upload/${vo.savefilename }"></td>
+			<td colspan="5"><img src="upload/${vo.savefilename }"></td>
 		</tr>
 		<tr>
 			<th>경매시작시간</th>
 			<td>${vo.starttime }</td>
-		</tr>
-		<tr>
 			<th>경매시작가</th>
-			<td>${vo.startprice }</td>
+			<td colspan="3">${vo.startprice }</td>
 		</tr>
 		<tr>
 			<th>조회수</th>
 			<td>${vo.hit }</td>
-		</tr>
-		<tr>
 			<th>경매예약자수</th>
-			<td>${vo.regv }</td>
+			<td colspan="3">${vo.regv }</td>
 		</tr>
 		<tr>
 			<th>경매품상태</th>
 			<td>${bstatus[vo.status] }</td>
-		</tr>
-		<tr>
 			<th>등록일</th>
-			<td>${vo.regdate }</td>
+			<td colspan="3">${vo.regdate }</td>
 		</tr>
 	</table>
 	<%
 		int status = (int)request.getAttribute("status");
 		if(status != 0){
 	%>
-			<input type="button" value="예약불가" id="resvBtn" disabled="disabled">
+			<input type="button" value="예약불가" id="resvBtn" disabled="disabled" class="btn btn-warning btn-sm">
 	<%
 		}else{
 			boolean resv = (boolean)request.getAttribute("resv");
 			if(resv){
 	%>
-				<input type="button" value="예약완료" id="resvBtn" disabled="disabled">
+				<input type="button" value="예약완료" id="resvBtn" disabled="disabled" class="btn btn-warning btn-sm">
 	<%
 			}else{
 	%>
-				<input type="button" value="예약" id="resvBtn" onclick="resv()" >
+				<input type="button" value="예약" id="resvBtn" onclick="resv()" class="btn btn-warning btn-sm">
 	<%
 			}
 		}
 	%>
-	<input type="button" value="경매참여" id="enterBtn" onclick="enter()" disabled="disabled">
+	<input type="button" value="경매참여" id="enterBtn" onclick="enter()" disabled="disabled" class="btn btn-warning btn-sm">
 	<br>
-	<form action="javascript:return false;" onsubmit="comm1()" method="post">
-		댓글 : <input type="text" id="comm" size="20">
-		<input type="submit" value="입력">
+	<form id="detailform" action="javascript:return false;" onsubmit="comm1()" method="post" class="form-inline">
+		댓글 : <input type="text" id="comm" size="60" class="form-control">
+		<input type="submit" value="입력" class="btn btn btn-xs">
 	</form>
-	<div id="list"></div>
+	<div id="detaillist"></div>
 </div>

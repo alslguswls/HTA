@@ -90,7 +90,7 @@
 	}
 	function listCallback() {
 		if(listXhr.readyState==4 && listXhr.status==200){
-			var list = document.getElementById("list");
+			var list = document.getElementById("detaillist");
 			var txt = listXhr.responseText;
 			var json = JSON.parse(txt);
 			list.innerHTML = "";
@@ -99,36 +99,39 @@
 					list.innerHTML += "&nbsp;&nbsp;&nbsp;&nbsp;";
 				}
 				list.innerHTML += "<label>"+json.list[i].id+" : "+json.list[i].comments+"</label>&nbsp;"+
-					"<input type=\"button\" value=\"답글\" onclick=\"addInput(" + i + ")\" id=\"btn" + i + "\"><br>"+
-					"<form action=\"javascript:return false;\" method=\"post\" style=\"display: none;\" name=\"form"+i+"\" onsubmit=\"ccomm("+i+")\" >"+
+					"<input type=\"button\" value=\"답글\" onclick=\"addInput(" + i + ")\" id=\"btn" + i + "\" class=\"btn btn btn-xs\"><br>"+
+					"<form action=\"javascript:return false;\" method=\"post\" style=\"display: none;\" name=\"form"+i+"\" onsubmit=\"ccomm("+i+")\" class=\"form-inline\">"+
 						"<input type=\"hidden\" name=\"cnum\" value=\""+json.list[i].cnum+"\">"+
 						"<input type=\"hidden\" name=\"bnum\" value=\""+json.list[i].bnum+"\">"+
 						"<input type=\"hidden\" name=\"id\" value=\"<%=session.getAttribute("id") %>\">"+
 						"<input type=\"hidden\" name=\"ref\" value=\""+json.list[i].ref+"\">"+
 						"<input type=\"hidden\" name=\"lev\" value=\""+json.list[i].lev+"\">"+
 						"<input type=\"hidden\" name=\"step\" value=\""+json.list[i].step+"\">"+
-						"<input type=\"text\" name=\"comm\" size=\"20\">"+
-						"<input type=\"submit\" value=\"입력\" >";
+						"<input type=\"text\" name=\"comm\" size=\"60\" class=\"form-control\">"+
+						"<input type=\"submit\" value=\"입력\" class=\"btn btn btn-xs\">";
 					"</form>";
 			}
-			
+			var html = "";
+			html += "<div>";
 			if(json.startPage>10){
-				list.innerHTML += "<a href=\"javascript:commList("+(json.startPage-1)+");\">[이전]</a>";
+				html += "<a href=\"javascript:commList("+(json.startPage-1)+");\">[이전]</a>";
 			}else{
-				list.innerHTML += "[이전]";
+				html += "[이전]";
 			}
 			for(var i = json.startPage;i <= json.endPage;i++){
 				if(json.pageNum == i){
-					list.innerHTML += "<a href=\"javascript:commList("+i+");\" style=\"color: red\">["+i+"]</a>";
+					html += "<a href=\"javascript:commList("+i+");\" style=\"color: red\">["+i+"]</a>";
 				}else{
-					list.innerHTML += "<a href=\"javascript:commList("+i+");\" style=\"color: gray\">["+i+"]</a>";
+					html += "<a href=\"javascript:commList("+i+");\" style=\"color: gray\">["+i+"]</a>";
 				}
 			}
 			if(json.endPage<json.pageCount){
-				list.innerHTML += "<a href=\"javascript:commList("+(json.endPage+1)+");\">[다음]</a>";
+				html += "<a href=\"javascript:commList("+(json.endPage+1)+");\">[다음]</a>";
 			}else{
-				list.innerHTML += "[다음]";
+				html += "[다음]";
 			}
+			html += "</div>";
+			list.innerHTML += html;
 		}
 	}
 	
