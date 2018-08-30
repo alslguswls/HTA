@@ -3,7 +3,8 @@
 .bg-1 {background-color: #444;}
 #wrap{width: 1200px;height: 1300px;margin: auto;}
 #header{width: 100%;height: 200px;background-color: #222;padding: 30px;margin-bottom: 10px;margin-top: 10px;}
-#header h1{margin-right: 900px;}
+#header h1{margin-right: 900px;display: inline-block;}
+#logo{width: 40px;height: 40px;margin-top: -20px;}
 #header h1 a{color: #ddd;}
 #header div{float: right;position: absolute;right: 15%;top: 120px;}
 #header ul li{list-style: none;float: left;margin-left: 10px;margin-top: 30px;}

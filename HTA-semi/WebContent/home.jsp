@@ -11,8 +11,9 @@
 		#icon div{width: 250px;height: 250px;margin: 10px;
 			background-color: #ffff99;display: inline-block;}
 		#icon label{font-size: 30px;color: #ddd}
-		img{width: 250px;height: 250px;
+		#icon img{width: 250px;height: 250px;
 			padding: 50px;background-color: #ffff55;}
+		#logo{width: 100px;height: 100px;margin-top: -60px;}
 		#name{font-size: 100px;color: #ddd;display: inline;}
 		#sname{font-size: 30px;color: #ddd;display: inline;}
 	</style>
@@ -23,6 +24,7 @@
 <body class="container-fluid bg-1 text-center">
 	<div id="wrap">
 		<div>
+			<img id="logo" src="images/logo.png">
 			<label id="name">억!</label>
 			<label id="sname">소리나는 옥</label>
 			<label id="name">션</label>

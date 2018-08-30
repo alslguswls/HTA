@@ -3,10 +3,11 @@
 <!--
 2018. 8. 28	오전 9:14:29	- 로그인 여부로 '회원 가입' 매뉴 출력 방법을 변경함.(로그인 전 : 회원가입 출력, 로그인 후 : 회원관리(관리자)/마이페이지(이용자)
 -->
+<img id="logo" src="images/logo.png">
 <h1><a href="#">억!션</a></h1>
 <div>
 	<ul class="list-inline">
-		<li><a href="layout.jsp?page=/boardList.do?mod=list&cate=0">홈으로</a></li>
+		<li><a href="home.jsp">홈으로</a></li>
 		
 		<!-- session에 isAdmin 값에 따라 '회원가입' 매뉴가 달라짐-->
 		<%
