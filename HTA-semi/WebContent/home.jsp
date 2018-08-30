@@ -12,9 +12,7 @@
 			background-color: #ffff99;display: inline-block;}
 		#icon label{font-size: 30px;color: #dddddd}
 		img{width: 250px;height: 250px;
-			padding: 50px;background-color: #ffff99;}
-		input{width: 250px;height: 250px;margin: 10px;
-			padding: 50px;background-color: #ffff99;}
+			padding: 50px;background-color: #ffff55;}
 		#name{font-size: 100px;color: #dddddd;}
 	</style>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -28,21 +26,21 @@
 		</div>
 		<br>
 		<div id="icon">
-			<div id="reg" onmouseover="over()" onmouseout="out()" class="img-rounded">
-				<a href="#">
-					<img id="regimg" src="images/reg.png" class="img-rounded">
+			<div onmouseover="over()" onmouseout="out()" class="img-rounded">
+				<a href="layout.jsp?page=join.jsp">
+					<img src="images/reg.png" class="img-rounded">
 				</a>
 				<label>회원가입</label>
 			</div>
 			<div onmouseover="over()" onmouseout="out()" class="img-rounded">
-				<a href="#">
-					<img id="loginimg" src="images/login.png" class="img-rounded">
+				<a href="layout.jsp?page=login.jsp">
+					<img src="images/login.png" class="img-rounded">
 				</a>
 				<label>로그인</label>
 			</div>
 			<div onmouseover="over()" onmouseout="out()" class="img-rounded">
-				<a href="#">
-					<img id="listimg" src="images/list.png" class="img-rounded">
+				<a href="layout.jsp?page=/boardList.do?mod=list&cate=0">
+					<img src="images/list.png" class="img-rounded">
 				</a>
 				<label>경매품 보기</label>
 			</div>

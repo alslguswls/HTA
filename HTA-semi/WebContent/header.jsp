@@ -5,7 +5,7 @@
 -->
 <h1><a href="#">경매사이트</a></h1>
 <div>
-	<ul>
+	<ul class="list-inline">
 		<li><a href="layout.jsp?page=/boardList.do?mod=list&cate=0">홈으로</a></li>
 		
 		<!-- session에 isAdmin 값에 따라 '회원가입' 매뉴가 달라짐-->
