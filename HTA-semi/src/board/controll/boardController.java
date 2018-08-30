@@ -72,7 +72,7 @@ public class boardController extends HttpServlet {
 		}
 		
 		//카테고리 체크
-		int cate=0;
+		int cate=1;
 		if(category_no!=null) {
 			cate=Integer.parseInt(category_no);
 		}

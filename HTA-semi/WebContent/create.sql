@@ -1,4 +1,5 @@
 ######  유저 테이블    #######
+drop table users;
 create table users(
 	id varchar2(100) primary key, --아이디
 	pwd varchar2(100), --비밀번호
@@ -19,7 +20,7 @@ create table board(
 	content varchar2(100), --내용
 	orgfilename varchar2(100), --오리지널파일네임
 	savefilename varchar2(100), --전장파일네임
-	starttime varchar2(30), --경매시작시간
+	starttime date, --경매시작시간
 	startprice number(38)default 0 NOT NULL, --시작경매가
 	hit number(10)default 0 NOT NULL, --조회수
 	regv number(10)default 0 NOT NULL, -- 예약자수
@@ -27,11 +28,14 @@ create table board(
 	regdate date default sysdate, --글등록일 수정일
 	CONSTRAINT pk_board PRIMARY KEY (bnum),
 	CONSTRAINT fk_board FOREIGN KEY(id) references users(id)
+	ON DELETE CASCADE
 )tablespace semi;
+drop sequence board_seq;
 create sequence board_seq;
 
 
 ######  카테고리 테이블    #######
+drop table category;
 create table category(
 	cate number(10) primary key, --카테고리 번호
 	name varchar2(100) unique --카테고리 이름
@@ -45,9 +49,10 @@ create table reservation(
 	vnum number(10) primary key, --예약자 번호
 	bnum number(38), --게시글번호
 	id varchar2(100), --작성자 아이디
-	CONSTRAINT fk_reservation_users FOREIGN KEY(bnum) references board(bnum),
-	CONSTRAINT fk_reservation_board FOREIGN KEY(id) references users(id)
+	CONSTRAINT fk_reservation_users FOREIGN KEY(bnum) references board(bnum) ON DELETE CASCADE,
+	CONSTRAINT fk_reservation_board FOREIGN KEY(id) references users(id) ON DELETE CASCADE
 )tablespace semi;
+drop sequence reservation_seq;
 create sequence reservation_seq;
 
 ######  댓글 테이블    #######
@@ -60,9 +65,10 @@ create table comments(
 	ref number(10), --글번호
 	lev number(10), --댓긇번호
 	step number(10), --대댓글
-	CONSTRAINT fk_comments_users FOREIGN KEY(bnum) references board(bnum),
-	CONSTRAINT fk_comments_board FOREIGN KEY(id) references users(id)
+	CONSTRAINT fk_comments_users FOREIGN KEY(bnum) references board(bnum) ON DELETE CASCADE,
+	CONSTRAINT fk_comments_board FOREIGN KEY(id) references users(id) ON DELETE CASCADE
 )tablespace semi;
+drop sequence comment_seq;
 create sequence comment_seq;
 
 ######  입찰내역 테이블    #######
@@ -73,9 +79,10 @@ create table result(
 	id varchar2(100), --구매자
 	price number(38), --구매가격 
 	endtime Date, --종료시간/구매일시
-	CONSTRAINT fk_comment_users FOREIGN KEY(bnum) references board(bnum),
-	CONSTRAINT fk_comment_board FOREIGN KEY(id) references users(id)
+	CONSTRAINT fk_comment_users FOREIGN KEY(bnum) references board(bnum) ON DELETE CASCADE,
+	CONSTRAINT fk_comment_board FOREIGN KEY(id) references users(id) ON DELETE CASCADE
 )tablespace semi;
+drop sequence result_seq;
 create sequence result_seq;
 
 
@@ -87,9 +94,10 @@ create table chat(
 	id varchar2(100), --아이디
 	str varchar2(2000), --채팅내용
 	status number(1) default 0 NOT NULL, --상태값
-	CONSTRAINT fk_chat_users FOREIGN KEY(bnum) references board(bnum),
-	CONSTRAINT fk_chat_board FOREIGN KEY(id) references users(id)
+	CONSTRAINT fk_chat_users FOREIGN KEY(bnum) references board(bnum) ON DELETE CASCADE,
+	CONSTRAINT fk_chat_board FOREIGN KEY(id) references users(id) ON DELETE CASCADE
 )tablespace semi;
+drop sequence chat_seq;
 create sequence chat_seq;
 
 
@@ -100,9 +108,10 @@ create table mprice(
 	bnum number(38), --글번호
 	id varchar2(100), --아이디
 	maxprice number(38), --최고가
-	CONSTRAINT fk_max_users FOREIGN KEY(bnum) references board(bnum),
-	CONSTRAINT fk_max_board FOREIGN KEY(id) references users(id)
+	CONSTRAINT fk_max_users FOREIGN KEY(bnum) references board(bnum) ON DELETE CASCADE,
+	CONSTRAINT fk_max_board FOREIGN KEY(id) references users(id) ON DELETE CASCADE
 )tablespace semi;
+drop sequence max_seq;
 create sequence max_seq;
 
 

@@ -50,7 +50,7 @@ public class newBoaradController extends HttpServlet {
 		}
 		MultipartRequest data = new MultipartRequest(req, path, 1024 * 1024 * 10, "utf-8",
 				new DefaultFileRenamePolicy());
-		int  bnum= Integer.parseInt(data.getParameter("boardNum"));
+		int bnum = Integer.parseInt(data.getParameter("boardNum"));
 		String title = data.getParameter("title");
 		int cate = Integer.parseInt(data.getParameter("cate"));
 		String content = data.getParameter("content");
@@ -62,15 +62,15 @@ public class newBoaradController extends HttpServlet {
 		String mm = data.getParameter("mm");
 		String starttime = sdate.substring(0, 4) + "" + sdate.substring(4, 6) + "" + sdate.substring(6, 8) + "" + hh
 				+ "" + mm + "00";
-		//업데이트시 이전에 올렸던 파일이 있으면db 업데이트 없으면 이전 데이터 
-		String oldOrgfile= data.getParameter("oldOrgfile");
-		String oldSavefile=data.getParameter("oldSavefile");
-		if(orgfilename==null) {
-			orgfilename=oldOrgfile;
-			savefilename=oldSavefile;
-		}else {
+		// 업데이트시 이전에 올렸던 파일이 있으면db 업데이트 없으면 이전 데이터
+		String oldOrgfile = data.getParameter("oldOrgfile");
+		String oldSavefile = data.getParameter("oldSavefile");
+		if (orgfilename == null) {
+			orgfilename = oldOrgfile;
+			savefilename = oldSavefile;
+		} else {
 			File f = new File(oldSavefile);
-			if(f.exists()) {
+			if (f.exists()) {
 				f.delete();
 			}
 		}
@@ -80,7 +80,7 @@ public class newBoaradController extends HttpServlet {
 				0, 0, null);
 		int n = dao.update(vo);
 		if (n > 0) {
-			res.sendRedirect("detail.do?cmd=detail&bnum="+bnum);
+			res.sendRedirect("detail.do?cmd=detail&bnum=" + bnum);
 		} else {
 			req.setAttribute("errMsg", "오류로 인해 저장에 실패 했습니다.");
 			req.getRequestDispatcher("/layout.jsp?page=error.jsp").forward(req, res);
@@ -112,15 +112,15 @@ public class newBoaradController extends HttpServlet {
 		String starttime = sdate.substring(0, 4) + "" + sdate.substring(4, 6) + "" + sdate.substring(6, 8) + "" + hh
 				+ "" + mm + "00";
 		String savefilename;
-		if(orgfilename!=null) {
+		if (orgfilename != null) {
 			savefilename = addPath + "/" + data.getFilesystemName("orgfile");
-		}else {
-			savefilename=null;
+		} else {
+			savefilename = null;
 		}
 		// DB SAVE
 		boardDao dao = boardDao.getInstance();
-		boardVo vo = new boardVo(0, id, cate, title, content, orgfilename, savefilename, starttime,  startprice, 0,
-				0, 0, null);
+		boardVo vo = new boardVo(0, id, cate, title, content, orgfilename, savefilename, starttime, startprice, 0, 0, 0,
+				null);
 		int n = dao.insert(vo);
 		if (n > 0) {
 			res.sendRedirect("/HTA-semi/boardList.do?mod=list");
