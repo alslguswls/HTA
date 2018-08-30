@@ -6,7 +6,7 @@
 2018-08-28	윤우현	마이페이지 작성
  -->
 
-	<div align="center"> 마이페이지</div>
+	<div align="center"><th> 마이페이지 </th> </div>
 	<ul><a href="layout.jsp?page=coin.do&left=mypage.jsp"> 코인 충전</a></ul>
 	<ul><a href="layout.jsp?page=perReser.do"> 경매 예약 확인 </a></ul>
 	<ul><a href="layout.jsp?page=joinDeal.do"> 경매 낙찰이력 확인 </a></ul>

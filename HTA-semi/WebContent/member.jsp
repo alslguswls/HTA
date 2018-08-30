@@ -3,7 +3,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <!-- 
-윤우현	페이징 기능추가중
+2018-08-30	검색기능 추가(윤우현)
  -->
 <html>
 <head>
@@ -62,6 +62,23 @@
 				[다음]
 			</c:otherwise>
 		</c:choose>
+	</div>
+	
+	<!-- 회원 검색 기능 -->
+	<div>
+		<form method="post" action="memberSearch.do" >
+			<tr>
+				<td>
+					<select name="searchSel">
+						<option value="id"> Id </option>
+						<option value="email"> Email </option>
+					</select>
+					<input type="text" name="searchText" >
+					<input type="submit" value="조회">
+				</td>
+			</tr>
+			
+		</form>
 	</div>
 </body>
 </html>
