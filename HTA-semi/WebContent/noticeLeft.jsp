@@ -21,7 +21,7 @@ function writeNext() {
 <%
 	if(session.getAttribute("id")!=null){
 %>
-<a href="layout.jsp">메인페이지로</a>
+<a href="layout.jsp">경매품 보러가기</a>
 <br>
  <%
  	if(n.equals("1")){
@@ -42,7 +42,7 @@ function writeNext() {
  	}
 	} else{
 		%>
-		<a href="layout.jsp">메인페이지로</a>
+		<a href="layout.jsp">경매품 보러가기</a>
 		<%
 	}
  %>

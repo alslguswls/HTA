@@ -11,7 +11,8 @@ public class lib {
 		String oder[] = {
 				"regdate desc",//기본 값 최근등록일
 				"hit desc", //조회순
-				"starttime asc"//마감 입박순
+				"starttime asc",//마감 입박순
+				"regv desc"//마감 입박순
 		};
 		return oder[cul];
 	}
@@ -21,12 +22,12 @@ public class lib {
 			"경매대기중",
 			"경매진행중",
 			"경매종료",
-			"3",
-			"4",
-			"5",
-			"6",
-			"7",
-			"8",
+			"",
+			"",
+			"",
+			"",
+			"",
+			"",
 			"삭제됨"
 		};
 		return status;

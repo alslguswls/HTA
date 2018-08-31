@@ -35,13 +35,13 @@
 		<br>
 		<div id="icon">
 			<div onmouseover="over()" onmouseout="out()" class="img-rounded">
-				<a href="layout.jsp?page=join.jsp">
+				<a href="layout.jsp?page=join.jsp&left=noticeLeft.jsp">
 					<img src="images/reg.png" class="img-rounded">
 				</a>
 				<label>회원가입</label>
 			</div>
 			<div onmouseover="over()" onmouseout="out()" class="img-rounded">
-				<a href="layout.jsp?page=login.jsp">
+				<a href="layout.jsp?page=login.jsp&left=noticeLeft.jsp">
 					<img src="images/login.png" class="img-rounded">
 				</a>
 				<label>로그인</label>

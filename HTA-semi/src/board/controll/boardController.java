@@ -66,9 +66,21 @@ public class boardController extends HttpServlet {
 			cul = Integer.parseInt(order);
 		}
 		order = lib.orderBy(cul);
-		if(cul==3) {
+		if(cul==2) {
 			//경매 마감을 제외한 경매임박순
-			where = "and status=0";
+			where = "and status =0";
+		}else if(cul==3) {
+			where = "and status !=2";
+		}
+		//관리자가 아니면 삭제처리된 9번 검색 제외 및 경로 변경
+		String admin = request.getParameter("admin");
+		String where_count= "";
+		String dispatcher = "/layout.jsp?page=/board/list.jsp";
+		if(admin==null) {
+			where += "and status!=9";
+			where_count ="and status!=9";
+		}else {
+			dispatcher = "/layout.jsp?page=/board/adminBoard.jsp&left=admin.jsp";
 		}
 		
 		//카테고리 체크
@@ -98,7 +110,7 @@ public class boardController extends HttpServlet {
 		boardDao dao=boardDao.getInstance();
 		ArrayList<boardVo> list=dao.list(startRow, endRow, cate, order, where);
 		//전체페이지갯수구하기
-		int pageCount=(int)Math.ceil(dao.getCount(cate)/10.0);
+		int pageCount=(int)Math.ceil(dao.getCount(cate,where_count)/10.0);
 		//시작페이지번호
 		int startPage=((pageNum-1)/10*10)+1;
 		//끝페이지번호
@@ -114,7 +126,7 @@ public class boardController extends HttpServlet {
 		request.setAttribute("pageNum",pageNum);
 		request.setAttribute("cate",cate);
 		request.setAttribute("search1",search);
-		request.getRequestDispatcher("/layout.jsp?page=/board/list.jsp").forward(request, response);
+		request.getRequestDispatcher(dispatcher).forward(request, response);
 	}
 	
 	private void getInfo(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
