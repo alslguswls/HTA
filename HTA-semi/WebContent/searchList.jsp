@@ -157,7 +157,7 @@ function writeSearch() {
 		<tr>
 			<th>번호</th><th>제목</th><th>내용</th><th>작성일</th>
 		</tr>
-		<c:forEach var="voSe3" items="<%=list33 %>" >
+		<c:forEach var="voSe3" items="<%=list33 %>">
 		<tr>
 			<td>${voSe3.noti_no }</td>
 			<td>${voSe3.title }</td>
