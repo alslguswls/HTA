@@ -31,7 +31,7 @@ public class getinfoController extends HttpServlet {
 			request.setAttribute("addr", vo.getAddr());
 			request.setAttribute("coin", vo.getCoin());
 			
-			RequestDispatcher rd = request.getRequestDispatcher("/update.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("layout.jsp?page=/update.jsp&left=admin.jsp");
 			rd.forward(request, response);
 		}else {
 			request.setAttribute("errMsg", "회원정보 조회 실패");

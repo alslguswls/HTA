@@ -42,7 +42,14 @@
 		<%
 			} else if (isAdmin.equals("1") ) {
 		%>
-			<li><a href="layout.jsp?page=memberList.do&left=admin.jsp">관리자</a></li>
+			<c:choose>
+				<c:when test="${left == 'admin.jsp' }">
+					<li><a href="layout.jsp?page=memberList.do&left=admin.jsp" style="color: #ff5;">관리자</a></li>
+				</c:when>
+				<c:otherwise>
+					<li><a href="layout.jsp?page=memberList.do&left=admin.jsp">관리자</a></li>
+				</c:otherwise>
+			</c:choose>
 		<%
 			} else {
 		%>
