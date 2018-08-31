@@ -6,6 +6,7 @@
 #header h1{margin-right: 900px;display: inline-block;}
 #logo{width: 40px;height: 40px;margin-top: -20px;}
 #header h1 a{color: #ddd;}
+#header h1 a span{color: #ff5;}
 #header div{float: right;position: absolute;right: 15%;top: 120px;}
 #header ul li{list-style: none;float: left;margin-left: 10px;margin-top: 30px;}
 #header ul li a{text-decoration: none;font-size: 15px;font-weight: bold;color: #ddd;}
@@ -25,6 +26,8 @@ form label{width: 100px;display: inline-block;}
 #detaillist{width: 600px;margin: auto;text-align: left;}
 #detaillist div{text-align: center;}
 
-#entertable{width: 600px;margin: auto;}
-#resulttable{width: 600px;margin: auto;margin-top: 100px;}
+#enterbody{width: 680px;margin: auto;}
+#enterbody form{margin-top: 10px;text-align: right;margin-right: 20px;}
+#entertable{width: 600px;margin: auto;margin-top: 50px;border: 8px solid #ffa;}
+#resulttable{width: 600px;margin: auto;margin-top: 100px;border: 8px solid #ffa;}
 #resulthead{margin-top: 50px;}

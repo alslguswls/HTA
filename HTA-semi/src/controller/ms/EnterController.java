@@ -17,6 +17,8 @@ import javax.servlet.http.HttpSession;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import category.dao.CategoryDao;
+import category.vo.CategoryVo;
 import dao.ms.BoardDao;
 import dao.ms.ChatDao;
 import dao.ms.MpriceDao;
@@ -39,6 +41,8 @@ public class EnterController extends HttpServlet{
 		String cmd = request.getParameter("cmd");
 		if(cmd != null && cmd.equals("resv")) {
 			resv(request,response);
+		}else if(cmd != null && cmd.equals("resvOk")) {
+			resvOk(request, response);
 		}else if(cmd != null && cmd.equals("timer")) {
 			timer(request, response);
 		}else if(cmd != null && cmd.equals("call")) {
@@ -66,6 +70,13 @@ public class EnterController extends HttpServlet{
 		PrintWriter pw = response.getWriter();
 		pw.println(json.toString());
 		pw.close();
+	}
+	protected void resvOk(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int bnum = Integer.parseInt(request.getParameter("bnum"));
+		
+		ArrayList<CategoryVo> list1 = leftList();
+		request.setAttribute("list1", list1);
+		request.getRequestDispatcher("layout.jsp?page=enter.jsp?bnum="+bnum).forward(request, response);
 	}
 	protected void timer(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int bnum = Integer.parseInt(request.getParameter("bnum"));
@@ -204,5 +215,11 @@ public class EnterController extends HttpServlet{
 		PrintWriter pw = response.getWriter();
 		pw.println(json.toString());
 		pw.close();
+	}
+	private ArrayList<CategoryVo> leftList(){
+		CategoryDao dao= CategoryDao.getInstance();
+		ArrayList<CategoryVo> list = new ArrayList<CategoryVo>();
+		list=dao.leftList();
+		return list;	
 	}
 }

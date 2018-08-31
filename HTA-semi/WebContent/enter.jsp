@@ -138,6 +138,7 @@
 
 
 <div id="enterbody">
+	<h1>경매장</h1>
 	<table id="entertable" class="table" border="5">
 		<tr>
 			<th>최고호가</th>
@@ -148,16 +149,16 @@
 			<td id="time">0:00</td>
 		</tr>
 	</table>
-	<div style="background-color: yellow;width: 800px;height: 500px;" id="area">
-		<textarea rows="34" cols="60" id="chatlog" ></textarea>
+	<div>
+		<textarea rows="22" cols="80" id="chatlog"></textarea>
 	</div>
 	<form action="javascript:return false;"onsubmit="chat()">
-		<input type="text" size="50" id="msg">
-		<input type="submit" value="입력">
+		<input type="text" size="70" id="msg">
+		<input type="submit" value="입력" class="btn btn-warning btn-sm">
 	</form>
 	<form action="javascript:return false;"onsubmit="priceCall()">
 		<input type="text" size="20" id="price">
-		<input type="submit" value="호가하기" id="callBtn">
+		<input type="submit" value="호가하기" id="callBtn" class="btn btn-warning btn-sm">
 	</form>
 </div>
 

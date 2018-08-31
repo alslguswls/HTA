@@ -156,11 +156,17 @@
 			var txt = enterXhr.responseText;
 			var json = JSON.parse(txt);
 			if(json.resv){
-				location.href = "layout.jsp?page=enter.jsp?bnum="+${vo.bnum };
+				enterOk();
 			}else{
 				alert("경매참여가 불가능합니다.");
 			}
 		}
+	}
+	
+	function enterOk() {
+		var bnum = ${vo.bnum };
+		var id = "<%=session.getAttribute("id") %>";
+		location.href = 'enter.do?cmd=resvOk&bnum='+bnum+'&id='+id;
 	}
 	
 	var csXhr = null;
