@@ -64,7 +64,7 @@ public class SearchController extends HttpServlet {
 		request.setAttribute("startPage", startPage);
 		request.setAttribute("endPage", endPage);
 		request.setAttribute("vose", vose);
-		RequestDispatcher rd = request.getRequestDispatcher("/layout.jsp?page=searchList.jsp&left=noticeLeft.jsp&n=1");
+		RequestDispatcher rd = request.getRequestDispatcher("/layout.jsp?page=searchList.jsp&left=noticeLeft.jsp");
 		rd.forward(request, response);
 	}
 
