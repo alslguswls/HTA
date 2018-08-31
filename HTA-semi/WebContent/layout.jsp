@@ -18,7 +18,7 @@
 	<title>Insert title here</title>
 	<jsp:include page="/script/common.jsp"></jsp:include>
 	<jsp:include page="/script/cate_ck.jsp"></jsp:include>
-
+	<jsp:include page="/script/detailScript.jsp"></jsp:include>
 	<link rel="stylesheet" type="text/css" href="<%=context %>/css/common.css">
 <!-- 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
@@ -42,7 +42,6 @@
 	<% 
 		}else if(page1.equals("detail.jsp")){
 	%>
-			<jsp:include page="/script/detailScript.jsp"></jsp:include>
 			<body onload="commList();checkStart()" class="container-fluid bg-1 text-center">
 	<%
 		}else if(page1.equals("enter.jsp")){

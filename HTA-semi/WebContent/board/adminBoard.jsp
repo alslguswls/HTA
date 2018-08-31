@@ -36,7 +36,7 @@
 			<tr>
 				<td>${n.bnum }<td>
 				<td>${n.id }<td>
-				<td><a href="detail.do?cmd=detail&bnum=${n.bnum}&admin=1">${n.title }</a><td>
+				<td>	<a href="detail.do?cmd=detail&bnum=${n.bnum}&admin=1">${n.title }</a><td>
 				<td>${n.content }</td>
 				<td>${n.starttime }</td>
 				<td>${n.startprice }</td>
@@ -48,8 +48,6 @@
 				<td><a href="">삭제</a><td>
 			</tr>
 		</c:forEach>
-		
-		
 	<tr>
 		<td colspan="12">
 		<!-- 페이징 -->

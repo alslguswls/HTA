@@ -11,5 +11,4 @@
 	function boardDelete(bnum){
 		location.href="<%=context%>/boardList.do?mod=delete&bnum="+bnum;
 	}
-
 </script>
