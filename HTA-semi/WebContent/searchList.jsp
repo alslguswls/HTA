@@ -84,7 +84,7 @@ function writeSearch() {
 		
 	</div>
 	<br>
-	<input type="button" value="글 작성" onclick="writeSearch()">
+	
 	<%
 	}else if(list33==null){
 		%>
@@ -211,6 +211,6 @@ function writeSearch() {
 <br><!-- 여기 작성 필요함 -->
 <a href="noticeList.do">검색 전 페이지로</a>
 <br>
-<a href="layout.jsp">메인페이지로</a>
+
 </body>
 </html>
