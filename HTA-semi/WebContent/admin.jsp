@@ -9,4 +9,5 @@
 	<div align="center"><th> 관리자 페이지 </th></div>
 	<ul><a href="layout.jsp?page=memberList.do&left=admin.jsp">회원관리</a></ul>
 	<ul><a href="layout.jsp?page=/Category.do?mod=list">카테고리관리</a></ul>
+	<ul><a href="layout.jsp?page=/boardList.do?mod=list&admin=1">게시글관리</a></ul>
 </div>

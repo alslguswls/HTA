@@ -101,7 +101,7 @@ public class boardDao {
 	}
 	//게시글 리스트 불러오기 카테고리별
 	public ArrayList<boardVo> list(int startRow, int endRow, int cate,String order, String where) {
-		String sql = "select X.bnum, X.id, X.title, X.hit,X.status, X.regdate from ( select rownum as xno, A.bnum , A.id, A.title, A.hit, A.status, A.regdate from ( select bnum, id, cate, title, hit, status, regdate  from board order by "+order+") A where rownum <= ? and A.cate=?"+where+"and status!=9) X where X.xno >= ?";
+		String sql = "select X.* from ( select rownum as xno, A.* from ( select *  from board order by "+order+") A where rownum <= ? and A.cate=?"+where+") X where X.xno >= ?";
 		try {
 			con = DBConnection.getConn();
 			pstmt = con.prepareStatement(sql);
@@ -130,10 +130,10 @@ public class boardDao {
 	}
 
 	// 전체 글의 갯수 구하기
-	public int getCount(int cate) {
+	public int getCount(int cate, String where) {
 		try {
 			con = DBConnection.getConn();
-			String sql = "select NVL(count(bnum),0) cnt from board where cate=?";
+			String sql = "select NVL(count(bnum),0) cnt from board where cate=?"+where;
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, cate);
 			rs = pstmt.executeQuery();

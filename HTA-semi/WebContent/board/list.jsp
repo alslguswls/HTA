@@ -16,6 +16,7 @@
 		<a href="<%=context %>/layout.jsp?page=boardList.do?mod=list&cul=1">조회순</a>
 		<a href="<%=context %>/layout.jsp?page=boardList.do?mod=list&cul=0">최근등록일</a>
 		<a href="<%=context %>/layout.jsp?page=boardList.do?mod=list&cul=2">경매임박순</a>
+		<a href="<%=context %>/layout.jsp?page=boardList.do?mod=list&cul=3">예약자순</a>
 		</div>
 		</th>
 		
