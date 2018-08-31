@@ -15,13 +15,14 @@
 <br>
 <table border="1" width="500">
 	<tr>
-		<th>경매 번호</th><th>경매게시글 번호</th><th>최고가</th>	
+		<th>경매시작 순번</th><th>경매게시글 번호</th><th>최고가</th><th>종료시간</th>	
 	</tr>
 	<c:forEach var="dealvo" items="${listDeal }">
 		<tr>
-			<td>${dealvo.mp_no }</td>
-			<td>${dealvo.bnum }</td>
-			<td>${dealvo.maxprice }</td>
+			<td>${dealvo.rnum }</td>
+			<td><a href="detail.do?cmd=detail&bnum=${dealvo.bnum}">${dealvo.bnum }</a></td>
+			<td>${dealvo.price }</td>
+			<td>${dealvo.endtime }</td>
 		</tr>
 	</c:forEach>
 </table>

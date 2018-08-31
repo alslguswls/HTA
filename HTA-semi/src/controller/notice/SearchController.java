@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import category.dao.CategoryDao;
+import category.vo.CategoryVo;
 import dao.notice.AdminDAO;
 import vo.notice.NoticeVO;
 import vo.notice.SearchVO;
@@ -47,16 +49,20 @@ public class SearchController extends HttpServlet {
 		if (endPage>pageCount) {
 			endPage=pageCount;
 		}
+	//	CategoryDao cdao = CategoryDao.getInstance();
+	//	ArrayList<CategoryVo> list1=new ArrayList<CategoryVo>();
+	//	list1=cdao.leftList();
+		
 		//System.out.println(list2);
 		//System.out.println(endPage);
-		
+	//	request.setAttribute("list1", list1);
 		request.setAttribute("list2", list2);
 		request.setAttribute("pageNum", pageNum);
 		request.setAttribute("pageCount", pageCount);
 		request.setAttribute("startPage", startPage);
 		request.setAttribute("endPage", endPage);
 		request.setAttribute("vose", vose);
-		RequestDispatcher rd = request.getRequestDispatcher("/layout.jsp?page=searchList.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/layout.jsp?page=searchList.jsp&left=noticeLeft.jsp");
 		rd.forward(request, response);
 	}
 

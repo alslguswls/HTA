@@ -1,6 +1,7 @@
 package controller.notice;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import category.dao.CategoryDao;
+import category.vo.CategoryVo;
 import dao.notice.AdminDAO;
 import vo.notice.NoticeVO;
 
@@ -26,9 +29,16 @@ public class detailContentController extends HttpServlet {
 		NoticeVO vo2 = new NoticeVO();
 		AdminDAO dao = AdminDAO.getInstance();
 		vo2 = dao.invite(num);
-		request.setAttribute("vodetail",vo2);
 		
-		RequestDispatcher rd = request.getRequestDispatcher("/layout.jsp?page=noticeDetail.jsp");
+	//	CategoryDao cdao = CategoryDao.getInstance();
+	//	ArrayList<CategoryVo> list1=new ArrayList<CategoryVo>();
+	//	list1=cdao.leftList();
+		
+		request.setAttribute("vodetail",vo2);
+	//	request.setAttribute("list1", list1);
+		
+		
+		RequestDispatcher rd = request.getRequestDispatcher("/layout.jsp?page=noticeDetail.jsp&left=noticeLeft.jsp");
 		rd.forward(request, response);
 	}
 

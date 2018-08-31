@@ -11,8 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import board.vo.boardVo;
 import dao.ms.ChatDao;
 import dao.mypage.ReserDAO;
+import vo.ms.BoardVo;
 import vo.ms.ChatVo;
 
 /**
@@ -20,7 +22,7 @@ import vo.ms.ChatVo;
  */
 @WebServlet("/joinchat.do")
 public class JoinChatController extends HttpServlet {
-	
+		//경매생성목록(경매 참여자료) 출력 컨트롤러
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("utf-8");
@@ -36,7 +38,7 @@ public class JoinChatController extends HttpServlet {
 		int startRow=(pageNum-1)*10+1;
 		int endRow=startRow +9;
 		
-		ArrayList<ChatVo> list = dao.chatTable(charId, startRow, endRow);
+		ArrayList<BoardVo> list = dao.chatTable(charId, startRow, endRow);
 		int pageCount = (int)Math.ceil(dao.getChatCount(charId)/10.0);
 		int startPage=((pageNum-1)/10*10)+1;
 		int endPage=startPage + 9;

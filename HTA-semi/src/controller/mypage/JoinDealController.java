@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import dao.mypage.ReserDAO;
 import vo.ms.MpriceVo;
+import vo.ms.ResultVo;
 
 /**
  * Servlet implementation class JoinDealController
@@ -35,7 +36,7 @@ public class JoinDealController extends HttpServlet {
 		int startRow = (pageNum-1)*10+1;
 		int endRow=startRow+9;
 		
-		ArrayList<MpriceVo> list = dao.dealJoin(dealId, startRow, endRow);
+		ArrayList<ResultVo> list = dao.dealJoin(dealId, startRow, endRow);
 		int pageCount = (int)Math.ceil(dao.getMyDealCount(dealId)/10.0);//공지사항 전체 개수를 호출하는 dao
 		int startPage = ((pageNum-1)/10*10)+1;
 		int endPage= startPage + 9;

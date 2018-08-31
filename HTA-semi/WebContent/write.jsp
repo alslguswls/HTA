@@ -5,8 +5,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript">
+
+
+</script>
 </head>
-<body>
+<body >
 <h3>공지사항 작성</h3>
 <form action="notiinsert.do" name="insert" method="post">
 제목:<input type="text" name="title"><br>

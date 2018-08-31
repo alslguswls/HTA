@@ -11,17 +11,19 @@
 </script>
 </head>
 <body >
-	<h3>경매 참여 기록 확인</h3>
+	<h3>경매 생성 기록 확인</h3>
 <br>
-<table>
+<table border="1" width="500">
 	<tr>
-		<th>채팅번호</th><th>경매창 번호</th><th>내용</th>
+		<th>카테고리</th><th>제목</th><th>내용</th><th>시작가</th><th>등록일</th>
 	</tr>
 	<c:forEach var="chatvo" items="${listChat }">
 		<tr>
-			<td>${chatvo.chat_no }</td>
-			<td>${chatvo.bnum }</td>
-			<td>${chatvo.str }</td>
+			<td>${chatvo.cate }</td>
+			<td>${chatvo.title }</td>
+			<td><a href="detail.do?cmd=detail&bnum=${chatvo.bnum}">${chatvo.content }</a></td>
+			<td>${chatvo.startprice }</td>
+			<td>${chatvo.regdate }</td>
 		</tr>
 	</c:forEach>
 </table>

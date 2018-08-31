@@ -13,7 +13,7 @@
 //검색된 뒤의 공지사항들
 //공지사항 메인보드
 function writeSearch() {
-	document.location.href="layout.jsp?page=write.jsp";
+	document.location.href="writeaddr.do";
 }
 
 </script>
@@ -43,7 +43,7 @@ function writeSearch() {
 		<tr>
 		<td>${voSe.noti_no }</td>
 			<td>${voSe.title }</td>
-			<td><a href="detail.do?noti_no=${voSe.noti_no}">${voSe.content }</a></td>
+			<td><a href="detailContent.do?noti_no=${voSe.noti_no}">${voSe.content }</a></td>
 			<td>${voSe.regdate }</td>
 			<td><a href="notiupdate.do?noti_no=${voSe.noti_no}">수정</a></td>
 			<td><a href="deleteWarning.jsp?noti_no=${voSe.noti_no}">삭제</a></td>
@@ -103,7 +103,7 @@ function writeSearch() {
 		<tr>
 			<td>${voSe2.noti_no }</td>
 			<td>${voSe2.title }</td>
-			<td><a href="detail.do?noti_no=${voSe2.noti_no}">${voSe2.content }</a></td>
+			<td><a href="detailContent.do?noti_no=${voSe2.noti_no}">${voSe2.content }</a></td>
 			<td>${voSe2.regdate }</td>
 	</tr>
 		
@@ -161,7 +161,7 @@ function writeSearch() {
 		<tr>
 			<td>${voSe3.noti_no }</td>
 			<td>${voSe3.title }</td>
-			<td><a href="detail.do?noti_no=${voSe3.noti_no}">${voSe3.content }</a></td>
+			<td><a href="detailContent.do?noti_no=${voSe3.noti_no}">${voSe3.content }</a></td>
 			<td>${voSe3.regdate }</td>
 	</tr>
 		

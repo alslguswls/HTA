@@ -5,12 +5,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
 
+import board.vo.boardVo;
 import db.DBConnection;
+import vo.ms.BoardVo;
 import vo.ms.ChatVo;
 import vo.ms.MpriceVo;
 import vo.ms.ReservationVo;
+import vo.ms.ResultVo;
 import vo.notice.NoticeVO;
 
 public class ReserDAO {
@@ -45,6 +48,7 @@ public class ReserDAO {
 	}*/
 	
 	public ArrayList<ReservationVo> reserAll(int startRow, int endRow, String id){
+		//예약한 것들 전부 호출
 		Connection con = null;
 		PreparedStatement pre = null;
 		String sql="select * from (select aa.*, rownum rnum from(select * from reservation  where id=? order by vnum desc) aa) where rnum>=? and rnum<=?";
@@ -78,6 +82,7 @@ public class ReserDAO {
 	}
 	
 	public int getReserCount(String id) {
+		//예약받은 개수 호출
 		Connection con = null;
 		PreparedStatement pre = null;
 		String sql="select NVL(count(vnum),0) cnt from reservation  where id=? ";
@@ -100,13 +105,14 @@ public class ReserDAO {
 		}
 	}
 	
-	public ArrayList<MpriceVo> dealJoin(String id, int startRow, int endRow ){
+	public ArrayList<ResultVo> dealJoin(String id, int startRow, int endRow ){
+		//경매낙찰받은 것들 호출
 		Connection con = null;
 		PreparedStatement pre = null;
-		String sql="select * from (select aa.*, rownum rnum from (select * from mprice  where id=? order by mp_no desc) aa) where rnum>=? and rnum<=?";
+		String sql="select * from (select aa.*, rownum rnum2 from (select * from result where id=? order by rnum desc) aa) where rnum2>=? and rnum2<=?";
 		ResultSet re = null;
 		try {
-			ArrayList<MpriceVo> list = new ArrayList<>();
+			ArrayList<ResultVo> list = new ArrayList<>();
 			con=DBConnection.getConn();
 			pre=con.prepareStatement(sql);
 			pre.setString(1, id);
@@ -114,11 +120,13 @@ public class ReserDAO {
 			pre.setInt(3, endRow);
 			re=pre.executeQuery();
 			while (re.next()) {
-				int mp_no=re.getInt("mp_no");
+				int rnum=re.getInt("rnum");
 				int bnum = re.getInt("bnum");
 				String dealid = re.getString("id");
-				int maxprice = re.getInt("maxprice");
-				MpriceVo vo = new MpriceVo(mp_no,bnum,dealid,maxprice);
+				int price = re.getInt("price");
+				Date endtime = re.getDate("endtime");
+				
+				ResultVo vo = new ResultVo(rnum, bnum, dealid, price, endtime);
 				list.add(vo);
 			}
 			return list;
@@ -131,9 +139,10 @@ public class ReserDAO {
 		}
 	}
 	public int getMyDealCount(String id) {
+		//낙찰받은 개수 호출
 		Connection con = null;
 		PreparedStatement pre = null;
-		String sql="select NVL(count(mp_no),0) cnt from mprice  where id=?";
+		String sql="select NVL(count(rnum),0) cnt from result  where id=?";
 		ResultSet re = null;
 		try {
 			con = DBConnection.getConn();
@@ -153,13 +162,14 @@ public class ReserDAO {
 		}
 	}
 	
-	public ArrayList<ChatVo> chatTable(String id, int startRow, int endRow ){
+	public ArrayList<BoardVo> chatTable(String id, int startRow, int endRow ){
+		//경매창 생성한거 전부 호출하는 dao
 		Connection con = null;
 		PreparedStatement pre = null;
-		String sql="select * from (select aa.* , rownum rnum from (select * from chat where id=? order by chat_no desc) aa) where rnum>=? and rnum<=?";
+		String sql="select * from (select aa.* , rownum rnum from (select * from board where id=? order by bnum desc) aa) where rnum>=? and rnum<=?";
 		ResultSet re = null;
 		try {
-			ArrayList<ChatVo> list = new ArrayList<>();
+			ArrayList<BoardVo> list = new ArrayList<>();
 			con=DBConnection.getConn();
 			pre=con.prepareStatement(sql);
 			pre.setString(1, id);
@@ -167,12 +177,23 @@ public class ReserDAO {
 			pre.setInt(3, endRow);
 			re=pre.executeQuery();
 			while (re.next()) {
-				int chat_no=re.getInt("chat_no");
+				
 				int bnum = re.getInt("bnum");
 				String chatid = re.getString("id");
-				String str = re.getString("str");
+				int cate = re.getInt("cate");
+				String title = re.getString("title");
+				String content = re.getString("content");
+				String orgfilename = re.getString("orgfilename");
+				String savefilename = re.getString("savefilename");
+				String starttime = re.getString("starttime");
+				int startprice = re.getInt("startprice");
+				int hit = re.getInt("hit");
+				int regv = re.getInt("regv");
 				int status = re.getInt("status");
-				ChatVo vo = new ChatVo(chat_no,bnum,chatid,str,status);
+				Date regdate = re.getDate("regdate");
+				
+				BoardVo vo = new BoardVo(bnum, chatid,  cate, title, content,  orgfilename, 
+						savefilename, starttime, startprice, hit, regv, status, regdate);
 				list.add(vo);
 			}
 			return list;
@@ -186,9 +207,10 @@ public class ReserDAO {
 	}
 	
 	public int getChatCount(String id) {
+		//경매 생성 개수 세는 다오
 		Connection con = null;
 		PreparedStatement pre = null;
-		String sql="select NVL(count(chat_no),0) cnt from chat where id=?";
+		String sql="select NVL(count(bnum),0) cnt from board where id=?";
 		ResultSet re = null;
 		try {
 			con = DBConnection.getConn();
@@ -206,5 +228,27 @@ public class ReserDAO {
 		}finally {
 			DBConnection.closeConn(re, pre, con);
 		}
+	}
+	
+	public int callBnum(int num) {
+		Connection con = null;
+		PreparedStatement pre = null;
+		String sql="select * from board where bnum=?";
+		ResultSet re = null;
+		
+		try {
+			con = DBConnection.getConn();
+			pre=con.prepareStatement(sql);
+			pre.setInt(1, num);
+			re=pre.executeQuery();
+			int realbnum=re.getInt("bnum");
+			return realbnum;
+		} catch(SQLException sq) {
+			System.out.println(sq.getMessage());
+			return -1;
+		}finally {
+			DBConnection.closeConn(re, pre, con);
+		}
+		
 	}
 }

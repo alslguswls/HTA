@@ -1,6 +1,7 @@
 package controller.notice;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import category.dao.CategoryDao;
+import category.vo.CategoryVo;
 import dao.notice.AdminDAO;
 import vo.notice.NoticeVO;
 
@@ -25,10 +28,17 @@ public class InsertController extends HttpServlet{
 		String content = (String)request.getParameter("content");
 		System.out.println(title);
 		System.out.println(content);
+		
+	//	CategoryDao cdao = CategoryDao.getInstance();
+	//	ArrayList<CategoryVo> list1=new ArrayList<CategoryVo>();
+	//	list1=cdao.leftList();  
+		
+	//	request.setAttribute("list1", list1);
+		
 		if (title.equals("") || content.equals("")) {
 			
 			request.setAttribute("errMsg", "빈칸 존재로 인한 등록 실패");
-			RequestDispatcher rd = request.getRequestDispatcher("/layout.jsp?page=notiError.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/layout.jsp?page=notiError.jsp&left=noticeLeft.jsp");
 			rd.forward(request, response);
 			return;
 		} else {
@@ -39,11 +49,12 @@ public class InsertController extends HttpServlet{
 		}
 		
 		
+		
 		if (insert>0) {
 			response.sendRedirect("noticeList.do");
 		}  else {
 			request.setAttribute("errMsg", "등록과정의 오류로인한 등록 실패");
-			RequestDispatcher rd = request.getRequestDispatcher("/layout.jsp?page=notiError.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/layout.jsp?page=notiError.jsp&left=noticeLeft.jsp");
 			rd.forward(request, response);
 		}
 	}

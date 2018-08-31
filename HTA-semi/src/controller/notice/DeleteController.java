@@ -27,7 +27,7 @@ public class DeleteController extends HttpServlet {
 			response.sendRedirect("noticeList.do");
 		} else {
 			request.setAttribute("errMsg3", "삭제의 오류로 인한 에러");
-			RequestDispatcher rd = request.getRequestDispatcher("/layout.jsp?page=notiError.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/layout.jsp?page=notiError.jsp&left=noticeLeft.jsp");
 			rd.forward(request, response);
 		}
 	}

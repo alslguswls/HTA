@@ -28,7 +28,7 @@ public class NoticeListController extends HttpServlet {
 		NoticeVO vo = new NoticeVO();
 		AdminDAO dao = AdminDAO.getInstance();
 		String spageNum=request.getParameter("pageNum");//공지사항 현재 페이지를 알려주는 파라미터
-		//System.out.println(page);
+		System.out.println(spageNum);
 		int pageNum=1;
 		if (spageNum!=null) {
 			pageNum=Integer.parseInt(spageNum);
@@ -45,19 +45,19 @@ public class NoticeListController extends HttpServlet {
 			endPage=pageCount;
 		}
 		
-		CategoryDao cdao = CategoryDao.getInstance();
-		ArrayList<CategoryVo> list1=new ArrayList<CategoryVo>();
-		list1=cdao.leftList();
+	//	CategoryDao cdao = CategoryDao.getInstance();
+	//	ArrayList<CategoryVo> list1=new ArrayList<CategoryVo>();
+	//	list1=cdao.leftList();
 		
 		
 		//System.out.println(page);
 		request.setAttribute("list22", list);
-		request.setAttribute("list1", list1);
+	//	request.setAttribute("list1", list1);
 		request.setAttribute("pageNum", pageNum);
 		request.setAttribute("pageCount", pageCount);
 		request.setAttribute("startPage", startPage);
 		request.setAttribute("endPage", endPage);
-		request.getRequestDispatcher("/layout.jsp?page=notice.jsp").forward(request, response);
+		request.getRequestDispatcher("/layout.jsp?page=notice.jsp&left=noticeLeft.jsp").forward(request, response);
 		
 		
 		

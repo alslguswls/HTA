@@ -4,38 +4,63 @@
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<html lang="ko">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ 
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
 <title>Insert title here</title>
+<style type="text/css">
+	.godcenter {display: block; width: 33%; height: auto; margin: 0 auto;}
+	
+	td {color:#80bfff;}
+	
+</style>
 <script type="text/javascript">
 	//공지사항 메인보드
 	function writeNext() {
-		document.location.href="layout.jsp?page=write.jsp";
+		document.location.href="writeaddr.do";
 	}
 </script>
+<!-- 합쳐지고 최소화된 최신 CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+<!-- 부가적인 테마 -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+
+<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+
+ 
+
 </head>
-<body>
+<body class="godcenter">
+
+
 <%	//로그인으로 넘겨받은 id
 	String id2 = null;
 	ArrayList<NoticeVO> list = (ArrayList<NoticeVO>)request.getAttribute("list22");
-	//System.out.print(id2);
+	//System.out.print(id2);table table-striped  class="godcenter"
 	
 %>
 <h2>공지사항</h2>
+
 <%	if(session.getAttribute("id")!=null){
 	id2 = (String)session.getAttribute("id");
 	String admin1 = (String)session.getAttribute("isAdmin"); 
 	System.out.print(admin1);
 	 if(admin1.equals("1")){//운영자일때
 		%>
-		<table border="1" width="500">
-		<tr>
+		<div class="container">
+		<table border="1" width="500" class="table table-striped">
+		<tr class="titlenotice" align="center">
 			<th>번호</th><th>제목</th><th>내용</th><th>작성일</th><th>내용수정</th><th>삭제</th>
 		</tr>
 		<c:set var="list1" value="<%=list %>"/>
 		<c:forEach var="vo2" items="<%=list %>" >
-		<tr>
+		<tr class="text-primary">
 			<td>${vo2.noti_no }</td>
 			<td>${vo2.title }</td>
 			<td><a href="detailContent.do?noti_no=${vo2.noti_no}">${vo2.content }</a></td>
@@ -47,28 +72,33 @@
 		</c:forEach>
 
 	</table>
+	</div>
 	<div>
 		<c:choose>
+		
 			<c:when test="${startPage>10 }">
 				<a href="noticeList.do?pageNum=${startPage-1 }">[이전]</a>
 			</c:when>
 			<c:otherwise>
 				[이전]
 			</c:otherwise>
+			
 		</c:choose>
 		<c:forEach var="i" begin="${startPage }" end="${endPage }">
+		<ul class="pagination">
 		<c:choose>
 			<c:when test="${pageNum==i }">
-				<a href="noticeList.do?pageNum=${i }"><span style="color: red;">[${i}]</span></a>
+				<li><a href="noticeList.do?pageNum=${i }"><span style="color: red;">${i}</span></a></li>
 		
 		</c:when>
 		<c:otherwise>
-			<a href="noticeList.do?pageNum=${i }"><span style="color: #555;">[${i}]</span></a>
+			<li><a href="noticeList.do?pageNum=${i }"><span style="color: #555;">${i}</span></a></li>
 		</c:otherwise>
 		
 		</c:choose>
-		
+		</ul>
 		</c:forEach>
+	
 		<c:choose>
 			<c:when test="${endPage<pageCount }">
 				<a href="noticeList.do?pageNum=${endPage+1 }">[다음]</a>
@@ -90,7 +120,8 @@
 		<input type="submit" value="검색">
 	</form>
 	<br>
-	<input type="button" value="글 작성" onclick="writeNext()">
+	
+	
 	<%
 	} else if(admin1.equals("0")){//관리자가 아닌 일반회원일 경우
 			%>
@@ -220,7 +251,7 @@
 %>
 
 <br><!-- 여기 작성 필요함 -->
-<a href="layout.jsp">메인페이지로</a>
+
 
 </body>
 </html>
