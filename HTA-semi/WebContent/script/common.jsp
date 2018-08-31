@@ -25,13 +25,17 @@
 	
 	var commXhr = null;
 	function comm1() {
+		var comm = document.getElementById("comm");
+		if(comm.value == ""){
+			alert("댓글 내용을 입력하세요.");
+			return;
+		}
 		commXhr = new XMLHttpRequest();
 		commXhr.onreadystatechange = commCallback;
 		commXhr.open('post','comm.do?cmd=insert',true);
 		commXhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
 		var bnum = ${vo.bnum };
 		var id = "<%=session.getAttribute("id") %>";
-		var comm = document.getElementById("comm");
 		var param = "bnum=" + bnum + "&id=" + id + "&comm=" + comm.value;
 		commXhr.send(param);
 		comm.value = "";
@@ -50,6 +54,11 @@
 	
 	var ccommXhr = null;
 	function ccomm(i) {
+		var comm = document.getElementsByName("form"+i)[0].comm.value;
+		if(comm == ""){
+			alert("답글 내용을 입력하세요.");
+			return;
+		}
 		ccommXhr = new XMLHttpRequest();
 		ccommXhr.onreadystatechange = ccommCallback;
 		ccommXhr.open('post','comm.do?cmd=insert',true);
@@ -57,7 +66,6 @@
 		var cnum = document.getElementsByName("form"+i)[0].cnum.value;
 		var bnum = document.getElementsByName("form"+i)[0].bnum.value;
 		var id = document.getElementsByName("form"+i)[0].id.value;
-		var comm = document.getElementsByName("form"+i)[0].comm.value;
 		var ref = document.getElementsByName("form"+i)[0].ref.value;
 		var lev = document.getElementsByName("form"+i)[0].lev.value;
 		var step = document.getElementsByName("form"+i)[0].step.value;

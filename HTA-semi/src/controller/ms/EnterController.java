@@ -24,12 +24,14 @@ import dao.ms.ChatDao;
 import dao.ms.MpriceDao;
 import dao.ms.ReservationDao;
 import dao.ms.ResultDao;
+import dao.ms.UsersDao;
 import vo.ms.BoardVo;
 import vo.ms.ChatVo;
 import vo.ms.CommentsVo;
 import vo.ms.MpriceVo;
 import vo.ms.ReservationVo;
 import vo.ms.ResultVo;
+import vo.ms.UsersVo;
 
 @WebServlet("/enter.do")
 public class EnterController extends HttpServlet{
@@ -123,28 +125,34 @@ public class EnterController extends HttpServlet{
 		BoardDao bdao = new BoardDao();
 		BoardVo bvo = bdao.detail(bnum);
 		int status = bvo.getStatus();
+		UsersDao udao = new UsersDao();
+		UsersVo uvo = udao.select(id);
 		JSONObject json = new JSONObject();
 		if(status == 2) {
 			json.put("msg", "경매가 종료되어 호가에 실패했습니다..");
 		}else {
-			if(vo == null) {
-				int n = dao.insert(new MpriceVo(0, bnum, id, price));
-				if(n>0) {
-					json.put("msg", "success");
-				}else {
-					json.put("msg", "오류로 인해 호가에 실패했습니다.");
-				}
-			}else{
-				if(vo.getMaxprice() < price) {
-					int n = dao.update(new MpriceVo(0, bnum, id, price));
+			if(uvo.getCoin() >= price) {
+				if(vo == null) {
+					int n = dao.insert(new MpriceVo(0, bnum, id, price));
 					if(n>0) {
 						json.put("msg", "success");
 					}else {
 						json.put("msg", "오류로 인해 호가에 실패했습니다.");
 					}
-				}else {
-					json.put("msg", "현재 최고호가 이상의 금액을 입력하세요.");
+				}else{
+					if(vo.getMaxprice() < price) {
+						int n = dao.update(new MpriceVo(0, bnum, id, price));
+						if(n>0) {
+							json.put("msg", "success");
+						}else {
+							json.put("msg", "오류로 인해 호가에 실패했습니다.");
+						}
+					}else {
+						json.put("msg", "현재 최고호가 이상의 금액을 입력하세요.");
+					}
 				}
+			}else {
+				json.put("msg", "보유 coin이상의 호가는 불가합니다.");
 			}
 		}
 		PrintWriter pw = response.getWriter();

@@ -8,11 +8,15 @@
 <script type="text/javascript">
 	var chatXhr = null;
 	function chat() {
+		var msg = document.getElementById("msg").value;
+		if(msg == ""){
+			alert("채팅 내용을 입력하세요.");
+			return;
+		}
 		chatXhr = new XMLHttpRequest();
 		chatXhr.onreadystatechange = chatCallback;
 		chatXhr.open('post','enter.do?cmd=chat',true);
 		chatXhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-		var msg = document.getElementById("msg").value;
 		var param = "bnum="+${param.bnum }+"&msg="+msg;
 		chatXhr.send(param);
 	}
@@ -106,9 +110,13 @@
 	
 	var callXhr = null;
 	function priceCall() {
+		var price = document.getElementById("price").value;
+		if(price == ""){
+			alert("호가 금액을 입력하세요.");
+			return;
+		}
 		var callBtn = document.getElementById("callBtn");
 		callBtn.disabled = "disabled";
-		var price = document.getElementById("price").value;
 		callXhr = new XMLHttpRequest();
 		callXhr.onreadystatechange = callCallback;
 		callXhr.open('get','enter.do?cmd=call&bnum='+${param.bnum }+'&price='+price,true);
