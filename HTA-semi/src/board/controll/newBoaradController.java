@@ -53,7 +53,7 @@ public class newBoaradController extends HttpServlet {
 		int bnum = Integer.parseInt(data.getParameter("boardNum"));
 		String title = data.getParameter("title");
 		int cate = Integer.parseInt(data.getParameter("cate"));
-		String content = data.getParameter("content");
+		String content = data.getParameter("contents");
 		String orgfilename = data.getOriginalFileName("orgfile");
 		String savefilename = addPath + "/" + data.getFilesystemName("orgfile");
 		int startprice = Integer.parseInt(data.getParameter("price"));
@@ -103,7 +103,7 @@ public class newBoaradController extends HttpServlet {
 		String id = data.getParameter("id");
 		String title = data.getParameter("title");
 		int cate = Integer.parseInt(data.getParameter("cate"));
-		String content = data.getParameter("content");
+		String content = data.getParameter("contents");
 		String orgfilename = data.getOriginalFileName("orgfile");
 		int startprice = Integer.parseInt(data.getParameter("price"));
 		String sdate = data.getParameter("sdate");
