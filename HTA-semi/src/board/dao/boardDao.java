@@ -193,10 +193,10 @@ public class boardDao {
 		}
 	}
 	//글삭제 상태값 9번으로 변경
-	public int delete(int bnum) {
+	public int delete(int bnum,String ss) {
 		try {
 			con = DBConnection.getConn();
-			String sql = "update board set status=9 where bnum=?";
+			String sql = ss;
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, bnum);
 			int n = pstmt.executeUpdate();

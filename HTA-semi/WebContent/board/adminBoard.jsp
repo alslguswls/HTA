@@ -44,8 +44,8 @@
 				<td>${n.regv}</td>	
 				<td>${bstatus[n.status]}</td>
 				<td>${n.regdate }<td>
-				<td><a href="">수정</a></td>
-				<td><a href="">삭제</a><td>
+				<td><input type="button" value="수정" onclick="javascript:AboardModify(${n.bnum})" class="btn btn-default btn-xs"></td>
+				<td><input type="button" value="삭제" onclick="javascript:AboardDelete(${n.bnum})" class="btn btn-default btn-xs"><td>
 			</tr>
 		</c:forEach>
 	<tr>
