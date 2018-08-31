@@ -4,9 +4,22 @@
 <div>
 	<div> 카테고리</div>
 <ul>
+	<%
+		Object ocate = request.getAttribute("cate");
+		int cate = 1;
+		if(ocate != null) cate = (int)ocate;
+	%>
+	<c:set var="cate" value="${cate }"></c:set>
 	<c:forEach var="n" items="${list1 }">
 		<li>
-			<a href="layout.jsp?page=/boardList.do?mod=list&cate=${n.cate}">${n.name }</a>
+			<c:choose>
+				<c:when test="${cate == n.cate }">
+					<a href="layout.jsp?page=/boardList.do?mod=list&cate=${n.cate}" style="color: #ff5;">${n.name }</a>
+				</c:when>
+				<c:otherwise>
+					<a href="layout.jsp?page=/boardList.do?mod=list&cate=${n.cate}">${n.name }</a>
+				</c:otherwise>
+			</c:choose>
 		</li>
 	</c:forEach>
 </ul>	

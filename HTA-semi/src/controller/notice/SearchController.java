@@ -24,6 +24,7 @@ public class SearchController extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("utf-8");
+		//int searchn = 1;
 		String search = request.getParameter("search");//선택된 항목
 		String keyword = request.getParameter("keyword");//쓰여진 검색어
 		request.getSession().setAttribute("search", search);
@@ -56,6 +57,7 @@ public class SearchController extends HttpServlet {
 		//System.out.println(list2);
 		//System.out.println(endPage);
 	//	request.setAttribute("list1", list1);
+		
 		request.setAttribute("list2", list2);
 		request.setAttribute("pageNum", pageNum);
 		request.setAttribute("pageCount", pageCount);

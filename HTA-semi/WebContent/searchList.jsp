@@ -84,7 +84,7 @@ function writeSearch() {
 		
 	</div>
 	<br>
-	<input type="button" value="글 작성" onclick="writeSearch()">
+	
 	<%
 	}else if(list33==null){
 		%>
@@ -157,7 +157,7 @@ function writeSearch() {
 		<tr>
 			<th>번호</th><th>제목</th><th>내용</th><th>작성일</th>
 		</tr>
-		<c:forEach var="voSe3" items="<%=list33 %>" >
+		<c:forEach var="voSe3" items="<%=list33 %>">
 		<tr>
 			<td>${voSe3.noti_no }</td>
 			<td>${voSe3.title }</td>
@@ -211,6 +211,6 @@ function writeSearch() {
 <br><!-- 여기 작성 필요함 -->
 <a href="noticeList.do">검색 전 페이지로</a>
 <br>
-<a href="layout.jsp">메인페이지로</a>
+
 </body>
 </html>

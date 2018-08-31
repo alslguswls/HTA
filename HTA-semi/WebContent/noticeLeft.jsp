@@ -15,14 +15,16 @@ function writeNext() {
 <body>
 <%
 	String admin1 = (String)session.getAttribute("isAdmin"); 
+	//String n = request.getParameter("n");
 %>
 <br><br>
 <%
 	if(session.getAttribute("id")!=null){
 %>
-<a href="layout.jsp">메인페이지로</a>
+<a href="layout.jsp">경매품 보러가기</a>
 <br>
  <%
+ 	
  	if(admin1.equals("1")){
  		%>
  		<button type="button" value="글 작성" onclick="writeNext()" class="btn btn-default"></button>    
@@ -32,8 +34,9 @@ function writeNext() {
  		
  	}
 	} else{
+		
 		%>
-		<a href="layout.jsp">메인페이지로</a>
+		<a href="layout.jsp">경매품 보러가기</a>
 		<%
 	}
  %>

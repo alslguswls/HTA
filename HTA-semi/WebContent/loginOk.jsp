@@ -15,6 +15,12 @@
 </head>
 <body>
 <%
+	String cmd = request.getParameter("cmd");
+	if(cmd != null && cmd.equals("logout")){
+		session.invalidate();
+		response.sendRedirect("layout.jsp");
+		return;
+	}
 	MembersVo vo = new MembersVo();
 	MembersVo paramVo = new MembersVo();
 	paramVo.setId(request.getParameter("id"));
