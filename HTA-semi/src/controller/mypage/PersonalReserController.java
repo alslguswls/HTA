@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import dao.mypage.ReserDAO;
 import vo.ms.ReservationVo;
+import vo.mypage.ReservationTitleVO;
 import vo.notice.NoticeVO;
 
 /**
@@ -40,8 +41,9 @@ public class PersonalReserController extends HttpServlet {
 		int endRow=startRow+9;
 		//System.out.println(page);
 		//ArrayList<NoticeVO> list = dao.all(startRow,endRow);//공지사항 전체 호출
-		ArrayList<ReservationVo> list = dao.reserAll(startRow, endRow,perId); 
+		ArrayList<ReservationTitleVO> list = dao.reserAll(startRow, endRow,perId); 
 		int pageCount = (int)Math.ceil(dao.getReserCount(perId)/10.0);//공지사항 전체 개수를 호출하는 dao
+		
 		int startPage = ((pageNum-1)/10*10)+1;
 		int endPage= startPage + 9;
 		if (endPage>pageCount) {

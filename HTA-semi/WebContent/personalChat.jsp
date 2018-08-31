@@ -11,7 +11,7 @@
 </script>
 </head>
 <body >
-	<h3>경매 생성 기록 확인</h3>
+	<h3>경매 출품내역 확인</h3>
 <br>
 <table border="1" width="500">
 	<tr>
