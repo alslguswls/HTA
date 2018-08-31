@@ -27,16 +27,22 @@
 		%>
 			<c:choose>
 				<c:when test="${page == 'join.jsp' }">
+					<li><a href="layout.jsp?page=join.jsp&left=noticeLeft.jsp" style="color: #ff5;">회원가입</a></li>
+					<!-- 
 					<li><a href="Category.do?mod=getCate&to=join.jsp" style="color: #ff5;">회원가입</a></li>
+					 -->
 				</c:when>
 				<c:otherwise>
+					<li><a href="layout.jsp?page=join.jsp&left=noticeLeft.jsp">회원가입</a></li>
+					<!-- 
 					<li><a href="Category.do?mod=getCate&to=join.jsp">회원가입</a></li>
+					 -->
 				</c:otherwise>
 			</c:choose>
 		<%
 			} else if (isAdmin.equals("1") ) {
 		%>
-			<li><a href="layout.jsp?left=admin.jsp">관리자</a></li>
+			<li><a href="layout.jsp?page=memberList.do&left=admin.jsp">관리자</a></li>
 		<%
 			} else {
 		%>
@@ -74,10 +80,16 @@
 		%>
 			<c:choose>
 				<c:when test="${page == 'login.jsp' }">
+					<li><a href="layout.jsp?page=login.jsp&left=noticeLeft.jsp" style="color: #ff5;">로그인</a></li>
+					<!-- 
 					<li><a href="Category.do?mod=getCate&to=login.jsp" style="color: #ff5;">로그인</a></li>
+					 -->
 				</c:when>
 				<c:otherwise>
+					<li><a href="layout.jsp?page=login.jsp&left=noticeLeft.jsp">로그인</a></li>
+					<!-- 
 					<li><a href="Category.do?mod=getCate&to=login.jsp">로그인</a></li>
+					 -->
 				</c:otherwise>
 			</c:choose>
 		<%
