@@ -9,7 +9,7 @@
 <c:set var="bstatus" value="<%=bstatus %>" />
 <h2>게시글목록</h2>     
 <div><a href="boardList.do?mod=getCate">글작성</a></div>
-<table class="table table-striped">
+<table class="table table-hover">
 	<tr>
 		<th colspan="6">
 		<div style="width: 100%">
