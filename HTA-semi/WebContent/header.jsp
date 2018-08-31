@@ -14,7 +14,7 @@
 			String isAdmin = (String)session.getAttribute("isAdmin");
 			if (isAdmin == null) {
 		%>
-			<li><a href="layout.jsp?page=join.jsp">회원가입</a></li>
+			<li><a href="Category.do?mod=getCate&to=join.jsp">회원가입</a></li>
 		<%
 			} else if (isAdmin.equals("1") ) {
 		%>
@@ -34,7 +34,7 @@
 			if(id == null){
 		%>
 		
-			<li><a href="layout.jsp?page=login.jsp">로그인</a></li>
+			<li><a href="Category.do?mod=getCate&to=login.jsp">로그인</a></li>
 		<%
 			}else{
 				

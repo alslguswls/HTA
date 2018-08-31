@@ -10,7 +10,7 @@
 	String[] cate=lb.category();
 	String sid = (String)session.getAttribute("id");
 	if(sid==null){ 
-		pageContext.forward("/layout.jsp?page=login.jsp");
+		pageContext.forward("Category.do?mod=getCate&to=login.jsp");
 	}
 	//게시글 수정시 사용
 	BoardVo vo=null;

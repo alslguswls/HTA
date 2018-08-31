@@ -1,14 +1,17 @@
+<%@page import="lib.lib"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
 		String context = application.getContextPath();
+		String bstatus[] = lib.bStatus(); 
 %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="bstatus" value="<%=bstatus %>" />
 <h2>게시글목록</h2>     
 <div><a href="boardList.do?mod=getCate">글작성</a></div>
 <table>
 	<tr>
-		<th colspan="5">
+		<th colspan="6">
 		<div>
 		<a href="<%=context %>/layout.jsp?page=boardList.do?mod=list&cul=1">조회순</a>
 		<a href="<%=context %>/layout.jsp?page=boardList.do?mod=list&cul=0">최근등록일</a>
@@ -18,13 +21,14 @@
 		
 	</tr>
 	<tr>
-		<th>글번호</th><th>제목</th><th>작성자</th><th>조회수</th><th>작성일</th>
+		<th>글번호</th><th>제목</th><th>작성자</th><th>진행상태</th><th>조회수</th><th>작성일</th>
 	</tr>
 		<c:forEach var="n" items="${list}">
 			<tr>
 				<td>${n.bnum }<td>
 				<td><a href="detail.do?cmd=detail&bnum=${n.bnum}">${n.title }</a><td>
 				<td>${n.id }<td>
+				<td>${bstatus[n.status]}</td>
 				<td>${n.hit }<td>
 				<td>${n.regdate }<td>
 			</tr>
@@ -32,7 +36,7 @@
 		
 		
 	<tr>
-		<td colspan="5">
+		<td colspan="6">
 		<!-- 페이징 -->
 		<div>
 			<!-- 이전 -->
@@ -77,7 +81,7 @@
 				<option value="0">제목</option>
 				<option value="1">아이디</option>
 			</select>
-			<input type="text" name="search" value="${search}">
+			<input type="text" name="search" value="${search1}">
 			<input type="submit" value="조회">
 			<input type="hidden" name="cate" value="${cate }">
 			</form>

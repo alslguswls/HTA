@@ -4,7 +4,7 @@
 <h2>카테고리목록</h2>
 <div id="cate_in" name="">	
 	<form method="post" action="Category.do?mod=insert" id="cateForm" name="cateForm">
-	<span>카테고리 추가하기</span>
+	<span id="cateText">카테고리 추가하기</span>
 	<input type="text" name="cate_n" id="cate_n">
 	<input type="hidden" name="cate" id="cate" value="">
 	<input type="button" value="추가" id="chButton" onclick="name_ck()">

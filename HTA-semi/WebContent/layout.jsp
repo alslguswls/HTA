@@ -44,7 +44,6 @@
 	%>
 			<jsp:include page="/script/detailScript.jsp"></jsp:include>
 			<body onload="commList();checkStart()" class="container-fluid bg-1 text-center">
-			
 	<%
 		}else if(page1.equals("enter.jsp")){
 	%>

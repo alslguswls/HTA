@@ -113,7 +113,7 @@ public class boardController extends HttpServlet {
 		request.setAttribute("endPage",endPage);
 		request.setAttribute("pageNum",pageNum);
 		request.setAttribute("cate",cate);
-		request.setAttribute("search",search);
+		request.setAttribute("search1",search);
 		request.getRequestDispatcher("/layout.jsp?page=/board/list.jsp").forward(request, response);
 	}
 	

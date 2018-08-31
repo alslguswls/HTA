@@ -29,6 +29,8 @@
 	
 	//카테고리 수정 작업 xml ajax 처리 후 저장 성공시 창새로고침
 	function cateInfo(no,str){
+		var text = document.getElementById("cateText");
+		text.innerHTML="카테고리 수정하기";
 		var btn=document.getElementById("chButton").style;
 		btn.display="none";
 		var btn1=document.getElementById("modify").style;
@@ -42,6 +44,8 @@
 	}
 	
 	function cateCancle(){
+		var text = document.getElementById("cateText");
+		text.innerHTML="카테고리 추가하기";
 		var btn=document.getElementById("chButton").style;
 		btn.display="inline";
 		var btn1=document.getElementById("modify").style;
