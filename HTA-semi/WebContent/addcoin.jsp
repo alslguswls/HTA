@@ -52,31 +52,31 @@
 
 <body>
 <br>
-<h1 align="center"> 코인충전 </h1>
-	<table border=1 width=500 height=100 >
+<h1> 코인충전 </h1>
+	<table border=3 class="table table-striped" style="width: 500px;height: 100px;">
 		<tr>
-			<th style="color:blue">[ ${vo1.id } ] 님의 코인잔액</th>
+			<th style="color:blue;text-align: center;font-size: 20px;">[ ${vo1.id } ] 님의 코인잔액</th>
 			<!-- vo에 있는걸 불러오는게 좋을까, 세션에 있는걸 불러오는게 좋을까? 세션에서 불러오는 방법은? -->
 		</tr>
 		<tr>
-			<td style="color:red"><fmt:formatNumber value="${vo1.coin }"  /> 원</td>
+			<td style="color:red;font-size: 30px;"><fmt:formatNumber value="${vo1.coin }"  /> 원</td>
 		</tr>
 	</table>
 	<br>
-	<form name="frm" id="frm" method="post" action="coin.do?cmd=update">
+	<form name="frm" class="form-inline" id="frm" method="post" action="coin.do?cmd=update">
 	<input type="hidden" name="coin" value="10000" />
-	<table border=1 width=500 height=100>
+	<table border=3 class="table table-striped" style="width: 500px;height: 100px;">
 		<tr>
 			<td>
-				<ul>
+				<ul style="margin-left: 50px;">
 					<li><input type="radio" name="cprice" value="10000" onclick="changeCoin(this.value)" checked/> 10,000원 </li> 
 					<li><input type="radio" name="cprice" value="20000" onclick="changeCoin(this.value)"/> 20,000원  </li>
 					<li><input type="radio" name="cprice" value="30000" onclick="changeCoin(this.value)"/> 30,000원  </li>
 					<li><input type="radio" name="cprice" value="50000" onclick="changeCoin(this.value)"/> 50,000원  </li>
 					<li><input type="radio" name="cprice" value="100000" onclick="changeCoin(this.value)"/> 100,000원 </li>
-					<li>
+					<li style="margin-left: 20px;">
 						<br>
-						직접입력 <input type="text" name="dcoin" id="dcoin" maxlength="6" value="10000" onkeyup="changeCoin(this.value);"  style="ime-mode:disabled;"> 원
+						<label for="dcoin">직접입력</label> <input type="text" class="form-control" name="dcoin" id="dcoin" maxlength="6" value="10000" onkeyup="changeCoin(this.value);"  style="ime-mode:disabled;"> 원
 					</li>
 				</ul>
 			</td>	
@@ -85,7 +85,7 @@
 			<td> 충전금액 : <strong><span id="chargeCoin">10,000</span></strong>원</td>
 		</tr>
 	</table>
-	<p align="center"><input type="submit" value="충전하기"></p>
+	<p align="center"><input type="submit" class="btn btn-warning" value="충전하기"></p>
 	</form>
 </body>
 </html>	

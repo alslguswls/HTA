@@ -101,51 +101,51 @@
 </script>
 </head>
 <body align="center">
-<h1> 회원 정보 수정</h1>
+<h1 style="margin-bottom: 30px;"> 회원 정보 수정</h1>
 
 <!-- 수정버튼을 누르면 membeInsert.do 서블릿으로 이동 -->
-<form name="f" method="post" action="memberUpdate.do" onsubmit="return check()" >  
-<table border="1" width="300" style="margin:auto;text-align:center;">
+<form name="f" class="form-inline" method="post" action="memberUpdate.do" onsubmit="return check()" >  
+<table border="3" class="table table-striped" style="margin:auto;text-align:center;width: 300px;">
 	
 	<tr>
-		<td>아이디</td>
+		<td><label for="id">아이디</label></td>
 		<td>
-			<input type="text" id="id" name="id" value="${requestScope.id }" readonly="readonly">
+			<input type="text" class="form-control" id="id" name="id" value="${requestScope.id }" readonly="readonly">
 		</td>
 	</tr>
 	<tr>
-		<td>패스워드</td>
+		<td><label for="pwd">패스워드</label></td>
 		<td>
-			<input type="password" id="pwd" name="pwd" value="${requestScope.pwd }">
+			<input type="password" class="form-control" id="pwd" name="pwd" value="${requestScope.pwd }">
 		</td>
 	</tr>
 	<tr>
-		<td>패스워드 확인</td>
+		<td><label for="pwd2">패스워드 확인</label></td>
 		<td>
-			<input type="password" name="pwd2" onkeyup="pwdcheck()" >
+			<input type="password" class="form-control" name="pwd2" id="pwd2" onkeyup="pwdcheck()" >
 			<div id="pwdcheck" style="color:red;font-size:12px"></div>
 		</td>
 	</tr>
 	<tr>
-		<td>이메일</td>
-		<td><input type="text" id="email" name="email" value="${requestScope.email }"></td>
+		<td><label for="email">이메일</label></td>
+		<td><input type="text" class="form-control" id="email" name="email" value="${requestScope.email }"></td>
 	</tr>
 	<tr>
-		<td>전화번호</td>
-		<td><input type="text" id="phone" name="phone" value="${requestScope.phone }"></td>
+		<td><label for="phone">전화번호</label></td>
+		<td><input type="text" class="form-control" id="phone" name="phone" value="${requestScope.phone }"></td>
 	</tr>
 	<tr>
-		<td>주소</td>
-		<td><input type="text" id="addr" name="addr" value="${requestScope.addr }"></td>
+		<td><label for="addr">주소</label></td>
+		<td><input type="text" class="form-control" id="addr" name="addr" value="${requestScope.addr }"></td>
 	</tr>
 	<tr>
-		<td>코인</td>
-		<td><input type="text" id="coin" name="coin" value="${requestScope.coin }"></td>
+		<td><label for="coin">코인</label></td>
+		<td><input type="text" class="form-control" id="coin" name="coin" value="${requestScope.coin }"></td>
 	</tr>
 	<tr>
 		<td colspan="2" align="center">
-				<input type="submit" value="수정">
-				<input type="reset" value="취소">
+				<input class="btn btn-warning btn-sm" type="submit" value="수정">
+				<input class="btn btn-warning btn-sm" type="reset" value="취소">
 		</td>
 	</tr>
 </table>

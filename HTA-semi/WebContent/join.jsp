@@ -102,48 +102,48 @@
 <body align="center">
 <br>
 <h1> 회원 가입</h1>
-<form name="f" method="post" action="membeInsert.do" onsubmit="return check()" >  <!-- 가입버튼을 누르면 membeInsert.do 서블릿으로 이동 -->
-<table border="1" width="400" style="margin:auto;text-align:center;">
+<form name="f" class="form-inline" method="post" action="membeInsert.do" onsubmit="return check()" >  <!-- 가입버튼을 누르면 membeInsert.do 서블릿으로 이동 -->
+<table border="3" class="table" style="margin:auto;text-align:center;width: 400px;">
 	<!--  가입시 lev 0, coin 0을 입력하는 기능. 미사용
 	<input type="hidden" name="lev" value="0">  
 	<input type="hidden" name="coin" value="0">  
 	-->
 	
 	<tr>
-		<td>아이디</td>
+		<td><label for="id">아이디</label></td>
 		<td>
-			<input type="text" name="id" id="id" onkeyup="idcheck()">
+			<input type="text" class="form-control" name="id" id="id" onkeyup="idcheck()">
 			<!-- 아이디 중복검사 기능 -->
 			<div id="idcheck" style="color:red;font-size:12px"></div>
 		</td>
 	</tr>
 	<tr>
-		<td>패스워드</td>
-		<td><input type="password" id="pwd" name="pwd"></td>
+		<td><label for="pwd">패스워드</label></td>
+		<td><input type="password" class="form-control" id="pwd" name="pwd"></td>
 	</tr>
 	<tr>
-		<td>패스워드 확인</td>
+		<td><label for="pwd2">패스워드 확인</label></td>
 		<td>
-			<input type="password" name="pwd2" onkeyup="pwdcheck()">
+			<input type="password" class="form-control" name="pwd2" id="pwd2" onkeyup="pwdcheck()">
 			<div id="pwdcheck" style="color:red;font-size:12px"></div>
 		</td>
 	</tr>
 	<tr>
-		<td>이메일</td>
-		<td><input type="text" id="email" name="email"></td>
+		<td><label for="email">이메일</label></td>
+		<td><input type="text" class="form-control" id="email" name="email"></td>
 	</tr>
 	<tr>
-		<td>전화번호</td>
-		<td><input type="text" id="phone" name="phone"></td>
+		<td><label for="phone">전화번호</label></td>
+		<td><input type="text" class="form-control" id="phone" name="phone"></td>
 	</tr>
 	<tr>
-		<td>주소</td>
-		<td><input type="text" id="addr" name="addr"></td>
+		<td><label for="addr">주소</label></td>
+		<td><input type="text" class="form-control" id="addr" name="addr"></td>
 	</tr>
 	<tr>
 		<td colspan="2" align="center">
-				<input type="submit" value="가입">
-				<input type="reset" value="취소">
+				<input type="submit" class="btn btn-warning btn-sm" value="가입">
+				<input type="reset" class="btn btn-warning btn-sm" value="취소">
 		</td>
 	</tr>
 </table>

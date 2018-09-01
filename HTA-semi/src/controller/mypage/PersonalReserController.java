@@ -55,6 +55,7 @@ public class PersonalReserController extends HttpServlet {
 		request.setAttribute("pageCount", pageCount);
 		request.setAttribute("startPage", startPage);
 		request.setAttribute("endPage", endPage);
+		request.setAttribute("cate", 2);
 		
 		
 		//request.setAttribute("reserList", list);

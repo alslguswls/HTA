@@ -38,21 +38,21 @@
 <br>
 <h1>로그인</h1>
 
-<form name="f" method="post" action="loginOk.jsp" onsubmit="return check()" align="center">
+<form name="f" class="form-inline" method="post" action="loginOk.jsp" onsubmit="return check()" align="center">
 	<div style="color:red;font-size:12px"><%=errMsg %></div>
-	<table align="center" border="1" width="250" height="100"  >
+	<table align="center" class="table" border="3" style="width: 250px;height: 100px;">
 		<tr>
-			<td>아이디</td>
-			<td><input type="text" name="id"></td>
+			<td><label for="id">아이디</label></td>
+			<td><input type="text" class="form-control" name="id" id="id"></td>
 		</tr>
 		<tr>
-			<td>패스워드</td>
-			<td><input type="password" name="pwd"></td>
+			<td><label for="pwd">패스워드</label></td>
+			<td><input type="password" class="form-control" name="pwd" id="pwd"></td>
 		</tr>
 		<tr>
 			<td colspan="2" align="center">
-				<input type="submit" value="로그인">
-				<input type="reset" value="취소">
+				<input type="submit" class="btn btn-warning btn-sm" value="로그인">
+				<input type="reset" class="btn btn-warning btn-sm" value="취소">
 			</td>
 		</tr>
 	
