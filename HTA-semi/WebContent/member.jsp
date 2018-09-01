@@ -14,7 +14,7 @@
 <body align="center">
 <br>
 <h1>회원관리 페이지</h1>
-	<table border="1" align="center" width="800">
+	<table border="3" class="table table-striped" align="center" style="width: 800px;">
 		<tr>
 			<th>id</th>
 			<th>email</th>
