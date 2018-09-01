@@ -8,6 +8,7 @@ public class MembersVo {
 	private String addr;		// ����� �ּ�
 	private int lev;				// ����� ���
 	private Long coin;	//	����
+	private String regdate;
 	
 	public MembersVo() {} // ����Ʈ������
 
@@ -78,4 +79,12 @@ public class MembersVo {
 		this.coin = coin;
 	}
 
+	public String getRegdate() {
+		return regdate;
+	}
+
+	public void setRegdate(String regdate) {
+		this.regdate = regdate;
+	}
+	
 }	

@@ -61,7 +61,7 @@ public class MembersDao {
 		PreparedStatement pstmt=null;
 		try {
 			con=db.DBConnection.getConn();
-			String sql="insert into users (id,pwd,email,phone,addr) values(?,?,?,?,?)";
+			String sql="insert into users (id,pwd,email,phone,addr,regdate) values(?,?,?,?,?,sysdate)";
 			pstmt=con.prepareStatement(sql);
 			
 			pstmt.setString(1,vo.getId());
@@ -202,7 +202,7 @@ public class MembersDao {
 				"    (" + 
 				"        select AA.*,rownum rnum from " + 
 				"        (" + 
-				"            select * from users where lev != '9' order by id asc" +  // lev가 '9'(삭제처리)인 것은 안나오게 함
+				"            select id, pwd, email, phone, addr, lev, coin, to_char(regdate, 'yyyy/mm/dd hh24:mi:ss') as regdate from users where lev != '9' order by id asc" +  // lev가 '9'(삭제처리)인 것은 안나오게 함
 				"        ) " + 
 				"    AA) " + 
 				"where rnum>=? and rnum<=?";
@@ -225,8 +225,10 @@ public class MembersDao {
 				String addr=rs.getString("addr");
 				Integer lev=rs.getInt("lev");
 				Long coin=rs.getLong("coin");
+				String regdate=rs.getString("regdate");
 				
 				MembersVo vo=new MembersVo(id, pwd, email, phone, addr, lev, coin);
+				vo.setRegdate(regdate);
 				list.add(vo);
 			}
 			return list;

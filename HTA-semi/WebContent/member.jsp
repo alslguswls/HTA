@@ -16,9 +16,10 @@
 <h1>회원관리 페이지</h1>
 	<table border="1" align="center" width="800">
 		<tr>
-			<th>id</th>
-			<th>email</th>
-			<th>phone</th>
+			<th>ID</th>
+			<th>이메일</th>
+			<th>전화번호</th>
+			<th>가입일</th>
 			<th>수정</th>
 			<th>삭제</th>
 		</tr>
@@ -27,6 +28,7 @@
 				<td>${vo.id }</td>
 				<td>${vo.email }</td>
 				<td>${vo.phone }</td>
+				<td>${vo.regdate }</td>
 				<td><a href="layout.jsp?page=memberGetinfo.do?id=${vo.id }">수정</a></td>
 				<td><a href="memberDelete.do?id=${vo.id }">삭제</a></td>
 			</tr>
