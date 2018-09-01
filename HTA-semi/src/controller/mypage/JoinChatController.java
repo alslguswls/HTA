@@ -51,6 +51,7 @@ public class JoinChatController extends HttpServlet {
 		request.setAttribute("pageCount", pageCount);
 		request.setAttribute("startPage", startPage);
 		request.setAttribute("endPage", endPage);
+		request.setAttribute("cate", 4);
 		RequestDispatcher rd = request.getRequestDispatcher("/layout.jsp?page=personalChat.jsp&left=mypage.jsp");
 		rd.forward(request, response);
 		

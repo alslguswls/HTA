@@ -35,3 +35,6 @@ form label{width: 100px;display: inline-block;}
 #entertable{width: 600px;margin: auto;margin-top: 50px;border: 8px solid #ffa;}
 #resulttable{width: 600px;margin: auto;margin-top: 100px;border: 8px solid #ffa;}
 #resulthead{margin-top: 50px;}
+
+#frm table{text-align: center;}
+#frm ul li{display: inline-block;}

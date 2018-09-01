@@ -68,13 +68,13 @@
 	<table border=3 class="table table-striped" style="width: 500px;height: 100px;">
 		<tr>
 			<td>
-				<ul>
-					<li><input type="radio" class="radio-inline" name="cprice" value="10000" onclick="changeCoin(this.value)" checked/> 10,000원 </li> 
-					<li><input type="radio" class="radio-inline" name="cprice" value="20000" onclick="changeCoin(this.value)"/> 20,000원  </li>
-					<li><input type="radio" class="radio-inline" name="cprice" value="30000" onclick="changeCoin(this.value)"/> 30,000원  </li>
-					<li><input type="radio" class="radio-inline" name="cprice" value="50000" onclick="changeCoin(this.value)"/> 50,000원  </li>
-					<li><input type="radio" class="radio-inline" name="cprice" value="100000" onclick="changeCoin(this.value)"/> 100,000원 </li>
-					<li>
+				<ul style="margin-left: 50px;">
+					<li><input type="radio" name="cprice" value="10000" onclick="changeCoin(this.value)" checked/> 10,000원 </li> 
+					<li><input type="radio" name="cprice" value="20000" onclick="changeCoin(this.value)"/> 20,000원  </li>
+					<li><input type="radio" name="cprice" value="30000" onclick="changeCoin(this.value)"/> 30,000원  </li>
+					<li><input type="radio" name="cprice" value="50000" onclick="changeCoin(this.value)"/> 50,000원  </li>
+					<li><input type="radio" name="cprice" value="100000" onclick="changeCoin(this.value)"/> 100,000원 </li>
+					<li style="margin-left: 20px;">
 						<br>
 						<label for="dcoin">직접입력</label> <input type="text" class="form-control" name="dcoin" id="dcoin" maxlength="6" value="10000" onkeyup="changeCoin(this.value);"  style="ime-mode:disabled;"> 원
 					</li>
@@ -85,7 +85,7 @@
 			<td> 충전금액 : <strong><span id="chargeCoin">10,000</span></strong>원</td>
 		</tr>
 	</table>
-	<p align="center"><input type="submit" value="충전하기"></p>
+	<p align="center"><input type="submit" class="btn btn-warning" value="충전하기"></p>
 	</form>
 </body>
 </html>	

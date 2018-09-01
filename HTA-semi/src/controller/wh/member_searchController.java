@@ -59,7 +59,8 @@ public class member_searchController extends HttpServlet {
 		request.setAttribute("endPage", endPage);
 		request.setAttribute("smvo", smvo);
 		// 페이지로 이동하기
-		request.getRequestDispatcher("layout.jsp?page=member.jsp").forward(request, response);
+		System.out.println("aa");
+		request.getRequestDispatcher("layout.jsp?page=member.jsp&left=admin.jsp").forward(request, response);
 	}
 
 }

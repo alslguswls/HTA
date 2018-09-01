@@ -38,6 +38,7 @@ public class coinController extends HttpServlet {
 		
 		if(vo1 != null) {
 			request.setAttribute("vo1", vo1);
+			request.setAttribute("cate", 1);
 			RequestDispatcher rd = request.getRequestDispatcher("layout.jsp?page=addcoin.jsp");
 			rd.forward(request, response);
 		}else {
@@ -55,7 +56,7 @@ public class coinController extends HttpServlet {
 		int n = dao.coinUpdate(id, coin);
 		
 		if(n>0) {
-			response.sendRedirect("layout.jsp?page=coin.do");
+			response.sendRedirect("layout.jsp?page=coin.do&left=mypage.jsp");
 		}else {
 			request.setAttribute("errMsg", "오류로 인해 코인 충전이 실패 하였습니다");
 			RequestDispatcher rd = request.getRequestDispatcher("/error.jsp");
