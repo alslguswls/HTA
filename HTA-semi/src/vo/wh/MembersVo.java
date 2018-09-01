@@ -1,8 +1,13 @@
 package vo.wh;
 
+/*
+2018-09-01	패스워드 암호화 추가	윤우현
+ */
+
 public class MembersVo {
 	private String id;			// ����� ���̵�
-	private String pwd;		// ����� �н�����
+	private String pwd;		// 암호화된 패스워드
+	private String pwd_enc;	// 암호화 패스워드 생성키
 	private String email;	// ����� �̸���
 	private String phone;	// ����� ��ȭ��ȣ
 	private String addr;		// ����� �ּ�
@@ -86,5 +91,14 @@ public class MembersVo {
 	public void setRegdate(String regdate) {
 		this.regdate = regdate;
 	}
+
+	public String getPwd_enc() {
+		return pwd_enc;
+	}
+
+	public void setPwd_enc(String pwd_enc) {
+		this.pwd_enc = pwd_enc;
+	}
+	
 	
 }	

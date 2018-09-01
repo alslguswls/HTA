@@ -13,46 +13,42 @@ import com.sun.org.apache.bcel.internal.generic.Select;
 
 import board.dao.boardDao;
 import db.DBConnection;
+import lib.SHA256Util;
 import sun.security.jca.GetInstance.Instance;
 import vo.wh.MembersVo;
 /*
-2018. 8. 26	윤우현		사용자 로그인 처리 여부 수정(전체 데이터 서치 방법 폐기. id, pw 존재 여부만 확인)
+2018-08-26	윤우현 	사용자 로그인 처리 여부 수정(전체 데이터 서치 방법 폐기. id, pw 존재 여부만 확인)
+2018-09-01	윤우현 	사용자 패스워드 암호화 기능 추가(회원가입시, 로그인 처리시)
  */
 
 public class MembersDao {
 	
 	// 사용자 로그인 처리(DB에 id, pwd 존재 여부 확인) 
 	public MembersVo loginCheck(MembersVo vo){
-		Connection con=null;
-		PreparedStatement pstmt=null;
-		ResultSet rs=null;
-		try {
-			con=db.DBConnection.getConn();
-			String sql="select * from users where id = ? and pwd = ? and lev != '9' ";
-			pstmt=con.prepareStatement(sql);
-			pstmt.setString(1, vo.getId());
-			pstmt.setString(2, vo.getPwd());
-			rs=pstmt.executeQuery();
+		// 1.입력된 패스워드 암호화(입력된 id로 회원정보를 조회해서 pwd_enc와 pwd를 구한다.)
+		String id = vo.getId();	// 입력된 id
+		String pwd = vo.getPwd();	// 입력된 패스워드
+		MembersVo getinfovo = getinfo(id);	// getinfo 메소드 호출해서 해당id 사용자 정보를 getinfovo에 저장
+		if (getinfovo == null) {	// 입력된 아이디가 없을경우(getinfovo에 값이 없을경우)
+			return null;
+		}
+		String pwd_enc = getinfovo.getPwd_enc();	// DB에서 해당 id 사용자에 저장된 pwd_enc 암호화 키를 불러옴
+	        String loginCheckPwd = SHA256Util.getEncrypt(pwd, pwd_enc);		// 위에 키를 이용해 입력된 패스워드를 암호화 해 봄
+	        
+	        // 2. DB에 입력되어 있는 패스워드와 로그인시에 입력되어 암호화한 패스워드를 비교
+	        String encryptedPwd = getinfovo.getPwd();
+
+	        // lev가 9가 아니고, DB에 암호화된 패스워드와 로그인시 입력된 패스워드가 같으면 loginVo에 id, lev 값을 전달
+	        if (getinfovo.getLev() != 9 && encryptedPwd.equals(loginCheckPwd)) {
+			MembersVo loginVo=new MembersVo();
+
+			loginVo.setId(id);
+			loginVo.setLev(getinfovo.getLev());
 			
-			if(rs.next()) {
-				String id=rs.getString("id");
-				String pwd=rs.getString("pwd");
-				String email=rs.getString("email");
-				String phone=rs.getString("phone");
-				String addr=rs.getString("addr");
-				Integer lev=rs.getInt("lev");
-				Long coin=rs.getLong("coin"); 
-				
-				MembersVo loginVo=new MembersVo(id, pwd, email, phone, addr, lev, coin);
-				return loginVo;
-			}
-			return null;
-		}catch(SQLException se) {
-			System.out.println(se.getMessage());
-			return null;
-		}finally {
-			db.DBConnection.closeConn(rs, pstmt, con);
-		}	
+			return loginVo;
+	        }
+		
+		return null;
 	}
 	
 	// 사용자 등록
@@ -61,7 +57,7 @@ public class MembersDao {
 		PreparedStatement pstmt=null;
 		try {
 			con=db.DBConnection.getConn();
-			String sql="insert into users (id,pwd,email,phone,addr,regdate) values(?,?,?,?,?,sysdate)";
+			String sql="insert into users (id,pwd,email,phone,addr,regdate,pwd_enc) values(?,?,?,?,?,sysdate,?)";
 			pstmt=con.prepareStatement(sql);
 			
 			pstmt.setString(1,vo.getId());
@@ -69,6 +65,7 @@ public class MembersDao {
 			pstmt.setString(3,vo.getEmail());
 			pstmt.setString(4,vo.getPhone());
 			pstmt.setString(5,vo.getAddr());
+			pstmt.setString(6, vo.getPwd_enc());
 			
 			int n=pstmt.executeUpdate();
 			return n;
@@ -135,8 +132,10 @@ public class MembersDao {
 				String addr=rs.getString("addr");
 				Integer lev=rs.getInt("lev");
 				Long coin=rs.getLong("coin");
+				String pwd_enc=rs.getString("pwd_enc");
 				
 				MembersVo vo=new MembersVo(id, pwd, email, phone, addr, lev, coin);
+				vo.setPwd_enc(pwd_enc);
 				return vo;
 			} 
 			

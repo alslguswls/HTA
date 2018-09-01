@@ -11,9 +11,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.wh.MembersDao;
 import javafx.scene.control.Alert;
+import lib.SHA256Util;
 import vo.wh.MembersVo;
 /*
 2018-08-24	회원 가입 기능 작성		윤우현 
+2018-09-01	암호화 기능 추가		윤우현
  */
 @WebServlet("/membeInsert.do")
 public class InsertController extends HttpServlet {
@@ -23,7 +25,10 @@ public class InsertController extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		
 		String id=request.getParameter("id");
-		String pwd=request.getParameter("pwd");
+		String input_pwd=request.getParameter("pwd");	// 입력된 평문 패스워드
+		String pwd_enc = SHA256Util.generateSalt();	// 암호화 키
+	        String pwd = SHA256Util.getEncrypt(input_pwd, pwd_enc);	// 평문 패스워드를 암호화
+
 		String email=request.getParameter("email");
 		String phone=request.getParameter("phone");
 		String addr=request.getParameter("addr");
@@ -32,6 +37,7 @@ public class InsertController extends HttpServlet {
 		
 		MembersDao dao=new MembersDao();
 		MembersVo vo=new MembersVo(id, pwd, email, phone, addr, 0, 0L);
+		vo.setPwd_enc(pwd_enc);
 		int n = dao.insert(vo);
 		if(n>0) {
 			response.sendRedirect("layout.jsp?page=login.jsp");
