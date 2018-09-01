@@ -9,14 +9,14 @@
 <c:set var="bstatus" value="<%=bstatus %>" />
 <h2>게시글목록</h2>     
 <div><a href="boardList.do?mod=getCate">글작성</a></div>
-<table>
+<table class="table table-hover">
 	<tr>
 		<th colspan="6">
-		<div>
-		<a href="<%=context %>/layout.jsp?page=boardList.do?mod=list&cul=1">조회순</a>
-		<a href="<%=context %>/layout.jsp?page=boardList.do?mod=list&cul=0">최근등록일</a>
-		<a href="<%=context %>/layout.jsp?page=boardList.do?mod=list&cul=2">경매임박순</a>
-		<a href="<%=context %>/layout.jsp?page=boardList.do?mod=list&cul=3">예약자순</a>
+		<div style="width: 100%">
+		<a href="<%=context %>/layout.jsp?page=boardList.do?mod=list&cul=1&cate=${cate}">조회순</a>
+		<a href="<%=context %>/layout.jsp?page=boardList.do?mod=list&cul=0&cate=${cate}">최근등록일</a>
+		<a href="<%=context %>/layout.jsp?page=boardList.do?mod=list&cul=2&cate=${cate}">경매임박순</a>
+		<a href="<%=context %>/layout.jsp?page=boardList.do?mod=list&cul=3&cate=${cate}">예약자순</a>
 		</div>
 		</th>
 		
@@ -26,16 +26,14 @@
 	</tr>
 		<c:forEach var="n" items="${list}">
 			<tr>
-				<td>${n.bnum }<td>
-				<td><a href="detail.do?cmd=detail&bnum=${n.bnum}">${n.title }</a><td>
-				<td>${n.id }<td>
+				<td>${n.bnum }</td>
+				<td><a href="detail.do?cmd=detail&bnum=${n.bnum}" >${n.title }</a></td>
+				<td>${n.id }</td>
 				<td>${bstatus[n.status]}</td>
-				<td>${n.hit }<td>
-				<td>${n.regdate }<td>
+				<td>${n.hit }</td>
+				<td>${n.regdate }</td>
 			</tr>
 		</c:forEach>
-		
-		
 	<tr>
 		<td colspan="6">
 		<!-- 페이징 -->
@@ -76,7 +74,7 @@
 		</td>
 	</tr>
 	<tr>
-		<td colspan="5">
+		<td colspan="6">
 			<form method="post" action="<%=context %>/boardList.do?mod=list">
 			<select name="searchSel">
 				<option value="0">제목</option>

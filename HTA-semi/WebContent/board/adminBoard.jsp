@@ -9,19 +9,19 @@
 <c:set var="bstatus" value="<%=bstatus %>" />
 <h3>게시글관리페이지</h3>
 <!-- <div><a href="boardList.do?mod=getCate">글작성</a></div> -->
-<table>
+<table class="table table-hover">
 	<tr>
 		<th colspan="12">
 		<div>
-		<select id="AdminCategorySel" onchange="selCate()">
+		<select id="AdminCategorySel" onchange="selCate(this.value)">
 				<c:forEach var="Acate" items="${list1 }">
-					<option value="${Acate.cate }">${Acate.name }</option>
+					<option value="${Acate.cate }" <c:if test="${cate eq Acate.cate}">selected</c:if>>${Acate.name }</option>
 				</c:forEach>
 		</select>
-		<a href="<%=context %>/layout.jsp?page=boardList.do?mod=list&cul=1&admin=1">조회순</a>
-		<a href="<%=context %>/layout.jsp?page=boardList.do?mod=list&cul=0&admin=1">최근등록일</a>
-		<a href="<%=context %>/layout.jsp?page=boardList.do?mod=list&cul=2&admin=1">경매임박순</a>
-		<a href="<%=context %>/layout.jsp?page=boardList.do?mod=list&cul=3&admin=1">예약자순</a>
+		<a href="<%=context %>/layout.jsp?page=boardList.do?mod=list&cul=1&admin=1&cate=${cate}">조회순</a>
+		<a href="<%=context %>/layout.jsp?page=boardList.do?mod=list&cul=0&admin=1&cate=${cate}">최근등록일</a>
+		<a href="<%=context %>/layout.jsp?page=boardList.do?mod=list&cul=2&admin=1&cate=${cate}">경매임박순</a>
+		<a href="<%=context %>/layout.jsp?page=boardList.do?mod=list&cul=3&admin=1&cate=${cate}">예약자순</a>
 		</div>
 		</th>
 		
@@ -34,18 +34,18 @@
 	</tr>
 		<c:forEach var="n" items="${list}">
 			<tr>
-				<td>${n.bnum }<td>
-				<td>${n.id }<td>
-				<td>	<a href="detail.do?cmd=detail&bnum=${n.bnum}&admin=1">${n.title }</a><td>
+				<td>${n.bnum }</td>
+				<td>${n.id }</td>
+				<td>	<a href="detail.do?cmd=detail&bnum=${n.bnum}&admin=1">${n.title }</a></td>
 				<td>${n.content }</td>
 				<td>${n.starttime }</td>
 				<td>${n.startprice }</td>
-				<td>${n.hit }<td>
+				<td>${n.hit }</td>
 				<td>${n.regv}</td>	
 				<td>${bstatus[n.status]}</td>
-				<td>${n.regdate }<td>
+				<td>${n.regdate }</td>
 				<td><input type="button" value="수정" onclick="javascript:AboardModify(${n.bnum})" class="btn btn-default btn-xs"></td>
-				<td><input type="button" value="삭제" onclick="javascript:AboardDelete(${n.bnum})" class="btn btn-default btn-xs"><td>
+				<td><input type="button" value="삭제" onclick="javascript:AboardDelete(${n.bnum})" class="btn btn-default btn-xs"></td>
 			</tr>
 		</c:forEach>
 	<tr>
@@ -72,8 +72,6 @@
 				</c:otherwise>
 			</c:choose>	
 			</c:forEach>
-			
-			
 			<!-- 다음 -->
 			<c:choose>
 				<c:when test="${endPage<pageCount }">
@@ -88,7 +86,7 @@
 		</td>
 	</tr>
 	<tr>
-		<td colspan="5">
+		<td colspan="12">
 			<form method="post" action="<%=context %>/boardList.do?mod=list&admin=1">
 			<select name="searchSel">
 				<option value="0">제목</option>

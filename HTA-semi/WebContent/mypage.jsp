@@ -10,7 +10,7 @@
 	<ul><a href="layout.jsp?page=coin.do&left=mypage.jsp"> 코인 충전</a></ul>
 	<ul><a href="layout.jsp?page=perReser.do"> 경매 예약 확인 </a></ul>
 	<ul><a href="layout.jsp?page=joinDeal.do"> 경매 낙찰이력 확인 </a></ul>
-	<ul><a href="layout.jsp?page=joinchat.do"> 경매 참여이력 확인 </a></ul>
+	<ul><a href="layout.jsp?page=joinchat.do"> 경매 출품내역 확인 </a></ul>
 
 
 	<!--   ' &left=mypage.jsp ' 링크걸때 이거 파라메터 값 넣어줘야 함

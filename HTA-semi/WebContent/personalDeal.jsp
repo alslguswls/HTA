@@ -1,3 +1,4 @@
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
        <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"   %>
@@ -11,19 +12,25 @@
 </script>
 </head>
 <body>
+<%
+	ArrayList<String> list = (ArrayList<String>) request.getAttribute("titleList");
+%>
+
 <h3>낙찰물품 목록</h3>
 <br>
 <table border="1" width="500">
 	<tr>
-		<th>경매시작 순번</th><th>경매게시글 번호</th><th>최고가</th><th>종료시간</th>	
+		<th>경매시작 순번</th><th>경매게시글 제목</th><th>최고가</th><th>종료시간</th>	
 	</tr>
 	<c:forEach var="dealvo" items="${listDeal }">
+		
 		<tr>
 			<td>${dealvo.rnum }</td>
-			<td><a href="detail.do?cmd=detail&bnum=${dealvo.bnum}">${dealvo.bnum }</a></td>
+			<td><a href="detail.do?cmd=detail&bnum=${dealvo.bnum}">${dealvo.title }</a></td>
 			<td>${dealvo.price }</td>
 			<td>${dealvo.endtime }</td>
 		</tr>
+		
 	</c:forEach>
 </table>
 <div>

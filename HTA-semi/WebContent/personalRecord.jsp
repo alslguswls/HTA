@@ -19,12 +19,12 @@
 <br>
 <table border="1" width="500">
 	<tr>
-		<th>예약된 순번</th><th>게시글 번호</th>	
+		<th>게시글 번호</th><th>제목</th>	
 	</tr>
 	<c:forEach var="reservo" items="${listReser }">
 		<tr>
-			<td>${reservo.vnum }</td>
-			<td><a href="detail.do?cmd=detail&bnum=${reservo.bnum}">${reservo.bnum }</a></td>
+			<td>${reservo.bnum }</td>
+			<td><a href="detail.do?cmd=detail&bnum=${reservo.bnum}">${reservo.title }</a></td>
 		</tr>
 	</c:forEach>
 </table>

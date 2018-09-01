@@ -109,15 +109,19 @@ public class boardDao {
 			pstmt.setInt(2, cate);
 			pstmt.setInt(3, startRow);
 			rs = pstmt.executeQuery();
-			ArrayList<boardVo> list = new ArrayList<>();
+			ArrayList<boardVo> list = new ArrayList<boardVo>();
 			while (rs.next()) {
 				int bnum = rs.getInt("bnum");
 				String id=rs.getString("id");
 				String title= rs.getString("title");
+				String content = rs.getString("content");
+				String starttime=rs.getString("starttime");
+				int startprice=rs.getInt("startprice");
 				int hit = rs.getInt("hit");
+				int regv = rs.getInt("regv");
 				int status = rs.getInt("status");
 				Date regdate = rs.getDate("regdate");
-				boardVo vo = new boardVo(bnum,id,cate,title,null,null,null,null,0,hit,0,status,regdate);
+				boardVo vo = new boardVo(bnum,id,cate,title,content,null,null,starttime,startprice,hit,regv,status,regdate);
 				list.add(vo);
 			}
 			return list;

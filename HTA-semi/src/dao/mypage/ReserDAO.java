@@ -14,6 +14,8 @@ import vo.ms.ChatVo;
 import vo.ms.MpriceVo;
 import vo.ms.ReservationVo;
 import vo.ms.ResultVo;
+import vo.mypage.DealTableVO;
+import vo.mypage.ReservationTitleVO;
 import vo.notice.NoticeVO;
 
 public class ReserDAO {
@@ -47,15 +49,15 @@ public class ReserDAO {
 		}
 	}*/
 	
-	public ArrayList<ReservationVo> reserAll(int startRow, int endRow, String id){
+	public ArrayList<ReservationTitleVO> reserAll(int startRow, int endRow, String id){
 		//예약한 것들 전부 호출
 		Connection con = null;
 		PreparedStatement pre = null;
-		String sql="select * from (select aa.*, rownum rnum from(select * from reservation  where id=? order by vnum desc) aa) where rnum>=? and rnum<=?";
+		String sql="select * from (select aa.*, rownum rnum from(select a.*, b.title from reservation a, board b where a.bnum=b.bnum and b.id=? order by a.bnum desc) aa) where rnum>=? and rnum<=?";
 		ResultSet re = null;
 		
 		try {
-			ArrayList<ReservationVo> list = new ArrayList<>();
+			ArrayList<ReservationTitleVO> list = new ArrayList<>();
 			con=DBConnection.getConn();
 			pre=con.prepareStatement(sql);
 			pre.setString(1, id);
@@ -64,10 +66,11 @@ public class ReserDAO {
 			
 			re=pre.executeQuery();
 			while (re.next()) {
-				String id2 = re.getString("id");
-				int vnum = re.getInt("vnum");
+				//String id2 = re.getString("id");
+				//int vnum = re.getInt("vnum");
 				int bnum = re.getInt("bnum");
-				ReservationVo vo = new ReservationVo(vnum, bnum, id2);
+				String title = re.getString("title");
+				ReservationTitleVO vo = new ReservationTitleVO(bnum, title);
 				list.add(vo);
 				
 			}
@@ -105,14 +108,15 @@ public class ReserDAO {
 		}
 	}
 	
-	public ArrayList<ResultVo> dealJoin(String id, int startRow, int endRow ){
+	public ArrayList<DealTableVO> dealJoin(String id, int startRow, int endRow ){
 		//경매낙찰받은 것들 호출
 		Connection con = null;
 		PreparedStatement pre = null;
-		String sql="select * from (select aa.*, rownum rnum2 from (select * from result where id=? order by rnum desc) aa) where rnum2>=? and rnum2<=?";
+		String sql="select * from (select aa.*, rownum rnum2 from (select a.*, b.title from result a, board b where a.bnum=b.bnum and b.id=? order by a.bnum desc) aa) where rnum2>=? and rnum2<=?";
 		ResultSet re = null;
 		try {
-			ArrayList<ResultVo> list = new ArrayList<>();
+			ArrayList<DealTableVO> list = new ArrayList<>();
+			
 			con=DBConnection.getConn();
 			pre=con.prepareStatement(sql);
 			pre.setString(1, id);
@@ -121,12 +125,23 @@ public class ReserDAO {
 			re=pre.executeQuery();
 			while (re.next()) {
 				int rnum=re.getInt("rnum");
+			
 				int bnum = re.getInt("bnum");
-				String dealid = re.getString("id");
-				int price = re.getInt("price");
-				Date endtime = re.getDate("endtime");
 				
-				ResultVo vo = new ResultVo(rnum, bnum, dealid, price, endtime);
+				String dealid = re.getString("id");
+			
+				int price = re.getInt("price");
+		
+				Date endtime = re.getDate("endtime");
+			
+				String title = re.getString("title");
+				//ResultVo vo = new ResultVo(rnum, bnum, dealid, price, endtime);
+				//list.add(rnum);
+				//list.add(bnum);
+				//list.add(dealid);
+				//list.add(price);
+				//list.add(endtime);
+				DealTableVO vo = new DealTableVO(rnum, bnum, dealid, price, endtime, title);
 				list.add(vo);
 			}
 			return list;
@@ -205,6 +220,36 @@ public class ReserDAO {
 			DBConnection.closeConn(re, pre, con);
 		}
 	}
+	public ArrayList<String> titleTable(String id){
+		//경매창 생성한거 전부 호출하는 dao
+		Connection con = null;
+		PreparedStatement pre = null;
+		String sql="select a.*, b.title from result a, board b where a.bnum=b.bnum and b.id=? order by a.bnum desc";
+		ResultSet re = null;
+		try {
+			ArrayList<String> list = new ArrayList<>();
+			con=DBConnection.getConn();
+			pre=con.prepareStatement(sql);
+			pre.setString(1, id);
+		
+			re=pre.executeQuery();
+			if (re.next()) {
+				
+				String title = re.getString("title");
+				
+				
+				list.add(title);
+			}
+			return list;
+			
+		} catch(SQLException sq) {
+			System.out.println(sq.getMessage());
+			return null;
+		}finally {
+			DBConnection.closeConn(re, pre, con);
+		}
+	}
+	
 	
 	public int getChatCount(String id) {
 		//경매 생성 개수 세는 다오
