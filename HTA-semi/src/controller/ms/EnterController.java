@@ -210,6 +210,13 @@ public class EnterController extends HttpServlet{
 			if(rvo == null) {
 				int n = rdao.insert(new ResultVo(0, bnum, vo.getId(), vo.getMaxprice(), new Date()));
 				if(n>0) {
+					UsersDao udao = new UsersDao();
+					int n1 = udao.coinUpdate(vo.getId(), -(vo.getMaxprice()));
+					if(n1>0) {
+						BoardDao bdao = new BoardDao();
+						BoardVo bvo = bdao.detail(bnum);
+						udao.coinUpdate(bvo.getId(), vo.getMaxprice());
+					}
 					end(request, response);
 					return;
 				}
