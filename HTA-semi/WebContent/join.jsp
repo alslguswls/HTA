@@ -2,7 +2,8 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <!-- 
-작업자:윤우현
+2018-09-01	윤우현	패스워드 8자 이상, 이메일 입력 조건식 작성
+2018-09-02	윤우현	패스워드 8자 이상, 대문자,숫자,특수문자 1개씩 추가 필요 작성
  -->
 <html>
 <head>
@@ -46,7 +47,8 @@
 		}
 		xhr2=new XMLHttpRequest();
 		xhr2.onreadystatechange=pwd_callback;
-		xhr2.open('get','pwdcheck.jsp?pwd='+pwd + '&pwd2='+ pwd2,true);
+		// '#'은 url로 넘길때 anchor로 인식해서 뒤에 문자들이 날라감. escape로 감싸주면 처리됨
+		xhr2.open('get','pwdcheck.jsp?pwd=' + escape(pwd) + '&pwd2='+ escape(pwd2),true);	
 		xhr2.send();
 	}
 	
@@ -68,8 +70,10 @@
 	function check(){
 		var id=document.f.id.value;
 		var pwd=document.f.pwd.value;
+		var pwdExp = /^(?=.*?[A-Z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;	// 패스워드 체크 정규식
 		var pwd2=document.f.pwd2.value;
 		var email=document.f.email.value;
+		var emailExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i; // 이메일 형식체크 정규식
 		var phone=document.f.phone.value;
 		var addr=document.f.addr.value;
 		if(id==""){
@@ -78,12 +82,18 @@
 		}else if(pwd==""){
 			alert("패스워드를 입력하세요");
 			return false;
+		}else if(pwd.match(pwdExp) == null ){
+			alert("패스워드 형식에 맞게 입력해주세요");
+			return false;
 		}else if(pwd != pwd2){
 			alert("패스워드를 확인하세요");
 			return false;
 			pwd.focus();
 		}else if(email==""){
 			alert("이메일을 입력하세요");
+			return false;
+		}else if(email.match(emailExp) == null){
+			alert("이메일 형식에 맞게 입력하세요");
 			return false;
 		}else if(phone==""){
 			alert("전화번호를 입력하세요");
@@ -110,7 +120,8 @@
 	-->
 	
 	<tr>
-		<td><label for="id">아이디</label></td>
+		<td><label for="id">아이디</label>			
+		</td>	
 		<td>
 			<input type="text" class="form-control" name="id" id="id" onkeyup="idcheck()">
 			<!-- 아이디 중복검사 기능 -->
@@ -118,7 +129,10 @@
 		</td>
 	</tr>
 	<tr>
-		<td><label for="pwd">패스워드</label></td>
+		<td><label for="pwd">패스워드</label>
+			<br>
+			(대문자,숫자,특수문자 포함 <br> 8자 이상)
+		</td>
 		<td><input type="password" class="form-control" id="pwd" name="pwd"></td>
 	</tr>
 	<tr>
@@ -148,8 +162,5 @@
 	</tr>
 </table>
 </form>
-메인으로 이동...<a href="main.jsp">메인</a>
-회원목록...<a href="memberList.do">이동</a>
-
 </body>
 </html>

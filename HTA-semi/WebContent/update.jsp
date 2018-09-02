@@ -150,8 +150,5 @@
 	</tr>
 </table>
 </form>
-메인으로 이동...<a href="layout.jsp">메인</a>
-회원목록...<a href="memberList.do">이동</a>
-
 </body>
 </html>

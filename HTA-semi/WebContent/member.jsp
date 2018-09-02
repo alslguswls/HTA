@@ -29,41 +29,45 @@
 				<td>${vo.email }</td>
 				<td>${vo.phone }</td>
 				<td>${vo.regdate }</td>
-				<td><a href="layout.jsp?page=memberGetinfo.do?id=${vo.id }">수정</a></td>
-				<td><a href="memberDelete.do?id=${vo.id }">삭제</a></td>
+				<td><a class="btn btn-primary btn-xs" href="layout.jsp?page=memberGetinfo.do?id=${vo.id }">수정</a></td>
+				<td><a class="btn btn-danger btn-xs" href="memberDelete.do?id=${vo.id }">삭제</a></td>
 			</tr>
 		</c:forEach>
 	</table>
 	<div>
 		<!-- 이전 -->
-		<c:choose>
-			<c:when test="${startPage>10 }">
-				<a href="memberList.do?pageNum=${startPage-1 }">[이전]</a>
-			</c:when>
-			<c:otherwise>
-				[이전]
-			</c:otherwise>
-		</c:choose>
-		<c:forEach var="i" begin="${startPage }" end="${endPage }">
+		<ul class="pagination">
 			<c:choose>
-				<c:when test="${pageNum==i }">
-					<%--현재페이지인경우 --%>
-					<a href="memberList.do?pageNum=${i }"><span style="color: red">[${i }]</span></a>
+				<c:when test="${startPage>10 }">
+					<li><a href="memberList.do?pageNum=${startPage-1 }">[이전]</a> </li>
 				</c:when>
 				<c:otherwise>
-					<a href="memberList.do?pageNum=${i }"><span style="color: #555">[${i }]</span></a>
+					<li><span> 이전 </span></li>
 				</c:otherwise>
 			</c:choose>
-		</c:forEach>
+		<!-- 페이지 숫자들 -->
+		
+			<c:forEach var="i" begin="${startPage }" end="${endPage }">
+				<c:choose>
+					<c:when test="${pageNum==i }">
+						<%--현재페이지인경우 --%>
+						<li class="active"><a href="memberList.do?pageNum=${i }">${i }</a></li>
+					</c:when>
+					<c:otherwise>
+						<li><a href="memberList.do?pageNum=${i }">${i }</a></li>
+					</c:otherwise>
+				</c:choose>
+			</c:forEach>
 		<!-- 다음 -->
 		<c:choose>
 			<c:when test="${endPage<pageCount }">
-				<a href="memberList.do?pageNum=${endPage+1 }">[다음]</a>
+				<li><a href="memberList.do?pageNum=${endPage+1 }">[다음]</a></li>
 			</c:when>
 			<c:otherwise>
-				[다음]
+				<li><span>다음</span></li>
 			</c:otherwise>
 		</c:choose>
+		</ul>
 	</div>
 	
 	<!-- 회원 검색 기능 -->
@@ -76,7 +80,7 @@
 						<option value="email"> Email </option>
 					</select>
 					<input type="text" name="searchText" >
-					<input type="submit" value="조회">
+					<input type="submit" class="btn btn-warning btn-xs" value="조회">
 				</td>
 			</tr>
 			

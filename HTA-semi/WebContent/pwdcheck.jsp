@@ -13,6 +13,8 @@
 	request.setCharacterEncoding("utf-8"); // utf-8로 pwd받기
 	String pwd=request.getParameter("pwd");
 	String pwd2=request.getParameter("pwd2");
+	System.out.println("pwd=" + pwd);
+	System.out.println("pwd2=" + pwd2);
 	boolean same=false;
 	if(pwd.equals(pwd2)){
 		same=true;
