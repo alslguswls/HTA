@@ -15,9 +15,10 @@ String sid = (String)session.getAttribute("id");
 %> 
 <div>
 <c:set var="id1" value="${vo.id }" />
-<c:set var="bstatus" value="<%=bstatus %>" />
+<c:set var="bstatus" value="<%=bstatus %>"/>
 <c:set var="sid" value="<%=sid %>" />
-<c:set var="lev"	value="<%=sessionLev %>" />
+<c:set var="lev"	value="<%=sessionLev %>"/>
+<c:set var="orgfile"	value="${vo.orgfilename }"/>
 	<h3>경매품 조회</h3>
 	<table id="detailtable" class="table table-striped" border="2">
 		<tr>
@@ -52,7 +53,11 @@ String sid = (String)session.getAttribute("id");
 		</tr>
 		<tr>
 			<th>사진</th>
-			<td colspan="5"><img src="upload/${vo.savefilename }"></td>
+			<td colspan="5">
+				<c:if test="${orgfile ne null}">
+				<img src="upload/${vo.savefilename }">
+				</c:if>
+			</td>
 		</tr>
 		<tr>
 			<th>경매시작시간</th>

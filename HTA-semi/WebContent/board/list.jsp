@@ -16,7 +16,7 @@
 		<a href="<%=context %>/layout.jsp?page=boardList.do?mod=list&cul=0&cate=${cate}">최근등록일</a>
 		<a href="<%=context %>/layout.jsp?page=boardList.do?mod=list&cul=2&cate=${cate}">경매임박순</a>
 		<a href="<%=context %>/layout.jsp?page=boardList.do?mod=list&cul=3&cate=${cate}">예약자순</a>
-		<a href="boardList.do?mod=getCate" style="float: right;">글작성</a>
+		<a href="<%=context %>/boardList.do?mod=getCate" style="float: right;">글작성</a>
 		</div>
 		</th>
 		
