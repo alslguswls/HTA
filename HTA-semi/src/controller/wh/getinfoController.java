@@ -1,6 +1,7 @@
 package controller.wh;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.wh.MembersDao;
 import vo.wh.MembersVo;
@@ -19,6 +21,23 @@ import vo.wh.MembersVo;
 public class getinfoController extends HttpServlet {
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// 회원정보 수정을 관리자만 할 수 있음
+		HttpSession session = request.getSession();	// 세션 객체를 얻어옴
+		String checkId = (String) session.getAttribute("id");
+		String checkLev = (String)session.getAttribute("isAdmin");
+		
+		if (!"1".equals(checkLev)) {	// 절대 null 이 아닌 값을 앞에 넣어 비교하면 null 체크와 다른 경우를 같이 체크가능
+			response.setCharacterEncoding("UTF-8");
+			response.setContentType("text/html; charset=UTF-8");
+
+			PrintWriter pw = response.getWriter();
+			pw.println("<script>");
+			pw.println("alert('잘못된 접근입니다.');");
+			pw.println("location.href = 'layout.jsp' ");
+			pw.println("</script>");
+			return;
+		}
+		
 		String id = request.getParameter("id");
 		MembersDao dao = new MembersDao();
 		MembersVo vo = dao.getinfo(id);
@@ -33,9 +52,9 @@ public class getinfoController extends HttpServlet {
 			
 			RequestDispatcher rd = request.getRequestDispatcher("layout.jsp?page=/update.jsp&left=admin.jsp");
 			rd.forward(request, response);
-		}else {
+		}else { 
 			request.setAttribute("errMsg", "회원정보 조회 실패");
-			RequestDispatcher rd = request.getRequestDispatcher("/error.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("layout.jsp?page=error.jsp");
 			rd.forward(request, response);
 		}
 	}

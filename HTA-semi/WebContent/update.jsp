@@ -110,7 +110,9 @@
 	<tr>
 		<td><label for="id">아이디</label></td>
 		<td>
-			<input type="text" class="form-control" id="id" name="id" value="${requestScope.id }" readonly="readonly">
+			<input type="hidden" name="id" value="${id }" />
+			${id }
+<%-- 			<input type="text" class="form-control" id="id" name="id" value="${requestScope.id }" readonly="readonly"> --%>
 		</td>
 	</tr>
 	<tr>

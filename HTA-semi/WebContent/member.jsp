@@ -29,7 +29,7 @@
 				<td>${vo.email }</td>
 				<td>${vo.phone }</td>
 				<td>${vo.regdate }</td>
-				<td><a class="btn btn-primary btn-xs" href="layout.jsp?page=memberGetinfo.do?id=${vo.id }">수정</a></td>
+				<td><a class="btn btn-primary btn-xs" href="memberGetinfo.do?id=${vo.id }">수정</a></td>
 				<td><a class="btn btn-danger btn-xs" href="memberDelete.do?id=${vo.id }">삭제</a></td>
 			</tr>
 		</c:forEach>
