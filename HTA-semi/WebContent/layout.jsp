@@ -12,7 +12,7 @@
 		String page1 = request.getParameter("page");
 		if(page1 == null) page1 = "/boardList.do?mod=list";
 		String left1 = request.getParameter("left");
-		if(left1 == null) left1 = "/board/category.jsp";
+		if(left1 == null) left1 = "/board/category.jsp"; 
 	%>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<link rel="stylesheet" href="<%=context %>/css/bootstrap.min.css">

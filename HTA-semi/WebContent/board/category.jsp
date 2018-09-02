@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <div>
-	<div> 카테고리</div>
+	<h3>카테고리</h3>
 <ul>
 	<%
 		Object ocate = request.getAttribute("cate");

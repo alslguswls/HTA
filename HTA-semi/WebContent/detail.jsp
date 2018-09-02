@@ -14,7 +14,7 @@ String sid = (String)session.getAttribute("id");
  	String[] bstatus= lib.bStatus();
 %> 
 <div>
-<c:set var="id" value="${vo.id }" />
+<c:set var="id1" value="${vo.id }" />
 <c:set var="bstatus" value="<%=bstatus %>" />
 <c:set var="sid" value="<%=sid %>" />
 <c:set var="lev"	value="<%=sessionLev %>" />
@@ -26,11 +26,13 @@ String sid = (String)session.getAttribute("id");
 			<!--  status 1번 경매 진행중에는 삭제 수정 불가 
 							   2번 경매 종료 후 수정 불가능 
 			 -->
-			<c:if test="${id  eq sid or lev eq '1' or vo.status eq '1' }">
-				<c:if test="${vo.status ne '2'}">
-				<input type="button" value="수정" onclick="javascript:boardModify(${vo.bnum})" class="btn btn-default btn-xs">
-				</c:if>
+			<c:if test="${id1  eq sid or lev eq '1'}">
+				<c:if test="${vo.status ne '1' }">
+					<c:if test="${vo.status ne '2' }">
+					<input type="button" value="수정" onclick="javascript:boardModify(${vo.bnum})" class="btn btn-default btn-xs">
+					</c:if>
 				<input type="button" value="삭제" onclick="javascript:boardDelete(${vo.bnum})" class="btn btn-default btn-xs">
+				</c:if>
 			</c:if>
 			</td>
 			<th>작성자</th>
