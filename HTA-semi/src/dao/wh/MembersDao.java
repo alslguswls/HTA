@@ -19,6 +19,7 @@ import vo.wh.MembersVo;
 /*
 2018-08-26	윤우현 	사용자 로그인 처리 여부 수정(전체 데이터 서치 방법 폐기. id, pw 존재 여부만 확인)
 2018-09-01	윤우현 	사용자 패스워드 암호화 기능 추가(회원가입시, 로그인 처리시)
+2018-09-01	윤우현 	사용자 패스워드 암호화 기능 추가(회원 정보 수정시)
  */
 
 public class MembersDao {
@@ -155,14 +156,15 @@ public class MembersDao {
 		PreparedStatement pstmt=null;
 		try {
 			con=DBConnection.getConn();
-			String sql="update users set pwd=?,email=?, phone=?, addr=?, coin=? where id=?";
+			String sql="update users set pwd=?,email=?, phone=?, addr=?, coin=?, pwd_enc = ? where id=?";
 			pstmt=con.prepareStatement(sql);
 			pstmt.setString(1,vo.getPwd());
 			pstmt.setString(2,vo.getEmail());
 			pstmt.setString(3,vo.getPhone());
 			pstmt.setString(4,vo.getAddr());
 			pstmt.setLong(5,vo.getCoin());
-			pstmt.setString(6, vo.getId());
+			pstmt.setString(6, vo.getPwd_enc());
+			pstmt.setString(7, vo.getId());
 			int n=pstmt.executeUpdate();
 			return n;
 		}catch(Exception e) {

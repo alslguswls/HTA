@@ -102,8 +102,6 @@
 			alert("주소를 입력하세요");
 			return false;
 		}
-		alert("가입을 축하합니다");
-		
 	}
 	
 

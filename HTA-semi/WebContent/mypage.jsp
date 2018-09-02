@@ -4,6 +4,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- 
 2018-08-28	윤우현	마이페이지 작성
+2018-09-02	윤우현	회원정보 수정 페이지 추가
  -->
 	<%
 		Object ocate = request.getAttribute("cate");
@@ -12,6 +13,14 @@
 	%>
 	<div align="center">
 		<div> 마이페이지 </div> 
+		<c:choose>
+			<c:when test="${cate == 5 }">
+				<ul><a href="layout.jsp?page=memberGetinfo.do&left=mypage.jsp" style="color: #ff5;"> 회원정보수정</a></ul>
+			</c:when>
+			<c:otherwise>
+				<ul><a href="layout.jsp?page=memberGetinfo.do&left=mypage.jsp"> 회원정보수정</a></ul>
+			</c:otherwise>
+		</c:choose>
 		<c:choose>
 			<c:when test="${cate == 1 }">
 				<ul><a href="layout.jsp?page=coin.do&left=mypage.jsp" style="color: #ff5;"> 코인 충전</a></ul>

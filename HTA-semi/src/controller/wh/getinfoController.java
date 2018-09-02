@@ -15,7 +15,8 @@ import dao.wh.MembersDao;
 import vo.wh.MembersVo;
 
 /**
-2018-08-27	회원 수정 시 조회 기능 작성중		윤우현 
+2018-08-27	윤우현 	회원 수정 시 조회 기능 작성중
+2018-09-02	윤우현 	관리자만 회원 관리 페이지 들어가도록 수정, 일반사용자 자신의 회원정보만 수정 가능하게 변경
  */
 @WebServlet("/memberGetinfo.do")
 public class getinfoController extends HttpServlet {
@@ -26,7 +27,7 @@ public class getinfoController extends HttpServlet {
 		String checkId = (String) session.getAttribute("id");
 		String checkLev = (String)session.getAttribute("isAdmin");
 		
-		if (!"1".equals(checkLev)) {	// 절대 null 이 아닌 값을 앞에 넣어 비교하면 null 체크와 다른 경우를 같이 체크가능
+		if ( checkId == null ) {	// 로그인을 안했을때 아웃
 			response.setCharacterEncoding("UTF-8");
 			response.setContentType("text/html; charset=UTF-8");
 
@@ -38,7 +39,13 @@ public class getinfoController extends HttpServlet {
 			return;
 		}
 		
-		String id = request.getParameter("id");
+		String id = null;
+		if ( "1".equals(checkLev)) {
+			 id = request.getParameter("id");
+		} else {
+			id = checkId;
+		}
+		
 		MembersDao dao = new MembersDao();
 		MembersVo vo = dao.getinfo(id);
 		

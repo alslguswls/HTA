@@ -1,6 +1,7 @@
 package controller.wh;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,8 +15,9 @@ import javafx.scene.control.Alert;
 import lib.SHA256Util;
 import vo.wh.MembersVo;
 /*
-2018-08-24	회원 가입 기능 작성		윤우현 
-2018-09-01	암호화 기능 추가		윤우현
+2018-08-24	윤우현 	회원 가입 기능 작성	
+2018-09-01	윤우현 	암호화 기능 추가
+2018-09-02	윤우현 	회원 가입 alert 문구 수정
  */
 @WebServlet("/membeInsert.do")
 public class InsertController extends HttpServlet {
@@ -40,7 +42,14 @@ public class InsertController extends HttpServlet {
 		vo.setPwd_enc(pwd_enc);
 		int n = dao.insert(vo);
 		if(n>0) {
-			response.sendRedirect("layout.jsp?page=login.jsp");
+			
+			response.setContentType("text/html; charset=UTF-8");
+			
+			PrintWriter pw = response.getWriter();
+			pw.println("<script>");
+			pw.println("alert('가입을 축하드립니다.');");
+			pw.println("location.href = 'layout.jsp?page=login.jsp';");
+			pw.println("</script>");
 		}else {
 			request.setAttribute("errMsg", "오류로 인해 회원가입이 실패하였습니다.");
 			RequestDispatcher rd = request.getRequestDispatcher("/error.jsp");
