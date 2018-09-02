@@ -127,9 +127,11 @@
 		</td>
 	</tr>
 	<tr>
-		<td><label for="pwd">패스워드</label></td>
-			<br>
-			(대문자,숫자,특수문자 포함 <br> 8자 이상)
+		<td>
+			<label for="pwd">패스워드
+				<br>
+				(대문자,숫자,특수문자 포함 <br> 8자 이상)
+			</label></td>
 		<td>
 			<input type="password" class="form-control" id="pwd" name="pwd" >
 		</td>
