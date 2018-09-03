@@ -18,9 +18,9 @@
 
 <h3>낙찰물품 목록</h3>
 <br>
-<table border="1" width="500">
+<table class="table table-striped">
 	<tr>
-		<th>경매시작 순번</th><th>경매게시글 제목</th><th>최고가</th><th>종료시간</th>	
+		<th class="text-center col-sm-1">경매시작 순번</th><th class="text-center col-sm-1">경매게시글 제목</th><th class="text-center col-sm-1">최고가</th><th class="text-center col-sm-1">종료시간</th>	
 	</tr>
 	<c:forEach var="dealvo" items="${listDeal }">
 		

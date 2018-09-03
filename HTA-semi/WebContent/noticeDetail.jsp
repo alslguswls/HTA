@@ -11,6 +11,26 @@
 	outline:none;
 }
 
+div.button1
+
+{
+
+   margin: auto;
+
+   width: 50%;
+
+}
+
+div.button2
+
+{
+
+   margin: auto;
+
+   width: 50%;
+
+}
+
 </style>
 
 </head>
@@ -38,35 +58,35 @@
 			
 <h2>세부사항</h2>
 <form action="notiupdate.do" method="post" name="updatearticle">
-	<table style="border: 1px solid; border-collapse: collapse; ">
-		<tr style="border: 1px solid;">
-		<th style="border: 1px solid;">
+	<table class="table table-hover" style="width: 700px; margin: 50px auto 0px auto;">
+		<tr >
+		<th >
 			번호
 		</th>
-			<th>
-				<input type="text" value="<%=vode.getNoti_no() %>" name="noti_no"
+			<th class="form-group">
+				<input type="text" class="form-control" value="<%=vode.getNoti_no() %>" name="noti_no"
 					size="20" style="width: 100%; border: 0;"  readonly="readonly">
 			</th>
 			
 		</tr>
 	
-		<tr style="border: 1px solid;">
-		<td style="border: 1px solid;">
+		<tr >
+		<td >
 			제목
 		</td>
-			<td>
-				<input type="text" value="<%=vode.getTitle() %>" name="title"
+			<td class="form-group">
+				<input type="text" class="form-control" value="<%=vode.getTitle() %>" name="title"
 					size="20" style="width: 100%; border: 0;" readonly="readonly">
 			</td>
 			
 		</tr>
 		
-		<tr style="border: 1px solid;">
-		<td style="border: 1px solid;">
+		<tr >
+		<td >
 			내용
 		</td>
-			<td>
-				<textarea rows="10"  name="content"
+			<td class="form-group">
+				<textarea rows="10"  name="content" class="form-control col-sm-5"
 					style="width: 100%; border: 0; resize: none;" readonly="readonly">
 				<%=vode.getContent() %>
 				</textarea>
@@ -74,12 +94,12 @@
 			</td>
 			
 		</tr>
-		<tr style="border: 1px solid;">
-		<th style="border: 1px solid;">
+		<tr >
+		<th >
 			등록일
 		</th>
-			<th>
-				<input type="text" value="<%=vode.getRegdate() %>" name="regdate"
+			<th class="form-group">
+				<input type="text" class="form-control" value="<%=vode.getRegdate() %>" name="regdate"
 					size="20" style="width: 100%; border: 0;" readonly="readonly">
 			</th>
 			
@@ -87,10 +107,11 @@
 		
 	</table>
 	<br>
-	<input type="submit" value="수정">
-	<br>
+	<div class="button1">
+	<input type="submit" class="btn "  value="수정">&nbsp;
+	<input type="button" class="btn "  value="삭제" onclick="deleteSomething()">
+	</div>
 	</form>
-	<input type="button" value="삭제" onclick="deleteSomething()">
 	
 
 			<%
@@ -98,35 +119,35 @@
 			%>
 			<h2>세부사항</h2>
 			<form action="notiupdate.do" method="post" name="updatearticle">
-				<table style="border: 1px solid; border-collapse: collapse; ">
-					<tr style="border: 1px solid;">
-					<th style="border: 1px solid;">
+				<table class="table table-hover" style="width: 700px; margin: 50px auto 0px auto;">
+					<tr >
+					<th >
 						번호
 					</th>
-						<th>
-							<input type="text" value="<%=vode.getNoti_no() %>" name="noti_no"
+						<th class="form-group">
+							<input type="text" class="form-control" value="<%=vode.getNoti_no() %>" name="noti_no"
 								size="20" style="width: 100%; border: 0;"  readonly="readonly">
 						</th>
 						
 					</tr>
 				
-					<tr style="border: 1px solid;">
-					<td style="border: 1px solid;">
+					<tr >
+					<td >
 						제목
 					</td>
-						<td>
-							<input type="text" value="<%=vode.getTitle() %>" name="title"
+						<td class="form-group">
+							<input type="text" class="form-control" value="<%=vode.getTitle() %>" name="title"
 								size="20" style="width: 100%; border: 0;" readonly="readonly">
 						</td>
 						
 					</tr>
 					
-					<tr style="border: 1px solid;">
-					<td style="border: 1px solid;">
+					<tr >
+					<td >
 						내용
 					</td>
-						<td>
-							<textarea rows="10"  name="content"
+						<td class="form-group">
+							<textarea rows="10"  name="content" class="form-control col-sm-5"
 								style="width: 100%; border: 0; resize: none;" readonly="readonly">
 							<%=vode.getContent() %>
 							</textarea>
@@ -134,12 +155,12 @@
 						</td>
 						
 					</tr>
-					<tr style="border: 1px solid;">
-					<th style="border: 1px solid;">
+					<tr >
+					<th >
 						등록일
 					</th>
-						<th>
-							<input type="text" value="<%=vode.getRegdate() %>" name="regdate"
+						<th class="form-group">
+							<input type="text" class="form-control"  value="<%=vode.getRegdate() %>" name="regdate"
 								size="20" style="width: 100%; border: 0;" readonly="readonly">
 						</th>
 						
@@ -154,35 +175,35 @@
 			%>
 			<h2>세부사항</h2>
 			<form action="notiupdate.do" method="post" name="updatearticle">
-				<table style="border: 1px solid; border-collapse: collapse; ">
-					<tr style="border: 1px solid;">
-					<th style="border: 1px solid;">
+				<table class="table table-hover" style="width: 700px; margin: 50px auto 0px auto;">
+					<tr >
+					<th >
 						번호
 					</th>
-						<th>
-							<input type="text" value="<%=vode.getNoti_no() %>" name="noti_no"
+						<th class="form-group">
+							<input type="text" class="form-control" value="<%=vode.getNoti_no() %>" name="noti_no"
 								size="20" style="width: 100%; border: 0;"  readonly="readonly">
 						</th>
 						
 					</tr>
 				
-					<tr style="border: 1px solid;">
-					<td style="border: 1px solid;">
+					<tr >
+					<td >
 						제목
 					</td>
-						<td>
-							<input type="text" value="<%=vode.getTitle() %>" name="title"
+						<td class="form-group">
+							<input type="text" class="form-control" value="<%=vode.getTitle() %>" name="title"
 								size="20" style="width: 100%; border: 0;" readonly="readonly">
 						</td>
 						
 					</tr>
 					
-					<tr style="border: 1px solid;">
-					<td style="border: 1px solid;">
+					<tr >
+					<td >
 						내용
 					</td>
-						<td>
-							<textarea rows="10"  name="content"
+						<td class="form-group">
+							<textarea rows="10"  name="content" class="form-control col-sm-5"
 								style="width: 100%; border: 0; resize: none;" readonly="readonly">
 							<%=vode.getContent() %>
 							</textarea>
@@ -190,12 +211,12 @@
 						</td>
 						
 					</tr>
-					<tr style="border: 1px solid;">
-					<th style="border: 1px solid;">
+					<tr >
+					<th >
 						등록일
 					</th>
-						<th>
-							<input type="text" value="<%=vode.getRegdate() %>" name="regdate"
+						<th class="form-group">
+							<input type="text" class="form-control"  value="<%=vode.getRegdate() %>" name="regdate"
 								size="20" style="width: 100%; border: 0;" readonly="readonly">
 						</th>
 						
