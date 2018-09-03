@@ -7,7 +7,9 @@ create table users(
 	phone varchar2(20), --전화번호
 	addr varchar2(100), --주소
 	lev number(10), --레벨
-	coin number(38) --코인
+	coin number(38), --코인
+	regdate date,
+	pwd_enc varchar2(100)
 )tablespace semi;
 
 ######  게시판 테이블    #######
@@ -28,7 +30,6 @@ create table board(
 	regdate date default sysdate, --글등록일 수정일
 	CONSTRAINT pk_board PRIMARY KEY (bnum),
 	CONSTRAINT fk_board FOREIGN KEY(id) references users(id)
-	ON DELETE CASCADE
 )tablespace semi;
 drop sequence board_seq;
 create sequence board_seq;
@@ -115,16 +116,15 @@ drop sequence max_seq;
 create sequence max_seq;
 
 
-
-
-
 ######  공지사항 테이블    #######
+drop table noti;
 create table noti(
 	noti_no number(38) primary key, --공지번호
 	title varchar2(100), --제목
 	content varchar2(2000), --내용
 	regdate date default sysdate --등록일
 );
+drop sequence noti_seq;
 create sequence noti_seq;
 
 

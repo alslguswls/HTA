@@ -111,7 +111,7 @@ public class CategoryDao {
 	public int nameCK(String name) {
 		try {
 			con=DBConnection.getConn();
-			sql="select * from category where name like ?";
+			sql="select * from category where name = ?";
 			pstmt=con.prepareStatement(sql);
 			pstmt.setString(1, name);
 			rs=pstmt.executeQuery();

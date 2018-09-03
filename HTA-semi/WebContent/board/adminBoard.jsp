@@ -4,6 +4,10 @@
 <%
 	String context = application.getContextPath();
 	String bstatus[] = lib.bStatus();
+	String sid = (String)session.getAttribute("id");
+	if(sid==null){
+		pageContext.forward("/layout.jsp?page=/login.jsp");
+	}
 %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="bstatus" value="<%=bstatus%>" />
