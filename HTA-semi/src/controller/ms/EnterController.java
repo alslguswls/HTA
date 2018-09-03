@@ -67,7 +67,8 @@ public class EnterController extends HttpServlet{
 		if(resv) {
 			json.put("resv", true);
 		}else {
-			json.put("resv", false);
+			//json.put("resv", false);
+			json.put("resv", true);
 		}
 		PrintWriter pw = response.getWriter();
 		pw.println(json.toString());
@@ -119,7 +120,19 @@ public class EnterController extends HttpServlet{
 		HttpSession session = request.getSession();
 		int bnum = Integer.parseInt(request.getParameter("bnum"));
 		String id = (String)session.getAttribute("id");
-		int price = Integer.parseInt(request.getParameter("price"));
+		String sprice = request.getParameter("price");
+		char[] spriceArr = sprice.toCharArray();
+		JSONObject json = new JSONObject();
+		for(char c : spriceArr) {
+			if(!(c>=48 && c<=57)) {
+				json.put("msg", "숫자만 입력하세요.");
+				PrintWriter pw = response.getWriter();
+				pw.println(json.toString());
+				pw.close();
+				return;
+			}
+		}
+		int price = Integer.parseInt(sprice);
 		MpriceDao dao = new MpriceDao();
 		MpriceVo vo = dao.select(bnum);
 		BoardDao bdao = new BoardDao();
@@ -127,17 +140,20 @@ public class EnterController extends HttpServlet{
 		int status = bvo.getStatus();
 		UsersDao udao = new UsersDao();
 		UsersVo uvo = udao.select(id);
-		JSONObject json = new JSONObject();
 		if(status == 2) {
 			json.put("msg", "경매가 종료되어 호가에 실패했습니다..");
 		}else {
 			if(uvo.getCoin() >= price) {
 				if(vo == null) {
-					int n = dao.insert(new MpriceVo(0, bnum, id, price));
-					if(n>0) {
-						json.put("msg", "success");
+					if(bvo.getStartprice() < price) {
+						int n = dao.insert(new MpriceVo(0, bnum, id, price));
+						if(n>0) {
+							json.put("msg", "success");
+						}else {
+							json.put("msg", "오류로 인해 호가에 실패했습니다.");
+						}
 					}else {
-						json.put("msg", "오류로 인해 호가에 실패했습니다.");
+						json.put("msg", "시작가 이상의 금액을 입력하세요.");
 					}
 				}else{
 					if(vo.getMaxprice() < price) {
@@ -152,7 +168,7 @@ public class EnterController extends HttpServlet{
 					}
 				}
 			}else {
-				json.put("msg", "보유 coin이상의 호가는 불가합니다.");
+				json.put("msg", "보유 coin이상의 호가는 불가합니다.\r\n충전하시겠습니까?");
 			}
 		}
 		PrintWriter pw = response.getWriter();
