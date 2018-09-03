@@ -10,6 +10,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>member.jsp</title>
 <style>table {margin:auto;text-align:center }</style>
+ <script type="text/javascript">
+	 function goDelete(id) {
+		       if (confirm("삭제하시겠습니까?") == true) {
+		 location.href ="memberDelete.do?id=" + id;
+		       }
+		}
+</script>
 </head>
 <body align="center">
 <br>
@@ -30,7 +37,8 @@
 				<td>${vo.phone }</td>
 				<td>${vo.regdate }</td>
 				<td><a class="btn btn-primary btn-xs" href="memberGetinfo.do?id=${vo.id }">수정</a></td>
-				<td><a class="btn btn-danger btn-xs" href="memberDelete.do?id=${vo.id }">삭제</a></td>
+				<td><a class="btn btn-danger btn-xs" href="javascript:goDelete('${vo.id}')">삭제</a></td>
+<!-- 				href="btn_confirm_click()  -->
 			</tr>
 		</c:forEach>
 	</table>

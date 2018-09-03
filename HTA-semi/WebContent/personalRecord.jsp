@@ -17,9 +17,9 @@
 
 <h3>참여 예약목록</h3>
 <br>
-<table border="1" width="500">
+<table class="table table-striped">
 	<tr>
-		<th>게시글 번호</th><th>제목</th>	
+		<th class="text-center col-sm-1">게시글 번호</th><th class="text-center col-sm-1">제목</th>	
 	</tr>
 	<c:forEach var="reservo" items="${listReser }">
 		<tr>

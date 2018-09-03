@@ -13,11 +13,27 @@
 <body >
 <h3>공지사항 작성</h3>
 <form action="notiinsert.do" name="insert" method="post">
-제목:<input type="text" name="title"><br>
-내용:<textarea rows="5" cols="50" name="content">
+<table class="table table-hover" style="width: 700px; margin: 50px auto 0px auto;">
+<tr>
+<th>
+제목
+</th>
+<th class="form-group">
+<input type="text"  class="form-control" name="title">
+</th>
+</tr>
+<tr>
+<th>
+내용
+</th>
+<td class="form-group">
+<textarea rows="5" class="form-control col-sm-5" cols="50" name="content">
+</textarea>
+</td>
+</tr>
 
-</textarea><br>
-<input type="submit" value="등록">
+</table>
+<input type="submit" class="btn " value="등록">
 </form>
 </body>
 </html>

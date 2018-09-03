@@ -13,9 +13,9 @@
 <body >
 	<h3>경매 출품내역 확인</h3>
 <br>
-<table border="1" width="500">
+<table class="table table-striped">
 	<tr>
-		<th>카테고리</th><th>제목</th><th>내용</th><th>시작가</th><th>등록일</th>
+		<th class="text-center col-sm-1">카테고리</th><th class="text-center col-sm-1">제목</th><th class="text-center col-sm-1">내용</th><th class="text-center col-sm-1">시작가</th><th class="text-center col-sm-1">등록일</th>
 	</tr>
 	<c:forEach var="chatvo" items="${listChat }">
 		<tr>

@@ -27,7 +27,10 @@ function writeNext() {
  	
  	if(admin1.equals("1")){
  		%>
- 		<button type="button" value="글 작성" onclick="writeNext()" class="btn btn-default"></button>    
+ 		<br>
+ 		<br>
+ 		<input type="button" class="btn btn-warning btn-sm" value="글 작성" onclick="writeNext()">
+ 		    
  		
  		<%
  	} else{

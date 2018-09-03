@@ -19,35 +19,35 @@
 %>
 <h2>수정사항</h2>
 <form action="notiupdateResult.do" method="post" name="updatearticle">
-	<table style="border: 1px solid; border-collapse: collapse; ">
-		<tr style="border: 1px solid;">
-		<th style="border: 1px solid;">
+	<table class="table table-hover" style="width: 700px; margin: 50px auto 0px auto;">
+		<tr >
+		<th >
 			번호
 		</th>
-			<th>
-				<input type="text" value="<%=vo3.getNoti_no() %>" name="noti_no"
+			<th class="form-group">
+				<input type="text" class="form-control" value="<%=vo3.getNoti_no() %>" name="noti_no"
 					size="20" style="width: 100%; border: 0;"  readonly="readonly">
 			</th>
 			
 		</tr>
 	
-		<tr style="border: 1px solid;">
-		<td style="border: 1px solid;">
+		<tr >
+		<td >
 			제목
 		</td>
-			<td>
-				<input type="text" value="<%=vo3.getTitle() %>" name="title"
+			<td class="form-group">
+				<input type="text" class="form-control" value="<%=vo3.getTitle() %>" name="title"
 					size="20" style="width: 100%; border: 0;">
 			</td>
 			
 		</tr>
 		
-		<tr style="border: 1px solid;">
-		<td style="border: 1px solid;">
+		<tr >
+		<td >
 			내용
 		</td>
-			<td>
-				<textarea rows="10"  name="content"
+			<td class="form-group">
+				<textarea rows="10" class="form-control col-sm-5"  name="content"
 					style="width: 100%; border: 0; resize: none;">
 				<%=vo3.getContent() %>
 				</textarea>
@@ -55,12 +55,12 @@
 			</td>
 			
 		</tr>
-		<tr style="border: 1px solid;">
-		<th style="border: 1px solid;">
+		<tr >
+		<th >
 			등록일
 		</th>
-			<th>
-				<input type="text" value="<%=vo3.getRegdate() %>" name="regdate"
+			<th class="form-group">
+				<input type="text" class="form-control" value="<%=vo3.getRegdate() %>" name="regdate"
 					size="20" style="width: 100%; border: 0;" readonly="readonly">
 			</th>
 			
@@ -68,7 +68,7 @@
 		
 	</table>
 	<br>
-<input type="submit" value="수정">
+<input type="submit" class="btn " value="수정">
 </form>
 
 </body>

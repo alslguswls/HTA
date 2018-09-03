@@ -10,8 +10,7 @@
 		int cate1 = 1;
 		if(ocate != null) cate1 = (int)ocate;
 	%>
-<div align="center">
-	<div align="center"><th> 관리자 페이지 </th></div>
+<div align="center"><th><strong> 관리자 페이지 </strong></th></div>
 	<c:set var="cate" value="<%=cate1 %>"></c:set>
 	<c:choose>
 		<c:when test="${cate == 1 }">

@@ -17,6 +17,11 @@ function writeSearch() {
 }
 
 </script>
+<style type="text/css">
+	td {color:#80bfff;}
+	th {margin-left: auto; margin-right: auto;  text-align: center;}
+
+</style>
 </head>
 <body>
 <%	//로그인으로 넘겨받은 id
@@ -35,7 +40,7 @@ function writeSearch() {
 		
 		 if(list33!=null){//검색된 공지사항 있을때
 		%>
-<table border="1" width="500">
+<table class="table table-striped">
 		<tr>
 			<th>번호</th><th>제목</th><th>내용</th><th>작성일</th><th>내용수정</th><th>삭제</th>
 		</tr>
@@ -95,7 +100,7 @@ function writeSearch() {
 			if(list33!=null){//공지사항 있을떄
 		
 		%>
-		<table border="1" width="500">
+		<table class="table table-striped">
 		<tr>
 			<th>번호</th><th>제목</th><th>내용</th><th>작성일</th>
 		</tr>
@@ -153,7 +158,7 @@ function writeSearch() {
 		if(list33!=null){//공지사항 있을때
 		%>
 		
-		<table border="1" width="500">
+		<table class="table table-striped">
 		<tr>
 			<th>번호</th><th>제목</th><th>내용</th><th>작성일</th>
 		</tr>

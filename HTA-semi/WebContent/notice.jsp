@@ -15,6 +15,7 @@
 	.godcenter {display: block; width: 33%; height: auto; margin: 0 auto;}
 	
 	td {color:#80bfff;}
+	th {margin-left: auto; margin-right: auto;  text-align: center;}
 	
 </style>
 <script type="text/javascript">
@@ -53,17 +54,17 @@
 	System.out.print(admin1);
 	 if(admin1.equals("1")){//운영자일때
 		%>
-		<div class="container">
-		<table border="1" width="500" class="table table-striped">
+		
+		<table  class="table table-striped">
 		<tr class="titlenotice" align="center">
-			<th>번호</th><th>제목</th><th>내용</th><th>작성일</th><th>내용수정</th><th>삭제</th>
+			<th class="text-center col-sm-1">번호</th><th class="text-center col-sm-1">제목</th><th class="text-center col-sm-1">내용</th><th class="text-center col-sm-1">작성일</th><th class="text-center col-sm-1">내용수정</th><th class="text-center col-sm-1">삭제</th>
 		</tr>
 		<c:set var="list1" value="<%=list %>"/>
 		<c:forEach var="vo2" items="<%=list %>" >
 		<tr class="text-primary">
 			<td>${vo2.noti_no }</td>
-			<td>${vo2.title }</td>
-			<td><a href="detailContent.do?noti_no=${vo2.noti_no}">${vo2.content }</a></td>
+			<td><a href="detailContent.do?noti_no=${vo2.noti_no}">${vo2.title }</a></td>
+			<td>${vo2.content }</td>
 			<td>${vo2.regdate }</td>
 			<td><a href="notiupdate.do?noti_no=${vo2.noti_no}">수정</a></td>
 			<td><a href="deleteWarning.jsp?noti_no=${vo2.noti_no}">삭제</a></td>
@@ -72,23 +73,25 @@
 		</c:forEach>
 
 	</table>
-	</div>
+	
 	<div>
+		<ul class="pagination">
 		<c:choose>
 		
 			<c:when test="${startPage>10 }">
-				<a href="noticeList.do?pageNum=${startPage-1 }">[이전]</a>
+				<li><a href="noticeList.do?pageNum=${startPage-1 }">[이전]</a></li>
 			</c:when>
 			<c:otherwise>
-				[이전]
+				<li>[이전]</li>
 			</c:otherwise>
 			
 		</c:choose>
+		
 		<c:forEach var="i" begin="${startPage }" end="${endPage }">
-		<ul class="pagination">
+	
 		<c:choose>
 			<c:when test="${pageNum==i }">
-				<li><a href="noticeList.do?pageNum=${i }"><span style="color: red;">${i}</span></a></li>
+				<li class="active"><a href="noticeList.do?pageNum=${i }"><span style="color: red;">${i}</span></a></li>
 		
 		</c:when>
 		<c:otherwise>
@@ -96,28 +99,35 @@
 		</c:otherwise>
 		
 		</c:choose>
-		</ul>
+		
 		</c:forEach>
-	
+		
 		<c:choose>
 			<c:when test="${endPage<pageCount }">
-				<a href="noticeList.do?pageNum=${endPage+1 }">[다음]</a>
+				<li><a href="noticeList.do?pageNum=${endPage+1 }">[다음]</a></li>
 			
 			</c:when>
 			
 		</c:choose>
-		
+		</ul>
 		
 	</div>
 	<br>
-	<form action="notisearch.do" method="post" >
+	<form action="notisearch.do" method="post" class="form-group" >
+	
 		<select name="search">
 			<option value="title">제목</option>
 			<option value="content">내용</option>
 			
 		</select>
-		<input type="text" name="keyword">
-		<input type="submit" value="검색">
+		
+		
+		<input type="text"  name="keyword">
+		
+		<input type="submit" class="btn " value="검색">
+		
+		
+		
 	</form>
 	<br>
 	
@@ -125,15 +135,15 @@
 	<%
 	} else if(admin1.equals("0")){//관리자가 아닌 일반회원일 경우
 			%>
-			<table border="1" width="500">
+			<table class="table table-striped" align="center">
 			<tr>
-				<th>번호</th><th>제목</th><th>내용</th><th>작성일</th>
+				<th class="text-center col-sm-1">번호</th><th class="text-center col-sm-1">제목</th><th class="text-center col-sm-1">내용</th><th class="text-center col-sm-1">작성일</th>
 			</tr>
 			<c:forEach var="voNo" items="${requestScope.list22 }" >
 			<tr>
 				<td>${voNo.noti_no }</td>
-				<td>${voNo.title }</td>
-				<td><a href="detailContent.do?noti_no=${voNo.noti_no}">${voNo.content }</a></td>
+				<td><a href="detailContent.do?noti_no=${voNo.noti_no}">${voNo.title }</a></td>
+				<td>${voNo.content }</td>
 				<td>${voNo.regdate }</td>
 				
 			</tr>
@@ -188,15 +198,15 @@
 		
 	} else if(session.getAttribute("id")==null){//아이디 없이 공지사항 들어갈 때
 		%>
-		<table border="1" width="500">
+		<table class="table table-striped" align="center">
 		<tr>
-			<th>번호</th><th>제목</th><th>내용</th><th>작성일</th>
+			<th class="text-center col-sm-1">번호</th><th class="text-center col-sm-1">제목</th><th class="text-center col-sm-1">내용</th><th class="text-center col-sm-1">작성일</th>
 		</tr>
 		<c:forEach var="vo4" items="${requestScope.list22 }" >
 		<tr>
 			<td>${vo4.noti_no }</td>
-			<td>${vo4.title }</td>
-			<td><a href="detailContent.do?noti_no=${vo4.noti_no}">${vo4.content }</a></td>
+			<td><a href="detailContent.do?noti_no=${vo4.noti_no}">${vo4.title }</a></td>
+			<td>${vo4.content }</td>
 			<td>${vo4.regdate }</td>
 			
 		</tr>

@@ -36,7 +36,7 @@ public class detailContentController extends HttpServlet {
 		
 		request.setAttribute("vodetail",vo2);
 	//	request.setAttribute("list1", list1);
-		
+		System.out.println(vo2);
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/layout.jsp?page=noticeDetail.jsp&left=noticeLeft.jsp");
 		rd.forward(request, response);
