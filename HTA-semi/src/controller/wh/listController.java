@@ -43,7 +43,7 @@ public class listController extends HttpServlet {
 			request.setAttribute("pageNum", pageNum);
 			request.setAttribute("startPage", startPage);
 			request.setAttribute("endPage", endPage);
-			request.setAttribute("cate", 1);
+			request.setAttribute("cate1", 1);
 			// 페이지로 이동하기
 			request.getRequestDispatcher("layout.jsp?page=member.jsp&left=admin.jsp").forward(request, response);
 	}

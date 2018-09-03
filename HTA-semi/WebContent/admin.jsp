@@ -6,13 +6,13 @@
 2018-08-28	윤우현	관리자 페이지 작성
  -->
  	<%
-		Object ocate = request.getAttribute("cate");
-		int cate = 1;
-		if(ocate != null) cate = (int)ocate;
+		Object ocate = request.getAttribute("cate1");
+		int cate1 = 1;
+		if(ocate != null) cate1 = (int)ocate;
 	%>
 <div align="center">
 	<div align="center"><th> 관리자 페이지 </th></div>
-	<c:set var="cate" value="<%=cate %>"></c:set>
+	<c:set var="cate" value="<%=cate1 %>"></c:set>
 	<c:choose>
 		<c:when test="${cate == 1 }">
 			<ul><a href="layout.jsp?page=memberList.do&left=mypage.jsp" style="color: #ff5;">회원관리</a></ul>
