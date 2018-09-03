@@ -69,6 +69,7 @@
 	// 입력칸 입력여부 체크
 	function check(){
 		var id=document.f.id.value;
+		var idExp = /^[A-Za-z0-9+]{4,12}$/; // id 체크 정규식
 		var pwd=document.f.pwd.value;
 		var pwdExp = /^(?=.*?[A-Z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;	// 패스워드 체크 정규식
 		var pwd2=document.f.pwd2.value;
@@ -78,6 +79,9 @@
 		var addr=document.f.addr.value;
 		if(id==""){
 			alert("아이디를 입력하세요");
+			return false;
+		}else if(id.match(idExp) == null){
+			alert("아이디 형식에 맞게 입력해 주세요")
 			return false;
 		}else if(pwd==""){
 			alert("패스워드를 입력하세요");
@@ -118,7 +122,10 @@
 	-->
 	
 	<tr>
-		<td><label for="id">아이디</label>			
+		<td>
+			<label for="id">아이디</label>	
+			<br>
+			(영문, 숫자만 가능 <br> 4자 이상)
 		</td>	
 		<td>
 			<input type="text" class="form-control" name="id" id="id" onkeyup="idcheck()">
