@@ -15,10 +15,10 @@
 	<c:set var="cate" value="<%=cate %>"></c:set>
 	<c:choose>
 		<c:when test="${cate == 1 }">
-			<ul><a href="layout.jsp?page=memberList.do&left=admin.jsp" style="color: #ff5;">회원관리</a></ul>
+			<ul><a href="layout.jsp?page=memberList.do&left=mypage.jsp" style="color: #ff5;">회원관리</a></ul>
 		</c:when>
 		<c:otherwise>
-			<ul><a href="layout.jsp?page=memberList.do&left=admin.jsp">회원관리</a></ul>
+			<ul><a href="layout.jsp?page=memberList.do&left=mypage.jsp">회원관리</a></ul>
 		</c:otherwise>
 	</c:choose>
 	<c:choose>
