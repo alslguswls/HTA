@@ -12,7 +12,7 @@
 		if(ocate != null) cate = (int)ocate;
 	%>
 	<div align="center">
-		<div> 마이페이지 </div> 
+		<div><strong> 마이페이지 </strong></div> 
 		<c:choose>
 			<c:when test="${cate == 5 }">
 				<ul><a href="layout.jsp?page=memberGetinfo.do&left=mypage.jsp" style="color: #ff5;"> 회원정보수정</a></ul>
