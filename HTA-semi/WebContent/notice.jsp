@@ -75,14 +75,14 @@
 	</table>
 	
 	<div>
-		<ul class="pagination">
+		
 		<c:choose>
 		
 			<c:when test="${startPage>10 }">
-				<li><a href="noticeList.do?pageNum=${startPage-1 }">[이전]</a></li>
+				<a href="noticeList.do?pageNum=${startPage-1 }">[이전]</a>
 			</c:when>
 			<c:otherwise>
-				<li>[이전]</li>
+				[이전]
 			</c:otherwise>
 			
 		</c:choose>
@@ -91,11 +91,11 @@
 	
 		<c:choose>
 			<c:when test="${pageNum==i }">
-				<li class="active"><a href="noticeList.do?pageNum=${i }"><span style="color: red;">${i}</span></a></li>
+				<a href="noticeList.do?pageNum=${i }"><span style="color: red;">${i}</span></a>
 		
 		</c:when>
 		<c:otherwise>
-			<li><a href="noticeList.do?pageNum=${i }"><span style="color: #555;">${i}</span></a></li>
+			<a href="noticeList.do?pageNum=${i }"><span style="color: #555;">${i}</span></a>
 		</c:otherwise>
 		
 		</c:choose>
@@ -104,12 +104,12 @@
 		
 		<c:choose>
 			<c:when test="${endPage<pageCount }">
-				<li><a href="noticeList.do?pageNum=${endPage+1 }">[다음]</a></li>
+				<a href="noticeList.do?pageNum=${endPage+1 }">[다음]</a>
 			
 			</c:when>
 			
 		</c:choose>
-		</ul>
+		
 		
 	</div>
 	<br>
@@ -124,7 +124,7 @@
 		
 		<input type="text"  name="keyword">
 		
-		<input type="submit" class="btn " value="검색">
+		<input type="submit" class="btn" value="검색">
 		
 		
 		
@@ -190,7 +190,7 @@
 				
 			</select>
 			<input type="text" name="keyword">
-			<input type="submit" value="검색">
+			<input type="submit" class="btn" value="검색">
 		</form>
 			
 			<%
@@ -253,7 +253,7 @@
 			
 		</select>
 		<input type="text" name="keyword">
-		<input type="submit" value="검색">
+		<input type="submit" class="btn" value="검색">
 	</form>
 		
 	<%

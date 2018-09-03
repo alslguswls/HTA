@@ -53,7 +53,7 @@ public class ReserDAO {
 		//예약한 것들 전부 호출
 		Connection con = null;
 		PreparedStatement pre = null;
-		String sql="select * from (select aa.*, rownum rnum from(select a.*, b.title from reservation a, board b where a.bnum=b.bnum and b.id=? order by a.bnum desc) aa) where rnum>=? and rnum<=?";
+		String sql="select * from (select aa.*, rownum rnum from(select a.*, b.title from reservation a, board b where a.bnum=b.bnum and a.id=? order by a.bnum desc) aa) where rnum>=? and rnum<=?";
 		ResultSet re = null;
 		
 		try {
@@ -112,7 +112,7 @@ public class ReserDAO {
 		//경매낙찰받은 것들 호출
 		Connection con = null;
 		PreparedStatement pre = null;
-		String sql="select * from (select aa.*, rownum rnum2 from (select a.*, b.title from result a, board b where a.bnum=b.bnum and b.id=? order by a.bnum desc) aa) where rnum2>=? and rnum2<=?";
+		String sql="select * from (select aa.*, rownum rnum2 from (select a.*, b.title from result a, board b where a.bnum=b.bnum and a.id=? order by a.bnum desc) aa) where rnum2>=? and rnum2<=?";
 		ResultSet re = null;
 		try {
 			ArrayList<DealTableVO> list = new ArrayList<>();
