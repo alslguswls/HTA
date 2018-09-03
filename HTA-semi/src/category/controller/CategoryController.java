@@ -129,7 +129,7 @@ public class CategoryController extends HttpServlet {
 		req.setAttribute("startPage", startPage);
 		req.setAttribute("endPage", endPage);
 		req.setAttribute("pageNum", pageNum);
-		req.setAttribute("cate", 2);
+		req.setAttribute("cate1", 2);
 		req.getRequestDispatcher("layout.jsp?page=/category/adminCate.jsp&left=admin.jsp").forward(req, res);
 	}
 }

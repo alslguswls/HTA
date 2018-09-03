@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%
+	String context = request.getContextPath();
+%>
 <script type="text/javascript">
 	var cateXhr;
 	function name_ck() {
@@ -94,6 +97,10 @@
 			alert("삭제되었습니다.");
 			location.href="Category.do?mod=delete&cate="+no;
 		}
+	}
+	
+	function selCate(val){
+		location.href="<%=context%>/boardList.do?mod=list&admin=1&cate="+val;
 	}
 	
 </script>

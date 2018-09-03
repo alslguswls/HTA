@@ -132,10 +132,10 @@ public class boardController extends HttpServlet {
 		request.setAttribute("startPage",startPage);
 		request.setAttribute("endPage",endPage);
 		request.setAttribute("pageNum",pageNum);
-		
+
 		request.setAttribute("cate",cate);
-	
-		
+		request.setAttribute("cate1",3);
+
 		request.setAttribute("search1",search);
 		request.getRequestDispatcher(dispatcher).forward(request, response);
 	}

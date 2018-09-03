@@ -127,9 +127,17 @@
 			var txt = callXhr.responseText;
 			var json = JSON.parse(txt);
 			if(json.msg != "success"){
-				alert(json.msg);
-				removeDelay();
-				return;
+				if(json.msg == "보유 coin이상의 호가는 불가합니다.\r\n충전하시겠습니까?"){
+					var cf = confirm(json.msg);
+					if(cf){
+						location.href = "layout.jsp?page=coin.do&left=mypage.jsp";
+						return;
+					}
+				}else{
+					alert(json.msg);
+				}
+					removeDelay();
+					return;
 			}
 			document.getElementById("price").value = "";
 			setTimeout(removeDelay, 3000);
