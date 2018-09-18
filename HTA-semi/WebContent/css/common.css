@@ -8,7 +8,7 @@
 #logo{width: 40px;height: 40px;margin-top: -20px;}
 #header h1 a{color: #ddd;}
 #header h1 a span{color: #ff5;}
-#header div{float: right;position: absolute;right: 15%;top: 120px;}
+#header div{float: right;right: 15%;top: 120px;}
 #header ul li{list-style: none;float: left;margin-left: 10px;margin-top: 30px;}
 #header ul li a{text-decoration: none;font-size: 15px;font-weight: bold;color: #ddd;}
 
