@@ -80,8 +80,8 @@ create table result(
 	id varchar2(100), --구매자
 	price number(38), --구매가격 
 	endtime Date, --종료시간/구매일시
-	CONSTRAINT fk_comment_users FOREIGN KEY(bnum) references board(bnum) ON DELETE CASCADE,
-	CONSTRAINT fk_comment_board FOREIGN KEY(id) references users(id) ON DELETE CASCADE
+	CONSTRAINT fk_comment_users FOREIGN KEY(bnum) references board(bnum) ,
+	CONSTRAINT fk_comment_board FOREIGN KEY(id) references users(id) 
 )tablespace semi;
 drop sequence result_seq;
 create sequence result_seq;
